@@ -36,6 +36,37 @@ section {
     display: none;
 }
 
+.img-mobile {
+    max-widht: 40%;
+}
+
 footer {
     display: none;
+}
+
+@media print, screen and (max-width: 960px) {
+    header {
+	display: none;
+    }
+}
+
+@media print, screen and (max-width: 720px) {
+    header {
+	display: none;
+    }
+}
+
+@media print, screen and (min-width: 961px) {
+    header {
+	display: none;
+    }
+    .link-wrapper-mobile {
+	display: true;
+    }
+}
+
+@media print, screen and (max-width: 480px) {
+    header {
+	display: none;
+    }
 }
