@@ -37,7 +37,7 @@ section {
 }
 
 .img-mobile {
-    max-widht: 40%;
+    max-width: 40%;
 }
 
 footer {
@@ -45,12 +45,19 @@ footer {
 }
 
 @media print, screen and (max-width: 960px) {
+    section {
+	border: none;
+	width: 950px;
+    }
     header {
 	display: none;
     }
 }
 
 @media print, screen and (max-width: 720px) {
+    section {
+	width: 710px;
+    }
     header {
 	display: none;
     }
@@ -60,12 +67,18 @@ footer {
     header {
 	display: none;
     }
+    section {
+	padding-top: 58px;
+    }
     .link-wrapper-mobile {
 	display: true;
     }
 }
 
 @media print, screen and (max-width: 480px) {
+    section {
+	width: 470px;
+    }
     header {
 	display: none;
     }
