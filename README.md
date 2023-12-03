@@ -47,7 +47,11 @@ lo              ethernet   UP          00:00:00:00:00:00
 admin@infix-12-34-56:/> copy running-config startup-config
 ```
 
-[Click here][3] for more details.
+Curious?  Continue reading:
+  - [CLI Introduction][3]
+  - [CLI Tutorial][7]
+  - [Networking Lego®][8]
+
 
 ## Platform Support
 
@@ -75,3 +79,5 @@ Virtual Environments][5].
 [4]: https://github.com/kernelkit/infix/blob/main/board/aarch64/README.md
 [5]: https://github.com/kernelkit/infix/blob/main/doc/virtual.md
 [6]: https://github.com/kernelkit/infix/blob/main/doc/variant.md
+[7]: https://github.com/kernelkit/infix/blob/main/doc/cli/tutorial.md
+[8]: https://github.com/kernelkit/infix/blob/main/doc/networking.md
