@@ -1,5 +1,3 @@
-## About
-
 Infix is a Linux Network Operating System (NOS) based on [Buildroot][1],
 and [sysrepo][2].  A powerful mix that ease porting to different
 platforms, simplify long-term maintenance, and provide made-easy
