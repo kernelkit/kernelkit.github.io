@@ -1,1 +1,8 @@
-theme: jekyll-theme-minimal
+remote_theme: "godalming123/minimal"
+plugins:
+- jekyll-remote-theme
+title: KernelKit -- Maintainers of the Infix Network Operating System
+description: Providers of Penguinated Solutions
+logo: /assets/img/jack.png
+show_downloads: "true"
+#color-scheme: ["dark", "light", "auto" or "auto-default-dark"]
