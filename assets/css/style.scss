@@ -4,9 +4,17 @@
 @import "{{ site.theme }}";
 
 .wrapper {
-    width: 1024px;
+    width: 1280px;
 }
 
 section {
-    width: 800px;
+    width: 896px;
+}
+
+.sidebar {
+    width: 364px;
+}
+
+.sidebar-footer {
+    display: none;
 }
