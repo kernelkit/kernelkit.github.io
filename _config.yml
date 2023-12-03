@@ -1,15 +1,19 @@
 #color-scheme: ["dark", "light", "auto" or "auto-default-dark"]
 #remote_theme: "godalming123/minimal"
 
-remote_theme: dunkmann00/primer@v0.12.0
+remote_theme: BDHU/minimalist
 plugins:
 - jekyll-remote-theme
 #title: KernelKit -- Maintainers of the Infix Network Operating System
 #description: Providers of Penguinated Solutions
 description: KernelKit is an independent organization managing the Infix Network Operating System.
-logo: /assets/img/jack.png
-show_downloads: "true"
-github:
-  zip_url: https://github.com/kernelkit/infix/releases/latest
-  tar_url: https://github.com/kernelkit/infix/releases/latest
-  repository_url: https://github.com/kernelkit/infix
+favicon: true
+logo: /assets/img/logo.png
+show_downloads: false
+sidebar:
+  - name: GitHub
+    icon: <i class="fa-brands fa-github"></i>
+    link: https://github.com/kernelkit/infix
+  - name: Download
+    icon: <i class="fa-download"></i>
+    link: https://github.com/kernelkit/infix/releases/latest
