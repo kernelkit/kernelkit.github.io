@@ -5,7 +5,7 @@ remote_theme: bdhu/minimalist
 plugins:
 - jekyll-remote-theme
 
-title: KernelKit
+#title: KernelKit
 description: Infix, a Network Operating System
 logo: /assets/img/logo.png
 favicon: true
