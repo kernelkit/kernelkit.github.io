@@ -45,28 +45,25 @@ footer {
 }
 
 @media print, screen and (max-width: 960px) {
+    header {
+	display: none;
+    }
     section {
 	border: none;
 	width: 950px;
     }
-    header {
-	display: none;
-    }
 }
 
 @media print, screen and (max-width: 720px) {
-    section {
-	width: 710px;
-    }
     header {
 	display: none;
+    }
+    section {
+	width: 710px;
     }
 }
 
 @media print, screen and (min-width: 961px) {
-    header {
-	display: none;
-    }
     section {
 	padding-top: 58px;
     }
@@ -76,10 +73,10 @@ footer {
 }
 
 @media print, screen and (max-width: 480px) {
-    section {
-	width: 470px;
-    }
     header {
 	display: none;
+    }
+    section {
+	width: 470px;
     }
 }
