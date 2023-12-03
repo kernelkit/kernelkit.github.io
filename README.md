@@ -1,25 +1,8 @@
-<details><summary><b>Documentation</b></summary>
-
- - **Infix In-Depth**
-   - [Infix Variants](https://github.com/kernelkit/infix/blob/main/doc/variant.md)
-   - [Boot Procedure](https://github.com/kernelkit/infix/blob/main/doc/boot.md)
-   - [Containers in Infix](https://github.com/kernelkit/infix/blob/main/doc/container.md)
-   - [Developer's Guide](https://github.com/kernelkit/infix/blob/main/doc/developers-guide.md)
-   - [Discover Your Device](https://github.com/kernelkit/infix/blob/main/doc/discovery.md)
-   - [Virtual Environments](https://github.com/kernelkit/infix/blob/main/doc/virtual.md)
-   - [Origin & Licensing](https://github.com/kernelkit/infix/blob/main/doc/license.md)
-- **CLI Topics**
-   - [Introduction to the CLI](https://github.com/kernelkit/infix/blob/main/doc/cli/introduction.md)
-   - [CLI User's Guide](https://github.com/kernelkit/infix/blob/main/doc/cli/tutorial.md)
-   - [Quick Overview](https://github.com/kernelkit/infix/blob/main/doc/cli/quick.md)
-
-</details>
-
 Infix is a Linux Network Operating System (NOS) based on [Buildroot][1],
 and [sysrepo][2].  A powerful mix that ease porting to different
 platforms, simplify long-term maintenance, and provide made-easy
-management using NETCONF[^1] (remote) or the built-in [command
-line interface (CLI)][3] (click the foldout for an example).
+management using NETCONF[^1] (remote) or the built-in [command line
+interface (CLI)][3]
 
 ## Example CLI Session
 
@@ -70,30 +53,25 @@ admin@infix-12-34-56:/> copy running-config startup-config
 
 Infix can run on many different types of architectures and boards, much
 thanks to Linux and Buildroot.  Currently the focus is on 64-bit ARM
-devices, optionally with switching fabric supported by Linux switchdev.
-The [following boards](https://github.com/kernelkit/infix/blob/main/board/aarch64/README.md) are fully supported:
+devices with switching fabric supported by Linux switchdev.
+
+The [following boards][4] are fully supported:
 
  - Marvell CN9130 CRB
  - Marvell EspressoBIN
  - Microchip SparX-5i PCB135 (eMMC)
 
 An x86_64 build is also available, primarily intended for development
-and testing, but can also be used for evaluation and demo purposes.  For
-more information, see: [Infix in Virtual Environments](https://github.com/kernelkit/infix/blob/main/doc/virtual.md).
-
-> See the [GitHub Releases](https://github.com/kernelkit/infix/releases)
-> page for our pre-built images.  The *Latest Build* has the bleeding
-> edge images, if possible we recommend using a versioned release.
->
-> For *customer specific builds* of Infix, see your product repository.
+and testing using [Qemu][5], but can also be used for evaluation and
+demo purposes in [GNS3][5].  For more information, see: [Infix in
+Virtual Environments][5].
 
 [^1]: NETCONF or RESTCONF, <https://datatracker.ietf.org/doc/html/rfc8040>,
-    for more information, see [Infix Variants](https://github.com/kernelkit/infix/blob/main/doc/variant.md).
+    for more information, see [Infix Variants][6].
 
 [1]: https://buildroot.org/
 [2]: https://www.sysrepo.org/
-[3]: doc/cli/introduction.md
-[License]:         https://en.wikipedia.org/wiki/GPL_license
-[License Badge]:   https://img.shields.io/badge/License-GPL%20v2-blue.svg
-[Coverity Scan]:   https://scan.coverity.com/projects/29393
-[Coverity Status]: https://scan.coverity.com/projects/29393/badge.svg
+[3]: https://github.com/kernelkit/infix/blob/main/doc/cli/introduction.md
+[4]: https://github.com/kernelkit/infix/blob/main/board/aarch64/README.md
+[5]: https://github.com/kernelkit/infix/blob/main/doc/virtual.md
+[6]: https://github.com/kernelkit/infix/blob/main/doc/variant.md
