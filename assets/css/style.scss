@@ -25,14 +25,13 @@ header h1 {
 
 section {
     /* width: 896px;*/
-    width: auto;
     max-width: 768px;
 }
 
 .sidebar {
     /* width: 364px;*/
     width: auto;
-    max-width: 243px;
+    max-width: 238px;
 }
 
 .sidebar-footer {
@@ -53,7 +52,7 @@ footer {
     }
     section {
 	border: none;
-	width: 950px;
+	width: auto;
     }
 }
 
@@ -62,7 +61,7 @@ footer {
 	display: none;
     }
     section {
-	width: 710px;
+	width: auto;
     }
 }
 
@@ -80,6 +79,6 @@ footer {
 	display: none;
     }
     section {
-	width: 470px;
+	width: 710px;
     }
 }
