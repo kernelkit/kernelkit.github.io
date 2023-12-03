@@ -1,10 +1,12 @@
 #color-scheme: ["dark", "light", "auto" or "auto-default-dark"]
-remote_theme: "godalming123/minimal"
+#remote_theme: "godalming123/minimal"
+
+remote_theme: dunkmann00/primer@v0.12.0
 plugins:
 - jekyll-remote-theme
 #title: KernelKit -- Maintainers of the Infix Network Operating System
 #description: Providers of Penguinated Solutions
-description: An independent organization managing the Infix Network Operating System.
+description: KernelKit is an independent organization managing the Infix Network Operating System.
 logo: /assets/img/jack.png
 show_downloads: "true"
 github:
