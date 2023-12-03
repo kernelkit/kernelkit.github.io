@@ -9,10 +9,45 @@ favicon: true
 logo: /assets/img/logo.png
 show_downloads: false
 color-scheme: auto
+
+# Links
 sidebar:
   - name: GitHub
     icon: <i class="fa-brands fa-github"></i>
     link: https://github.com/kernelkit/infix
+  - name: ChangeLog
+    icon: <i class="fa-solid fa-code-compare"></i>
+    link: https://github.com/kernelkit/infix/blob/main/doc/ChangeLog.md
   - name: Download
     icon: <i class="fa-solid fa-download"></i>
     link: https://github.com/kernelkit/infix/releases/latest
+
+doc:
+  - name: Branding Infix
+    icon: <i class="fa-solid fa-copyright"></i>
+    link: https://github.com/kernelkit/infix/blob/main/doc/branding.md
+  - name: CLI Tutorial
+    icon: <i class="fa-solid fa-terminal"></i>
+    link: https://github.com/kernelkit/infix/blob/main/doc/cli/tutorial.md
+  - name: Containers in Infix
+    icon: <i class="fa-brands fa-docker"></i>
+    link: https://github.com/kernelkit/infix/blob/main/doc/container.md
+  - name: Developer's Guide
+    icon: <i class="fa-solid fa-user-astronaut"></i>
+    link: https://github.com/kernelkit/infix/blob/main/doc/developers-guide.md
+  - name: Network Discovery
+    icon: <i class="fa-solid fa-magnifying-glass"></i>
+    link: https://github.com/kernelkit/infix/blob/main/doc/discovery.md
+  - name: Networking Lego®
+    icon: <i class="fa-solid fa-network-wired"></i>
+    link: https://github.com/kernelkit/infix/blob/main/doc/networking.md
+  - name: Infix Variants
+    icon: <i class="fa-solid fa-mercury"></i>
+    link: https://github.com/kernelkit/infix/blob/main/doc/variant.md
+  - name: Testing
+    icon: <i class="fa-solid fa-vial"></i>
+    link: https://github.com/kernelkit/infix/blob/main/doc/testing.md
+  - name: Virtualization
+    icon: <i class="fa-solid fa-vr-cardboard"></i>
+    link: https://github.com/kernelkit/infix/blob/main/doc/virtual.md
+
