@@ -4,9 +4,7 @@
 remote_theme: bdhu/minimalist
 plugins:
 - jekyll-remote-theme
-title: Infix = Linux 💛 NETCONF
-#description: Providers of Penguinated Solutions
-description: KernelKit is an independent organization managing the Infix Network Operating System.
+description: Welcome to Infix, a Network Operating System
 favicon: true
 logo: /assets/img/logo.png
 show_downloads: false
