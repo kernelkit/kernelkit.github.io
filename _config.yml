@@ -4,9 +4,11 @@
 remote_theme: bdhu/minimalist
 plugins:
 - jekyll-remote-theme
+
+title: Infix @ KernelKit
 description: Welcome to Infix, a Network Operating System
-favicon: true
 logo: /assets/img/logo.png
+favicon: true
 show_downloads: false
 color-scheme: auto
 

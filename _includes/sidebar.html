@@ -17,10 +17,14 @@
   <hr/>
   <ul class="link">
     <li><i class="fa-solid fa-book"></i>&nbsp;Documentation</li>
-    <ul class="link">
+    <li>&nbsp;</li>
+    <table style="width:auto;">
       {%- for doc in site.doc %}
-      <li><a href="{{ doc.link }}">{{ doc.icon }}&nbsp;{{ doc.name }}</a></li>
+      <tr>
+	<td>{{ doc.icon }}</td>
+	<td><a href="{{ doc.link }}">{{ doc.name }}</a></td>
+      </tr>
       {%- endfor %}
-    </ul>
+    </table>
   </ul>
 </div>
