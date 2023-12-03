@@ -56,15 +56,6 @@ footer {
     }
 }
 
-@media print, screen and (max-width: 720px) {
-    header {
-	display: none;
-    }
-    section {
-	width: auto;
-    }
-}
-
 @media print, screen and (min-width: 961px) {
     section {
 	padding-top: 58px;
@@ -74,11 +65,3 @@ footer {
     }
 }
 
-@media print, screen and (max-width: 480px) {
-    header {
-	display: none;
-    }
-    section {
-	width: 710px;
-    }
-}
