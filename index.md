@@ -22,7 +22,7 @@ values may be appealing for other use-cases as well:
 - Atomic upgrades to secondary partition
 - Highly security focused
 
-An immutable[^1] operating system enhances security and inherently makes
+An immutable[^2] operating system enhances security and inherently makes
 it maintenance-free.  Configuration and data, e.g, containers, is stored
 on separate partitions to ensure complete separation from system files
 and allow for seamless backup, restore, and provisioning.
@@ -38,8 +38,6 @@ LAN as other connected equipment.
 The simple design of Infix provides complete control over both system
 and data, minimal cognitive burden, and makes it incredibly easy to get
 started.
-
-[^1]: https://www.zdnet.com/article/what-is-immutable-linux-heres-why-youd-run-an-immutable-linux-distro/
 
 ## Example CLI Session
 
@@ -110,6 +108,7 @@ Virtual Environments][5].
 
 [^1]: NETCONF or RESTCONF, <https://datatracker.ietf.org/doc/html/rfc8040>,
     for more information, see [Infix Variants][6].
+[^2]: https://www.zdnet.com/article/what-is-immutable-linux-heres-why-youd-run-an-immutable-linux-distro/
 
 [1]: https://buildroot.org/
 [2]: https://www.sysrepo.org/
