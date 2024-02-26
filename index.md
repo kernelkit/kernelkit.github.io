@@ -108,11 +108,12 @@ Virtual Environments][5].
 
 [^1]: NETCONF or RESTCONF, <https://datatracker.ietf.org/doc/html/rfc8040>,
     for more information, see [Infix Variants][6].
+
 [^2]: An immutable operating system is one with read-only file systems,
-	atomic updates, rollbacks, declarative configuration, and workload
-	isolation.  All to improve reliability, scalability, and security.
-	For more information, see <https://ceur-ws.org/Vol-3386/paper9.pdf>
-	and https://www.zdnet.com/article/what-is-immutable-linux-heres-why-youd-run-an-immutable-linux-distro/
+    atomic updates, rollbacks, declarative configuration, and workload
+    isolation.  All to improve reliability, scalability, and security.
+    For more information, see <https://ceur-ws.org/Vol-3386/paper9.pdf>
+    and https://www.zdnet.com/article/what-is-immutable-linux-heres-why-youd-run-an-immutable-linux-distro/
 
 [1]: https://buildroot.org/
 [2]: https://www.sysrepo.org/
