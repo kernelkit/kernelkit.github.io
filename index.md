@@ -18,20 +18,22 @@ values may be appealing for other use-cases as well:
 - Runs from a squashfs image on a read-only partition
 - Single configuration file on a separate partition
 - Built around YANG with standard IETF models
+- Linux switchdev provides open switch APIs
 - Atomic upgrades to secondary partition
 - Highly security focused
 
 An immutable[^1] operating system enhances security and inherently makes
-it maintenance-free.  Custom configuration and data is stored on
-separate partitions to ensure data segregation and allow for seamless
-backup, restore, and provisioning.
+it maintenance-free.  Configuration and data, e.g, containers, is stored
+on separate partitions to ensure complete separation from system files
+and allow for seamless backup, restore, and provisioning.
 
 In itself Infix is perfectly suited for dedicated networking tasks and
-the native support for Docker containers provides a versatile platform
-that can easily be adapted to any customer need.  Legacy applications
-like factory network protocols, or modern close process monitoring, can
-be given dedicated Ethernet ports or virtual network cables to exist on
-the same LAN as other connected equipment.
+native support for Docker containers provides a versatile platform that
+can easily be adapted to any customer need.  Be it legacy applications,
+network protocols, process monitoring, or edge data analysis, it can run
+close to end equipment.  Either directly connected on dedicated Ethernet
+ports or indirectly using virtual network cables to exist on the same
+LAN as other connected equipment.
 
 The simple design of Infix provides complete control over both system
 and data, minimal cognitive burden, and makes it incredibly easy to get
