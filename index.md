@@ -84,8 +84,7 @@ admin@infix-12-34-56:/> copy running-config startup-config
 
 Curious?  Continue reading:
   - [CLI Introduction][3]
-  - [CLI Tutorial][7]
-  - [Networking Lego®][8]
+  - [Networking Lego®][6]
 
 
 ## Platform Support
@@ -106,9 +105,7 @@ and testing using [Qemu][5], but can also be used for evaluation and
 demo purposes in [GNS3][5].  For more information, see: [Infix in
 Virtual Environments][5].
 
-[^1]: NETCONF or RESTCONF, <https://datatracker.ietf.org/doc/html/rfc8040>,
-    for more information, see [Infix Variants][6].
-
+[^1]: NETCONF or RESTCONF, <https://datatracker.ietf.org/doc/html/rfc8040>
 [^2]: An immutable operating system is one with read-only file systems,
     atomic updates, rollbacks, declarative configuration, and workload
     isolation.  All to improve reliability, scalability, and security.
@@ -117,9 +114,7 @@ Virtual Environments][5].
 
 [1]: https://buildroot.org/
 [2]: https://www.sysrepo.org/
-[3]: https://github.com/kernelkit/infix/blob/main/doc/cli/introduction.md
+[3]: https://github.com/kernelkit/infix/tree/main/doc/cli
 [4]: https://github.com/kernelkit/infix/blob/main/board/aarch64/README.md
 [5]: https://github.com/kernelkit/infix/blob/main/doc/virtual.md
-[6]: https://github.com/kernelkit/infix/blob/main/doc/variant.md
-[7]: https://github.com/kernelkit/infix/blob/main/doc/cli/tutorial.md
-[8]: https://github.com/kernelkit/infix/blob/main/doc/networking.md
+[6]: https://github.com/kernelkit/infix/blob/main/doc/networking.md

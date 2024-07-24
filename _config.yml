@@ -29,7 +29,7 @@ doc:
   - name: Branding Infix
     icon: <i class="fa-solid fa-copyright"></i>
     link: https://github.com/kernelkit/infix/blob/main/doc/branding.md
-  - name: CLI Tutorial
+  - name: CLI Introduction
     icon: <i class="fa-solid fa-terminal"></i>
     link: https://github.com/kernelkit/infix/tree/main/doc/cli
   - name: Containers in Infix
