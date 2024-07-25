@@ -10,11 +10,12 @@ User management, including passwords, SSH keys, remote authentication is
 available in the system authentication configuration context.
 
 ```
-admin@host:/config/> edit system authentication user admin
-admin@host:/config/system/authentication/user/admin/> change password
+admin@example:/> configure
+admin@example:/config/> edit system authentication user admin
+admin@example:/config/system/authentication/user/admin/> change password
 New password: 
 Retype password: 
-admin@host:/config/system/authentication/user/admin/> leave
+admin@example:/config/system/authentication/user/admin/> leave
 ```
 
 The change password command starts an interactive dialogue that asks for
@@ -44,14 +45,14 @@ With SSH keys in place it is possible to disable password login, just
 remember to verify SSH login and network connectivity before doing so.
 
 ```
-admin@host:/config/> edit system authentication user admin 
-admin@host:/config/system/authentication/user/admin/> edit authorized-key example@host
-admin@host:/config/system/authentication/user/admin/authorized-key/example@host/> set algorithm ssh-rsa
-admin@host:/config/system/authentication/user/admin/authorized-key/example@host/> set key-data AAAAB3NzaC1yc2EAAAADAQABAAABgQC8iBL42yeMBioFay7lty1C4ZDTHcHyo739gc91rTTH8SKvAE4g8Rr97KOz/8PFtOObBrE9G21K7d6UBuPqmd0RUF2CkXXN/eN2PBSHJ50YprRFt/z/304bsBYkDdflKlPDjuSmZ/+OMp4pTsq0R0eNFlX9wcwxEzooIb7VPEdvWE7AYoBRUdf41u3KBHuvjGd1M6QYJtbFLQMMTiVe5IUfyVSZ1RCxEyAB9fR9CBhtVheTVsY3iG0fZc9eCEo89ErDgtGUTJK4Hxt5yCNwI88YaVmkE85cNtw8YwubWQL3/tGZHfbbQ0fynfB4kWNloyRHFr7E1kDxuX5+pbv26EqRdcOVGucNn7hnGU6C1+ejLWdBD7vgsoilFrEaBWF41elJEPKDzpszEijQ9gTrrWeYOQ+x++lvmOdssDu4KvGmj2K/MQTL2jJYrMJ7GDzsUu3XikChRL7zNfS2jYYQLzovboUCgqfPUsVba9hqeX3U67GsJo+hy5MG9RSry4+ucHs=
-admin@host:/config/system/authentication/user/admin/authorized-key/example@host/> show
+admin@example:/config/> edit system authentication user admin
+admin@example:/config/system/authentication/user/admin/> edit authorized-key jacky@host
+admin@example:/config/system/authentication/user/admin/authorized-key/jacky@host/> set algorithm ssh-rsa
+admin@example:/config/system/authentication/user/admin/authorized-key/jacky@host/> set key-data AAAAB3NzaC1yc2EAAAADAQABAAABgQC8iBL42yeMBioFay7lty1C4ZDTHcHyo739gc91rTTH8SKvAE4g8Rr97KOz/8PFtOObBrE9G21K7d6UBuPqmd0RUF2CkXXN/eN2PBSHJ50YprRFt/z/304bsBYkDdflKlPDjuSmZ/+OMp4pTsq0R0eNFlX9wcwxEzooIb7VPEdvWE7AYoBRUdf41u3KBHuvjGd1M6QYJtbFLQMMTiVe5IUfyVSZ1RCxEyAB9fR9CBhtVheTVsY3iG0fZc9eCEo89ErDgtGUTJK4Hxt5yCNwI88YaVmkE85cNtw8YwubWQL3/tGZHfbbQ0fynfB4kWNloyRHFr7E1kDxuX5+pbv26EqRdcOVGucNn7hnGU6C1+ejLWdBD7vgsoilFrEaBWF41elJEPKDzpszEijQ9gTrrWeYOQ+x++lvmOdssDu4KvGmj2K/MQTL2jJYrMJ7GDzsUu3XikChRL7zNfS2jYYQLzovboUCgqfPUsVba9hqeX3U67GsJo+hy5MG9RSry4+ucHs=
+admin@example:/config/system/authentication/user/admin/authorized-key/jacky@host/> show
 algorithm ssh-rsa;
 key-data AAAAB3NzaC1yc2EAAAADAQABAAABgQC8iBL42yeMBioFay7lty1C4ZDTHcHyo739gc91rTTH8SKvAE4g8Rr97KOz/8PFtOObBrE9G21K7d6UBuPqmd0RUF2CkXXN/eN2PBSHJ50YprRFt/z/304bsBYkDdflKlPDjuSmZ/+OMp4pTsq0R0eNFlX9wcwxEzooIb7VPEdvWE7AYoBRUdf41u3KBHuvjGd1M6QYJtbFLQMMTiVe5IUfyVSZ1RCxEyAB9fR9CBhtVheTVsY3iG0fZc9eCEo89ErDgtGUTJK4Hxt5yCNwI88YaVmkE85cNtw8YwubWQL3/tGZHfbbQ0fynfB4kWNloyRHFr7E1kDxuX5+pbv26EqRdcOVGucNn7hnGU6C1+ejLWdBD7vgsoilFrEaBWF41elJEPKDzpszEijQ9gTrrWeYOQ+x++lvmOdssDu4KvGmj2K/MQTL2jJYrMJ7GDzsUu3XikChRL7zNfS2jYYQLzovboUCgqfPUsVba9hqeX3U67GsJo+hy5MG9RSry4+ucHs=;
-admin@host:/config/system/authentication/user/admin/authorized-key/example@host/> leave
+admin@example:/config/system/authentication/user/admin/authorized-key/jacky@host/> leave
 ```
 
 > The `ssh-keygen` program used to create the public/private key-pair

@@ -10,6 +10,7 @@ Notice how the hostname in the prompt does not change until the change
 is committed by issuing the leave command.
 
 ```
+admin@host:/> configure
 admin@host:/config/> edit system
 admin@host:/config/system/> set hostname example
 admin@host:/config/system/> leave
