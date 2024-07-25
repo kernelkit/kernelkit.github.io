@@ -31,9 +31,7 @@ The simple design of Infix provides complete control over both system
 and data, minimal cognitive burden, and makes it incredibly easy to get
 started.
 
-
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-info }
+----
 
 [^1]: An immutable operating system is one with read-only file systems,
     atomic updates, rollbacks, declarative configuration, and workload
