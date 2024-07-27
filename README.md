@@ -21,6 +21,17 @@ Verified to work on Linux Mint 21.3, based on Ubuntu 22.04 LTS:
  - [Install Jekyll](https://jekyllrb.com/docs/installation/)
  - Run `bundle` from the blog directory to install all deps
 
+## Identity
+
+All blog posts have one or more authors.  Make sure your nick is added
+to the file `_data/authors.yml` on the format:
+
+```yaml
+jacky:
+  name: Jacky Switch
+  url: https://infix-os.net
+```
+
 ## Blog
 
  1. New blog posts go in `_posts/yyyy-mm-dd-brief-title.md`
@@ -28,6 +39,7 @@ Verified to work on Linux Mint 21.3, based on Ubuntu 22.04 LTS:
 
         ---
         title: Longer title of post
+        author: jacky
         date: 2022-11-20 09:03:20 +0100
         categories: [examples]
         tags: [cli]
@@ -39,6 +51,9 @@ Verified to work on Linux Mint 21.3, based on Ubuntu 22.04 LTS:
  5. Preview
 
         jekyll serve -lIw
+
+> **Tip:** for work in progress, use the top-level directory `_drafts/`
+> and add the `-D` option to `jekyll serve` to preview your post.
 
 [0]: https://jekyllrb.com/
 [1]: https://chirpy.cotes.page/
