@@ -30,7 +30,7 @@ blog post is the first in a series of posts that aims to show this.
 All configuration and administration of networking and containers is
 done through the CLI:
 
-```
+```console
 admin@infix:~$ cli
 
 See the 'help' command for an introduction to the system
@@ -66,7 +66,7 @@ to the container as a regular interface.
 
 Here's how you create a container bridge:
 
-```
+```console
 admin@infix:/> configure
 admin@infix:/config> edit interface docker0
 admin@infix:/config/interface/docker0> set container-network
@@ -83,7 +83,7 @@ be using [docker://nginx:alpine](https://hub.docker.com/_/nginx).  It's
 a relatively small container with the Nginx web server built on top of
 the Alpine Linux image.
 
-```
+```console
 admin@infix:/> configure
 admin@infix:/config> edit container web
 admin@infix:/config/container/web/> set image docker://nginx:alpine
@@ -96,13 +96,13 @@ admin@infix:/config/container/web/network/> leave
 Issuing the command `leave` queues a job to download the image and
 create a container in the background.  To see the progress:
 
-```
+```console
 admin@infix:/> show log container
 ```
 
 or just poll the status command:
 
-```
+```console
 admin@infix:/> show container
 CONTAINER ID  IMAGE                           COMMAND               CREATED         STATUS         PORTS               NAMES
 c60a6deeea4e  docker.io/library/nginx:alpine  nginx -g daemon o...  2 minutes ago   Up 2 minutes   0.0.0.0:8080->80/tcp  web
@@ -128,7 +128,7 @@ most importantly, image upgrades.
 
 Here's how to add a volume to your container:
 
-```
+```console
 admin@infix:/> configure
 admin@infix:/config/> edit container web
 admin@infix:/config/container/web/> edit volume content
@@ -140,7 +140,7 @@ Named volumes have the downside of being opaque to the host, so the
 easiest is to upload the content using `scp` or editing it directly
 in the container:
 
-```
+```console
 admin@infix:/> container shell web
 d95ce9f7674d:/# vi /usr/share/nginx/html/
 50x.html    index.html
@@ -165,7 +165,7 @@ This feature is perfectly suited for container applications that need a
 specific site setup.  For example a configuration file.  Here we use the
 same container image to bundle an `index.html` file:
 
-```
+```console
 admin@infix:/> configure
 admin@infix:/config/> edit container web
 admin@infix:/config/container/web/> edit mount index.html
@@ -215,7 +215,7 @@ hold down Ctrl while tapping the X and C keys).
 
 Leave configuration context to activate your changes:
 
-```
+```console
 admin@infix:/config/container/web/mount/index.html/> leave
 ```
 
@@ -227,7 +227,7 @@ Reload your browser to see the change.
 That's the end of the first post about containers in Infix.  Remember to
 save your changes for next boot:
 
-```
+```console
 admin@infix:/> copy running-config startup-config
 ```
 

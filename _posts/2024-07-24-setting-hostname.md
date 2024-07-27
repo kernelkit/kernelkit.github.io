@@ -11,7 +11,7 @@ the hostname of a device.  The default is a unique name composed from
 the built-in default name suffixed by the last three octets of the base
 MAC address.
 
-```
+```console
 admin@infix-c0-ff-ee-:/>
 ```
 
@@ -21,7 +21,7 @@ Infix build and can be [tailored to your product][0].
 
 The hostname can be changed from the system configuration context:
 
-```
+```console
 admin@infix-c0-ff-ee:/> configure
 admin@infix-c0-ff-ee:/config/> edit system
 admin@infix-c0-ff-ee:/config/system/> set hostname example

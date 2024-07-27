@@ -13,7 +13,7 @@ User management is available in the system authentication configuration
 context and there is a dedicated `change` command available to simplify
 the process:
 
-```
+```console
 admin@example:/> configure
 admin@example:/config/> edit system authentication user admin
 admin@example:/config/system/authentication/user/admin/> change password
@@ -50,7 +50,7 @@ SSH key login enabled.  The following shows how to add a an authorized
 With SSH keys in place it is possible to disable password login, just
 remember to verify SSH login and network connectivity before doing so.
 
-```
+```console
 admin@example:/config/> edit system authentication user admin
 admin@example:/config/system/authentication/user/admin/> edit authorized-key jacky@host
 admin@example:/config/system/authentication/user/admin/authorized-key/jacky@host/> set algorithm ssh-rsa
@@ -78,7 +78,7 @@ of.
 To give another user administrator rights we add them to the `admin`
 group:
 
-```
+```console
 admin@example:/config/> edit nacm group admin
 admin@example:/config/nacm/group/admin/> set user-name jacky
 admin@example:/config/nacm/group/admin/> leave

@@ -11,7 +11,7 @@ This is an example of how to set up a VLAN transparent bridge with a
 DHCP assigned IP address.  We have a system with two interfaces, or
 ports, named `eth0` and `eth1`.
 
-```
+```console
 admin@example:/> show interfaces 
 INTERFACE       PROTOCOL   STATE       DATA
 lo              ethernet   UP          00:00:00:00:00:00
@@ -27,7 +27,7 @@ eth1            ethernet   UP          00:c0:ff:ee:00:02
 Creating a bridge and setting our interfaces as bridge ports is a
 straight forward operation.
 
-```
+```console
 admin@example:/> configure
 admin@example:/config/> set interface br0
 admin@example:/config/> set interface eth0 bridge-port bridge br0
@@ -64,7 +64,7 @@ interfaces {
 
 Now we enable a DHCP client on `br0` and activate the changes.
 
-```
+```console
 admin@example:/config/> set dhcp-client client-if br0
 admin@example:/config/> leave
 admin@example:/>
@@ -73,7 +73,7 @@ admin@example:/>
 Back in admin-exec mode we inspect the changes and notice the bridge has
 already got a DHCP lease from the server.
 
-```
+```console
 admin@example:/> show interfaces 
 INTERFACE       PROTOCOL   STATE       DATA
 lo              ethernet   UP          00:00:00:00:00:00
@@ -90,7 +90,7 @@ admin@example:/>
 
 Remember to save your changes for next boot:
 
-```
+```console
 admin@infix:/> copy running-config startup-config
 ```
 
