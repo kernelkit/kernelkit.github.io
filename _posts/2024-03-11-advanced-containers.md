@@ -45,8 +45,8 @@ two bridges instead.
 > and multiple VLAN filtering bridges.  Our example with two non-VLAN
 > filtering bridges means that they share the same MAC database.  In
 > most use-case this is not a problem, but it is worth mentioning for
-> networks where the same MAC address may appear in both bridges.  {:
-> .prompt-info }
+> networks where the same MAC address may appear in both bridges.
+{: .prompt-info }
 
 ## System Container
 
