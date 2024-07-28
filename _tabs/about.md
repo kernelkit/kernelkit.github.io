@@ -3,21 +3,26 @@ icon: fas fa-info-circle
 order: 1
 ---
 
-Infix is a free, Linux based, immutable operating system for networked
-equipment.  Primarily focused on switches and routers, yet its core
-values may be appealing for other use-cases as well:
+Infix is a free, Linux based, immutable[^1] operating system for
+networked equipment.  Although primarily focused on switches and
+routers, its core values may be appealing for other use-cases as
+well:
 
 - Runs from a squashfs image on a read-only partition
 - Single configuration file on a separate partition
-- Built around YANG with standard IETF models
 - Linux switchdev provides open switch APIs
 - Atomic upgrades to secondary partition
 - Highly security focused
 
-An immutable[^1] operating system enhances security and inherently makes
-it maintenance-free.  Configuration and data, e.g, containers, is stored
-on separate partitions to ensure complete separation from system files
-and allow for seamless backup, restore, and provisioning.
+The entire system is modeled using [YANG][1] with standard IETF models
+and dedicated models when needed to fully leverage Linux capabilities.
+Meaning, not only is the system configuration derived from YANG, but
+also system state and any operations (RPC/actions), like upgrade.
+
+An immutable operating system greatly enhances security.  Configuration
+and data, e.g, containers, is stored on separate partitions to ensure
+complete separation from system files and allow for seamless backup,
+restore, and provisioning.
 
 In itself Infix is perfectly suited for dedicated networking tasks and
 native support for Docker containers provides a versatile platform that
@@ -38,3 +43,5 @@ started.
     isolation.  All to improve reliability, scalability, and security.
     For more information, see <https://ceur-ws.org/Vol-3386/paper9.pdf>
     and <https://www.zdnet.com/article/what-is-immutable-linux-heres-why-youd-run-an-immutable-linux-distro/>.
+
+[1]: https://datatracker.ietf.org/doc/html/rfc7950
