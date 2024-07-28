@@ -50,7 +50,7 @@ jacky:
  4. Use relevant tags and categories, check first!
  5. Preview
 
-        jekyll serve -lIw
+        jekyll serve -lw
 
 > **Tip:** for work in progress, use the top-level directory `_drafts/`
 > and add the `-D` option to `jekyll serve` to preview your post.
