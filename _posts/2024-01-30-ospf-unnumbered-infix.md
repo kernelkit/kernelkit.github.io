@@ -16,8 +16,7 @@ IP plans for the PtP connections can be tedious and limits flexibility
 as configurations must be coordinated and matched with each neighbor. 
 The figure below is used as illustration.
 
-<a id="fig1">&nbsp;</a>
-![](/assets/img/ospf-unnumbered-fig1.svg)
+![](/assets/img/ospf-unnumbered-fig1.svg){: #fig1}
 _**Figure 1**: OSPF network with point-to-point links._
 
 The setup disregards any user networks attached to the routers, and
@@ -65,8 +64,7 @@ It's always a good idea to start with the smallest setup to get a feel
 for the system, and how to [troubleshoot](#troubleshooting) it.  So we
 start out with a simple network, just two nodes:
 
-<a id="fig2">&nbsp;</a>
-![](/assets/img/ospf-unnumbered-fig2.svg)
+![](/assets/img/ospf-unnumbered-fig2.svg){: #fig2}
 _**Figure 2**: OSPF network with point-to-point link between two routers._
 
 The first step, the IP plan, is already shown in Figure 2.
@@ -456,8 +454,7 @@ In addition to the point-to-point links, the router likely has regular
 LAN subnets where hosts can be connected. In Figure 3, host subnets
 have been added to R1 and R6.
 
-<a id="fig3">&nbsp;</a>
-![](/assets/img/ospf-unnumbered-fig3.svg)
+![](/assets/img/ospf-unnumbered-fig3.svg){: #fig3}
 _**Figure 3**: LAN broadcast networks added at R1 and R6._
 
 On R1, *eth2* is configured with IP address 10.0.1.1/24, and enabled
