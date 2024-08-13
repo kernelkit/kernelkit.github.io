@@ -7,9 +7,9 @@ tags: [boards]
 ---
 
 Much thanks to the solid foundation curated by [Buildroot][1], Infix can
-quite easily be ported to any system that that supports Linux.  The only
-real hardware requirement is "enough" RAM and storage, and if the board
-has a built-in switch, that it is supported by switchdev.
+quite easily be ported to any system that supports Linux.  The only real
+hardware requirement is "enough" RAM and storage, and if the board has a
+built-in switch, that it is supported by switchdev.
 
 Currently the following boards are fully supported.  Other boards have
 been known to work, but have not been updated or tested continuously.
@@ -22,7 +22,7 @@ been known to work, but have not been updated or tested continuously.
 > Although not really a "board", Qemu can be quite useful for anyone who
 > just want to understand what Infix is.  All releases, as well as the
 > [*latest*][2] (nightly) builds, have an x86_64 image that can be run
-> on any Linux PC with Qemu installed.
+> on any Linux PC with Qemu installed ([instructions][10]).
 
 
 ### Marvell CN9130 CRB
@@ -105,3 +105,4 @@ the M.2 slot stand out as candidates for exploration.
 [8]: https://doc-en.rvspace.org/VisionFive2/Landing_Page/VisionFive_2/introduction.html
 [9]: https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R2S
 [0]: https://www.qemu.org/
+[10]: https://github.com/kernelkit/infix/blob/main/doc/virtual.md
