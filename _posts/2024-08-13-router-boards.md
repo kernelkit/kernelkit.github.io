@@ -72,8 +72,9 @@ soon to Infix.
 _**Figure 3**: NanoPi R2S Plus Overview of functions._
 
 > There are also spin-offs on the same theme with more powerful CPUs and
-> 2.5 Gbps Ethernet.  All of which could easily be supported as well on
-> Infix with a little bit of time and patience.
+> 2.5 Gbps Ethernet: [R4S][11], [R5S][12], [R6S][13] ... all of which
+> could easily be supported as well on Infix with a little bit of time
+> and patience.
 
 
 ### StarFive VisionFive2
@@ -106,3 +107,6 @@ the M.2 slot stand out as candidates for exploration.
 [9]: https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R2S
 [0]: https://www.qemu.org/
 [10]: https://github.com/kernelkit/infix/blob/main/doc/virtual.md
+[11]: https://www.friendlyelec.com/index.php?route=product/product&product_id=284
+[12]: https://www.friendlyelec.com/index.php?route=product/product&product_id=287&search=r5s&description=true&category_id=0&sub_category=true
+[13]: https://www.friendlyelec.com/index.php?route=product/product&product_id=289
