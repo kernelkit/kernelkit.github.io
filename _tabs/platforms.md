@@ -7,7 +7,7 @@ Infix can run on many different types of [architectures and boards][1],
 much thanks to Linux and Buildroot.  Currently the focus is on 64-bit
 ARM devices with switching fabric supported by Linux switchdev.
 
-> See https://kernelkit.org/posts/router-boards/ for the up-to-date list.
+> See <https://kernelkit.org/posts/router-boards/> for the up-to-date list.
 
 The following boards have been know to run Infix.  They are divided into
 three tiers to denote level of support.
