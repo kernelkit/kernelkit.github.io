@@ -110,7 +110,7 @@ admin@R1:/>
 admin@R1:/> configure
 admin@R1:/config/> set interface lo ipv4 address 10.1.1.1 prefix-length 32
 admin@R1:/config/> set interface eth0 ipv4 address 10.1.1.1 prefix-length 32
-admin@R1:/config/> set interface eth0 ipv4 forwarding true
+admin@R1:/config/> set interface eth0 ipv4 forwarding
 ```
 
 To view the changes done so far, use the `diff` command.
@@ -127,11 +127,11 @@ interfaces {
 +    }
   }
   interface lo {
-	ipv4 {
+    ipv4 {
 +      address 10.1.1.1 {
 +        prefix-length 32;
 +      }
-	}
+    }
   }
 }
 ```
@@ -146,12 +146,11 @@ admin@R1:/>
 Status of IP address assignment can be viewed using `show interfaces` command.
 
 ```console
-admin@R1:/> 
 admin@R1:/> show interfaces 
 INTERFACE       PROTOCOL   STATE       DATA                                     
 eth0            ethernet   UP          0c:ec:d1:04:00:00                        
-				ipv4                   10.1.1.1/32 (static)
-				ipv6                   fe80::eec:d1ff:fe04:0/64 (link-layer)
+                ipv4                   10.1.1.1/32 (static)
+                ipv6                   fe80::eec:d1ff:fe04:0/64 (link-layer)
 eth1            ethernet   DOWN        0c:ec:d1:04:00:01                        
 eth2            ethernet   DOWN        0c:ec:d1:04:00:02                        
 eth3            ethernet   DOWN        0c:ec:d1:04:00:03                        
@@ -162,9 +161,9 @@ eth7            ethernet   DOWN        0c:ec:d1:04:00:07
 eth8            ethernet   DOWN        0c:ec:d1:04:00:08                        
 eth9            ethernet   DOWN        0c:ec:d1:04:00:09                        
 lo              ethernet   UP          00:00:00:00:00:00                        
-				ipv4                   127.0.0.1/8 (static)
-				ipv4                   10.1.1.1/32 (static)
-				ipv6                   ::1/128 (other)
+                ipv4                   127.0.0.1/8 (static)
+                ipv4                   10.1.1.1/32 (static)
+                ipv6                   ::1/128 (other)
 admin@R1:/>
 ```
 
@@ -180,10 +179,9 @@ are done within OSPF area context (here the backbone area 0.0.0.0 is
 used).
 
 ```console
-admin@R1:/config/> 
 admin@R1:/config/> edit routing control-plane-protocol ospfv2 name default
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> set ospf area 0.0.0.0 interface lo enabled true
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> set ospf area 0.0.0.0 interface eth0 enabled true
+admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> set ospf area 0.0.0.0 interface lo enabled
+admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> set ospf area 0.0.0.0 interface eth0 enabled
 admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> set ospf area 0.0.0.0 interface eth0 interface-type point-to-point 
 admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/>
 ```
@@ -191,7 +189,7 @@ admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/>
 Changes can be shown with the `diff` command.
 
 ```diff
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> diff	
+admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> diff
 +routing {
 +  control-plane-protocols {
 +    control-plane-protocol ospfv2 name default {
@@ -222,52 +220,17 @@ admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> leave
 admin@R1:/>
 ```
 
-
-### Checking connectivity
-
-Assuming the above configuration is done on R1 and R2 (with address
-10.1.1.2), we can verify connectivity, by pinging the neighbor
-router. 
+When the above configuration is done on R1, and correspondingly on R2
+with address 10.1.1.2 ([Figure 2](#fig2)), routing information will be
+exchanged using OSPF.
 
 ```console
-admin@R1:/>
-admin@R1:/> ping 10.1.1.2
-PING 10.1.1.2 (10.1.1.2) 56(84) bytes of data.
-64 bytes from 10.1.1.2: icmp_seq=1 ttl=64 time=1.21 ms
-64 bytes from 10.1.1.2: icmp_seq=2 ttl=64 time=1.54 ms
-^C
---- 10.1.1.2 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1002ms
-rtt min/avg/max/mdev = 1.205/1.374/1.544/0.169 ms
-admin@R1:/>
-```
-
-We can also view the IP routing table using the `show routes` command
-
-```console
-admin@R1:/> 
-admin@R1:/> show routes 
-PREFIX                        NEXT-HOP                          PREF  PROTOCOL  
-10.1.1.2/32                   10.1.1.2                            20  ospf      
-admin@R1:/>
-```
-
-OSPF status can be shown with commands such as `show ospf neighbor`,
-`show ospf interface`, `show ospf routes`, etc.
-
-```console
-admin@R1:/> 
-admin@R1:/> show ospf neighbor 
-
-Neighbor ID     Pri State           Up Time         Dead Time Address         Interface                        RXmtL RqstL DBsmL
-10.1.1.2          1 Full/-          1m01s             38.568s 10.1.1.2        eth0:10.1.1.1                        0     0     0
-
 admin@R1:/> show ospf routes 
 ============ OSPF network routing table ============
 N    10.1.1.1/32           [0] area: 0.0.0.0
-						   directly attached to lo
+                           directly attached to lo
 N    10.1.1.2/32           [10] area: 0.0.0.0
-						   via 10.1.1.2, eth0
+                           via 10.1.1.2, eth0
 
 ============ OSPF router routing table =============
 
@@ -275,92 +238,6 @@ N    10.1.1.2/32           [10] area: 0.0.0.0
 
 admin@R1:/>
 ```
-
-
-## Troubleshooting
-
-If OSPF fails to setup the routes, it is usually good to start
-checking from bottom up. Is cable connected, are Ethernet interfaces
-up, etc. To troubleshoot connectivity, it can be hard to use `IPv4
-ping` as we have not assigned any IPv4 address to `eth0` other than
-the /32 address. Pinging the neighbor relies on OSPF to work when
-unnumbered interfaces are used.
-
-Instead we can use *tcpdump* to listen for LLDP packets.
-
-```console
-admin@R1:/> tcpdump eth0
-tcpdump: listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
-07:22:13.051412 LLDP, length 232: R2
-07:22:31.856495 LLDP, length 232: R1
-07:22:43.063845 LLDP, length 232: R2
-
-3 packets captured
-3 packets received by filter
-0 packets dropped by kernel
-^C
-admin@R1:/>
-```
-
-In this case, R1 could see both its outgoing LLDP message and R2's
-incoming LLDP. A good sign of connectivity, but we ought to have seen
-some OSPF signalling too.
-
-We can also use IPv6 ping to *all-hosts* address. Below R1 sends such
-a ping on interface eth0.
-
-```console
-admin@R1:/> ping interface eth0 ff02::1
-ping: Warning: source address might be selected on device other than: eth0
-PING ff02::1(ff02::1) from :: eth0: 56 data bytes
-64 bytes from fe80::eec:d1ff:fe04:0%eth0: icmp_seq=1 ttl=64 time=0.022 ms
-64 bytes from fe80::e47:2dff:fe15:0%eth0: icmp_seq=1 ttl=64 time=1.34 ms
-64 bytes from fe80::eec:d1ff:fe04:0%eth0: icmp_seq=2 ttl=64 time=0.057 ms
-64 bytes from fe80::e47:2dff:fe15:0%eth0: icmp_seq=2 ttl=64 time=2.97 ms
-^C
---- ff02::1 ping statistics ---
-2 packets transmitted, 2 received, +2 duplicates, 0% packet loss, time 1002ms
-rtt min/avg/max/mdev = 0.022/1.097/2.968/1.203 ms
-admin@R1:/>
-```
-
-By looking at sequence numbers, we see duplicate responses for each
-ping; one from R1 itself and one from R2. This is also a good sign of
-connectivity. 
-
-If neighbor connectivity work but you are unable to ping to 10.1.1.2
-from R1, the following hints for troubleshooting is suggested.
-
-- Check the IP address status (`show interfaces`) and/or IP address
-  and forwarding configuration (`show running-config`, look for
-  *interface eth0* and *interface lo*)
-- Check OSPF status, in particular `show ospf neighbor` and `show ospf
-  interfaces` for hints.
-- Chec OSPF configuration, either by `show running-config` (look for
-  *ietf-routing:routing*) or by entering configuration mode as shown below.
-
-```
-admin@R1:/> configure 
-admin@R1:/config/> edit routing control-plane-protocol ospfv2 name default 
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> show
-ospf {
-  areas {
-	area 0.0.0.0 {
-	  interfaces {
-		interface eth0 {
-		  interface-type point-to-point;
-		  enabled true;
-		}
-		interface lo {
-		  enabled true;
-		}
-	  }
-	}
-  }
-}
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/>
-```
-
 
 ## Larger setup
 
@@ -376,18 +253,16 @@ config as eth0 got before).
 First setting IPv4 address and enable forwarding
 
 ```console
-admin@R1:/> 
 admin@R1:/> configure 
 admin@R1:/config/> set interface eth1 ipv4 address 10.1.1.1 prefix-length 32
-admin@R1:/config/> set interface eth1 ipv4 forwarding true
+admin@R1:/config/> set interface eth1 ipv4 forwarding
 ```
 
 Then OSPF configuration
 
 ```console
-admin@R1:/config/> 
 admin@R1:/config/> edit routing control-plane-protocol ospfv2 name default
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> set ospf area 0.0.0.0 interface eth1 enabled true 
+admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> set ospf area 0.0.0.0 interface eth1 enabled
 admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> set ospf area 0.0.0.0 interface eth1 interface-type point-to-point
 ```
 
@@ -397,21 +272,21 @@ OSPF configuration can be inspected
 admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> show
 ospf {
   areas {
-	area 0.0.0.0 {
-	  interfaces {
-		interface eth0 {
-		  interface-type point-to-point;
-		  enabled true;
-		}
-		interface eth1 {
-		  interface-type point-to-point;
-		  enabled true;
-		}
-		interface lo {
-		  enabled true;
-		}
-	  }
-	}
+    area 0.0.0.0 {
+      interfaces {
+        interface eth0 {
+          interface-type point-to-point;
+          enabled true;
+        }
+        interface eth1 {
+          interface-type point-to-point;
+          enabled true;
+        }
+        interface lo {
+          enabled true;
+        }
+      }
+    }
   }
 }
 admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> leave
@@ -426,18 +301,18 @@ routers. Here is the result at R1.
 admin@R1:/> show ospf routes 
 ============ OSPF network routing table ============
 N    10.1.1.1/32           [0] area: 0.0.0.0
-						   directly attached to lo
+                           directly attached to lo
 N    10.1.1.2/32           [10] area: 0.0.0.0
-						   via 10.1.1.2, eth0
+                           via 10.1.1.2, eth0
 N    10.1.1.3/32           [10] area: 0.0.0.0
-						   via 10.1.1.3, eth1
+                           via 10.1.1.3, eth1
 N    10.1.1.4/32           [20] area: 0.0.0.0
-						   via 10.1.1.2, eth0
+                           via 10.1.1.2, eth0
 N    10.1.1.5/32           [20] area: 0.0.0.0
-						   via 10.1.1.3, eth1
+                           via 10.1.1.3, eth1
 N    10.1.1.6/32           [30] area: 0.0.0.0
-						   via 10.1.1.2, eth0
-						   via 10.1.1.3, eth1
+                           via 10.1.1.2, eth0
+                           via 10.1.1.3, eth1
 
 ============ OSPF router routing table =============
 
@@ -464,12 +339,11 @@ router is expected on this LAN, eth2 can be configured as a passive
 OSPF interface.
 
 ```console
-admin@R1:/> 
 admin@R1:/> configure 
 admin@R1:/config/> set interface eth2 ipv4 address 10.0.1.1 prefix-length 24
-admin@R1:/config/> set interface eth2 ipv4 forwarding true
-admin@R1:/config/> set routing control-plane-protocol ospfv2 name default ospf area 0.0.0.0 interface eth2 enabled true 
-admin@R1:/config/> set routing control-plane-protocol ospfv2 name default ospf area 0.0.0.0 interface eth2 passive true
+admin@R1:/config/> set interface eth2 ipv4 forwarding
+admin@R1:/config/> set routing control-plane-protocol ospfv2 name default ospf area 0.0.0.0 interface eth2 enabled
+admin@R1:/config/> set routing control-plane-protocol ospfv2 name default ospf area 0.0.0.0 interface eth2 passive
 admin@R1:/config/> leave
 admin@R1:/>
 ```
@@ -481,23 +355,23 @@ following routing table
 admin@R1:/> show ospf routes 
 ============ OSPF network routing table ============
 N    10.0.1.0/24           [10] area: 0.0.0.0
-						   directly attached to eth2
+                           directly attached to eth2
 N    10.0.6.0/24           [40] area: 0.0.0.0
-						   via 10.1.1.2, eth0
-						   via 10.1.1.3, eth1
+                           via 10.1.1.2, eth0
+                           via 10.1.1.3, eth1
 N    10.1.1.1/32           [0] area: 0.0.0.0
-						   directly attached to lo
+                           directly attached to lo
 N    10.1.1.2/32           [10] area: 0.0.0.0
-						   via 10.1.1.2, eth0
+                           via 10.1.1.2, eth0
 N    10.1.1.3/32           [10] area: 0.0.0.0
-						   via 10.1.1.3, eth1
+                           via 10.1.1.3, eth1
 N    10.1.1.4/32           [20] area: 0.0.0.0
-						   via 10.1.1.2, eth0
+                           via 10.1.1.2, eth0
 N    10.1.1.5/32           [20] area: 0.0.0.0
-						   via 10.1.1.3, eth1
+                           via 10.1.1.3, eth1
 N    10.1.1.6/32           [30] area: 0.0.0.0
-						   via 10.1.1.2, eth0
-						   via 10.1.1.3, eth1
+                           via 10.1.1.2, eth0
+                           via 10.1.1.3, eth1
 
 ============ OSPF router routing table =============
 
@@ -507,7 +381,8 @@ N    10.1.1.6/32           [30] area: 0.0.0.0
 admin@R1:/>
 ```
 
-Verify be letting PC1 ping PC2
+Verify by letting PC1 ping PC2, where attached to R1 and R4
+respectivly, see [Figure 3](#fig3).
 
 ```console
 PC1> ping 10.0.6.26
