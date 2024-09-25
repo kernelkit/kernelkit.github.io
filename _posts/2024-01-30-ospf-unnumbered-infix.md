@@ -61,8 +61,7 @@ connectivity.
 ## Simple setup, two nodes
 
 It's always a good idea to start with the smallest setup to get a feel
-for the system, and how to [troubleshoot](#troubleshooting) it.  So we
-start out with a simple network, just two nodes:
+for the system. So we start out with a simple network, just two nodes:
 
 ![](/assets/img/ospf-unnumbered-fig2.svg){: #fig2}
 _**Figure 2**: OSPF network with point-to-point link between two routers._
