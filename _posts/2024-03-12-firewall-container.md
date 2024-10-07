@@ -93,10 +93,11 @@ Notice the command `text-editor content`, it opens up an interactive
 [text editor][4] where you can paste in the contents of the file
 `/etc/nftables.conf` that will be mounted in the container.
 
-The `text-editor` command base64 encodes the content and stores it
-in the Infix `startup-config`, thus ensuring that the configuration
-of the firewall is retained even when reconfigure the container, or
-upgrade the container image.
+When exiting the `text-editor`, the file contents are base64 encoded and
+stored it in the configuration.  Saving this to `startup-config` ensures
+that the firewall configuration is retained even when reconfiguring, or
+upgrading, the container image.
+
 
 ## The Result
 
