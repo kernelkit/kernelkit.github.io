@@ -1,5 +1,5 @@
 ---
-title: Basic Container Setup
+title: Gentle Container Introduction
 author: troglobit
 date: 2024-10-15 07:00:00 +0100
 categories: [showcase]
@@ -11,6 +11,11 @@ tags: [container, containers, networking, docker, podman]
 This is the fourth post in a series about containers in Infix.  This
 time we go back to basics for a more gentle introduction into using
 containers.
+
+We will use one real interface, connected to the outside world, and one
+VETH pair.  One end of the pair in the host and the other given to the
+container.  The host end of the pair can be bridged or routed, this is
+left as an exercise to the reader.
 
 See the [first post][1] for a background and networking basics.
 
