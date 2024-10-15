@@ -46,6 +46,10 @@ container.  We start with the networking, we want a single port as our
 WAN port, connected to the Internet, and a VETH pair where one end will
 be handed over to the container.
 
+Notice the *DHCP client* on interface `e1`, it is required since we need
+Internet access to download the container image below.
+
+
 ```console
 admin@infix:/> configure
 admin@infix:/config/> set dhcp-client client-if e1
