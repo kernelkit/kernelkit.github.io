@@ -53,7 +53,7 @@ admin@infix:/config/> edit interface veth0a
 admin@infix:/config/interface/veth0a/> set veth peer veth0b
 admin@infix:/config/interface/veth0a/> set ipv4 address 192.168.0.1 prefix-length 24
 admin@infix:/config/interface/veth0a/> end
-admin@infix:/config/> edit interface veth0a
+admin@infix:/config/> edit interface veth0b
 admin@infix:/config/interface/veth0b/> set ipv4 address 192.168.0.2 prefix-length 24
 admin@infix:/config/interface/veth0b/> set container-network
 admin@infix:/config/interface/veth0b/> leave
