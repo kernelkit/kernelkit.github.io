@@ -31,15 +31,13 @@ See the [first post][1] for a background and networking basics.
 
 ## Introduction
 
-Let's set up the basic building blocks used with most containers, which
-is usually hidden from users.
+Let's set up the [basic building blocks][0] used with most containers,
+which is usually hidden from users.
 
 ![](/assets/img/basic-docker-veth.svg)
 
- 1. You need the [*Latest
-    Build*](https://github.com/kernelkit/infix/releases/tag/latest) of
-    Infix, use the `x86_64` for [testing with
-    Qemu](https://github.com/kernelkit/infix/blob/main/doc/virtual.md)
+ 1. You need the [*Latest Build*][7] of Infix.  Either on an actual device, or
+    a Linux PC with the `x86_64` image for [testing with Qemu][6]
  2. In Qemu you need to activate separate `/var`, at least 256 MiB: `./qemu.sh -c`
  3. Start Infix: `./qemu.sh`
 
@@ -141,3 +139,5 @@ Take care! <3
 [3]: https://en.wikipedia.org/wiki/Network_address_translation
 [4]: https://github.com/kernelkit/infix/blob/main/doc/cli/text-editor.md
 [5]: https://wiki.nftables.org/wiki-nftables/index.php/Main_Page
+[6]: https://github.com/kernelkit/infix/blob/main/doc/virtual.md
+[7]: https://github.com/kernelkit/infix/releases/tag/latest
