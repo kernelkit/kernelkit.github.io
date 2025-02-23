@@ -114,17 +114,20 @@ host's IP address.
 ![](/assets/img/nginx-welcome.png)
 _Nginx default landing page._
 
+
+> See the [end of this post](#container-content-in-device-configuration)
+> for how to store container file content in the Infix configuration!
+> Meaning custom(er) builds of Infix can bundle a built-in container's
+> initial configuration in the Infix `factory-config`, which can be very
+> useful when deploying at new installations.
+{: .prompt-info }
+
 ## Customizing Content
 
-Deceivingly enough, Docker containers have a thin writable layer that
-allows changing just about any file in the image.  The big *HOWEVER*
-though is that this layer doesn't survive configuration changes or,
-most importantly, image upgrades.
-
-> Use Volumes!  They are a specialized type of "mount", for people
-> familiar with UNIX systems.  Infix currently supports *named mounts*
-> that provide a *persistent* writable layer for containers.
-{: .prompt-tip }
+Containers in Infix are created *read-only by default*, to change the
+content, or store state data across host restarts and upgrades, use
+volumes.  They are a specialized type of "mount", for people familiar
+with UNIX systems.
 
 Here's how to add a volume to your container:
 
@@ -144,7 +147,7 @@ in the container:
 admin@infix:/> container shell web
 d95ce9f7674d:/# vi /usr/share/nginx/html/
 50x.html    index.html
-d95ce9f7674d:/# vi /usr/share/nginx/html/index.html 
+d95ce9f7674d:/# vi /usr/share/nginx/html/index.html
 ... edit, save & exit from vi ...
 d95ce9f7674d:/# 
 ```
@@ -155,11 +158,6 @@ d95ce9f7674d:/#
 Save the best for last?  A neat feature is that container content can be
 saved in the system's `startup-config` and therefore be automatically be
 backed up by administrators snapshotting the system.
-
-> This also means that custom(er) builds of Infix can bundle a built-in
-> container's initial configuration in the Infix `factory-config`, which
-> can be very useful when deploying at new installations.
-{: .prompt-info }
 
 This feature is perfectly suited for container applications that need a
 specific site setup.  For example a configuration file.  Here we use the
