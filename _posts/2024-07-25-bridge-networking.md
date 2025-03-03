@@ -4,7 +4,7 @@ author: troglobit
 date: 2024-07-25 08:23:00 +0100
 categories: [examples]
 tags: [cli, networking, bridge]
-pin: true
+pin: false
 ---
 
 This is an example of how to set up a VLAN transparent bridge with a
