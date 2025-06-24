@@ -3,58 +3,63 @@ icon: fas fa-info-circle
 order: 1
 ---
 
-Infix is a free, Linux-based, immutable[^1] operating system based on
-[Buildroot][2] and completely modeled in YANG using [sysrepo][3].  This
-allows for full remote control and monitoring using NETCONF or RESTCONF.
-Initially focused on switches and routers, Infix has grown to be useful
-for many other use-cases as well.
+Infix is a free, Linux-based, immutable[^1] operating system built on
+[Buildroot][2] and fully modeled in YANG using [sysrepo][3]. This
+enables complete remote control and monitoring via NETCONF or RESTCONF.
+Originally designed for switches and routers, Infix now serves a broad
+range of use cases, including edge devices and security-critical
+applications.
 
-An immutable operating system greatly enhances security.  Configuration
-and data, e.g, containers, is stored on separate partitions to ensure
-complete separation from system files and allow for seamless backup,
-restore, and provisioning.
+An immutable operating system significantly enhances security by design.
+Configuration and application data, including containers, are stored on
+separate partitions to ensure complete isolation from system files and
+enable seamless backup, restore, and provisioning operations.
 
-### Core Values
+### Core Features
 
-- Runs from a squashfs image on a read-only partition
-- Single configuration file on a separate partition
+- Boots from a squashfs image on a read-only partition
+- Full system modeling in YANG for standardized management
+- Single configuration file stored on a separate partition
 - Linux switchdev (DSA) provides open switch APIs
-- Atomic upgrades using common A/B partitioning
-- Highly security focused — LTS kernel + Buildroot
+- Atomic upgrades using proven A/B partitioning
+- Security-focused architecture — always LTS kernel and Buildroot
+- Native Docker container support for workload isolation
 
-### YANG vs NETCONF vs RESTCONF
+### YANG, NETCONF, and RESTCONF Integration
 
-The entire system is modeled using [YANG][1] with standard IETF models
-and dedicated models when needed to fully leverage Linux capabilities.
-Meaning, not only is the system configuration derived from YANG, but
-also system state and any operations (RPC/actions), like upgrade.
+The entire system is modeled using [YANG][1], incorporating both standard
+IETF models and custom models designed to fully leverage Linux capabilities.
+This means not only system configuration but also system state and
+operations (RPC/actions) such as upgrades are all derived from YANG models.
 
-The *wire protocol* to interact with Infix devices is NETCONF (xml over
-ssh) and RESTCONF (json over https).  The latter is particularly useful
-for scripting (and demo) purposes, while the former has more tooling
-available, e.g., [Clixon Controller][4], which is a NETCONF controller.
+The wire protocols for interacting with Infix devices are NETCONF (XML over
+SSH) and RESTCONF (JSON over HTTPS). RESTCONF is particularly well-suited
+for scripting and demonstration purposes, while NETCONF benefits from
+extensive tooling support, including [Clixon Controller][4], a dedicated
+NETCONF controller.
 
-### Adaptability with Containers
+### Extensibility Through Containerization
 
-In itself, Infix is perfectly suited for dedicated networking tasks and
-native support for Docker containers provides a versatile platform that
-can easily be adapted to any customer need.  Be it legacy applications,
-network protocols, process monitoring, or edge data analysis, it can run
-close to end equipment.  Either directly connected on dedicated Ethernet
-ports or indirectly using virtual network cables to exist on the same
-LAN as other connected equipment.
+While Infix excels at dedicated networking tasks, its native Docker container
+support creates a versatile platform that adapts to diverse customer
+requirements. Whether deploying legacy applications, implementing custom
+network protocols, performing process monitoring, or conducting edge data
+analysis, workloads can run close to end equipment. This can be achieved
+either through direct connection via dedicated Ethernet ports or indirectly
+using virtual network interfaces to participate in the same LAN as other
+connected equipment.
 
 ### Summary
 
-The simple design of Infix provides complete control over both system
-and data, minimal cognitive burden, and makes it incredibly easy to get
-started.
+Infix's streamlined design provides comprehensive control over both system
+and data layers while minimizing operational complexity. This makes it
+exceptionally easy to deploy and manage in production environments.
 
 ----
 
-[^1]: An immutable operating system is one with read-only file systems,
+[^1]: An immutable operating system features read-only file systems,
     atomic updates, rollbacks, declarative configuration, and workload
-    isolation.  All to improve reliability, scalability, and security.
+    isolation—all designed to improve reliability, scalability, and security.
     For more information, see <https://ceur-ws.org/Vol-3386/paper9.pdf>
     and <https://www.zdnet.com/article/what-is-immutable-linux-heres-why-youd-run-an-immutable-linux-distro/>.
 
