@@ -27,6 +27,7 @@ participation.
 
  - [StarFive VisionFive2][6] (RISC-V)
  - [NanoPi R2S][7] (ARM)
+ - [Raspberry Pi 4B][10] (ARM)
 
 ### Tier 3
 
@@ -56,3 +57,4 @@ Infix boot sequence, and testing:
 [7]: https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R2S
 [8]: https://ww1.microchip.com/downloads/en/DeviceDoc/00002854B.pdf
 [9]: https://espressobin.net/
+[10]: https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
