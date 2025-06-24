@@ -14,12 +14,12 @@ timezone: Europe/Stockholm
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Infix Network Operating System
+title: KernelKit — Home of Infix OS & curiOS
 
-tagline: A Network Operating System
+tagline: Immutable, Friendly & Secure OS
 
 description: >- # used by seo meta and the atom feed
-  Infix is a free, Linux based, immutable operating system for networked equipment. Primarily focused on switches and routers.
+  Infix is a free, Linux-based, immutable operating system.  Suitable for switches, routers, and end-devices alike.
 
 # Fill in the protocol & hostname for your site.
 # e.g. 'https://username.github.io', note that it does not end with a '/'.
