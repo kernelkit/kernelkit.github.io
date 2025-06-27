@@ -17,7 +17,7 @@ three tiers to denote level of support.
 Fully supported in default builds, with images included in releases:
 
  - [Marvell CN9130][5] CRB (ARM)
- - Qemu[^1] (x86_64)
+ - [GNS3][3]/Qemu[^1] (ARM, x86_64)
 
 ### Tier 2
 
@@ -41,12 +41,12 @@ Infix boot sequence, and testing:
 
 ------
 
-**Footnotes**
+### Footnotes
 
-[^1]: The [Qemu][2] x86_64 is primarily intended for development and
-    testing, but can also be used for evaluation and demo purposes in
-    [GNS3][3].  For more information, see: [Infix in Virtual
-    Environments][4].
+[^1]: The [Qemu][2] x86_64 support is primarily intended for development
+    and testing, but can also be used for evaluation and demo purposes
+    using the [Infix appliance][11] in [GNS3][3].  For more information,
+    see: [Infix in Virtual Environments][4].
 
 [1]: https://github.com/kernelkit/infix/tree/main/board
 [2]: https://www.qemu.org/
@@ -58,3 +58,4 @@ Infix boot sequence, and testing:
 [8]: https://ww1.microchip.com/downloads/en/DeviceDoc/00002854B.pdf
 [9]: https://espressobin.net/
 [10]: https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
+[11]: https://www.gns3.com/marketplace/appliances/infix
