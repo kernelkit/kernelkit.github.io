@@ -66,7 +66,7 @@ backed by [Wires][6], which enables us to advance our development efforts for
 commercial deployment and our community contributions.
 
 <div align="center">
-  <a href="https://wires.se"><img src="https://raw.githubusercontent.com/wires-se/.github/main/profile/logo.png" width=300></a>
+  <a href="https://wires.se"><img alt="Wires" src="https://raw.githubusercontent.com/wires-se/.github/main/profile/logo.png" width=300></a>
 </div>
 
 ----
