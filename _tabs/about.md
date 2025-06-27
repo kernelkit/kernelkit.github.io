@@ -65,6 +65,10 @@ KernelKit is proudly sponsored by its founding developers and is commercially
 backed by [Wires][6], which enables us to advance our development efforts for
 commercial deployment and our community contributions.
 
+<div align="center">
+  <a href="https://wires.se"><img src="https://raw.githubusercontent.com/wires-se/.github/main/profile/logo.png" width=300></a>
+</div>
+
 ----
 
 [^1]: An immutable operating system features read-only file systems,
