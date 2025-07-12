@@ -229,7 +229,7 @@ save your changes for next boot:
 admin@infix:/> copy running-config startup-config
 ```
 
-Take care! <3
+Take care! 🧡
 
 [0]: https://github.com/kernelkit/infix/blob/main/doc/networking.md
 [1]: https://podman.io

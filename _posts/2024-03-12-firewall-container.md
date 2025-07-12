@@ -254,7 +254,7 @@ remember to
 admin@infix:/> copy running-config startup-config
 ```
 
-Take care! <3
+Take care! 🧡
 
 ----
 
