@@ -24,6 +24,13 @@
           <span>{{ site.data.locales[include.lang].tabs.home | upcase }}</span>
         </a>
       </li>
+      <!-- infix docs.yml -->
+      <li class="nav-item">
+        <a href="/infix/" class="nav-link">
+          <i class="fa-fw fas fa-book"></i>
+          <span>User's Guide</span>
+        </a>
+      </li>
       <!-- the real tabs -->
       {% for tab in site.tabs %}
         <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}">
