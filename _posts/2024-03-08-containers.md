@@ -193,15 +193,15 @@ font-family: Tahoma, Verdana, Arial, sans-serif; }
 </style>
 </head>
 <body>
-<h1>Welcome to Infix the Network Operating System!</h1>
+<h1>Welcome to the Infix Operating System!</h1>
 <p>If you see this page, the nginx web server container has been
 installed and is working.</p>
 
 <p>For online documentation and support please refer to the
-<a href="https://kernelkit.github.io/">Infix Homepage</a>.<br/>
+<a href="https://kernelkit.org/">Infix Homepage</a>.<br/>
 
 Commercial support and customer adaptations are available from
-<a href="https://addiva.se/electronics">Addiva Elektronik AB</a>.</p>
+<a href="https://wires.se">Wires</a>.</p>
 
 <p><em>Thank you for reading this blog post!</em></p>
 </body>
