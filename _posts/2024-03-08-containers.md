@@ -87,11 +87,16 @@ the Alpine Linux image.
 admin@infix:/> configure
 admin@infix:/config> edit container web
 admin@infix:/config/container/web/> set image docker://nginx:alpine
+admin@infix:/config/container/web/> set volume cache target /var/cache
 admin@infix:/config/container/web/> edit network
 admin@infix:/config/container/web/network/> set interface docker0
 admin@infix:/config/container/web/network/> set publish 8080:80
 admin@infix:/config/container/web/network/> leave
 ```
+
+> Infix does not create a writable layer by default, so you need to
+> explicitly add *volumes* for directories your container needs.
+{: .prompt-info }
 
 Issuing the command `leave` queues a job to download the image and
 create a container in the background.  To see the progress:
