@@ -3,49 +3,46 @@ icon: fas fa-microchip
 order: 3
 ---
 
-Infix can run on many different types of [architectures and boards][1],
-much thanks to Linux and Buildroot.  Currently the focus is on 64-bit
-ARM devices with switching fabric supported by Linux switchdev.
+Infix runs on many different types of [architectures and boards][1], thanks
+largely to Linux and Buildroot. The project started out with a heavy network
+focus, and that remains its strength, though it is now expanding to include
+end devices like the Raspberry Pi.
 
-> See <https://kernelkit.org/posts/router-boards/> for the up-to-date list.
-
-The following boards have been know to run Infix.  They are divided into
-three tiers to denote level of support.
+The following boards are known to run Infix. The list is divided into three
+tiers to denote level of support.
 
 ### Tier 1
 
 Fully supported in default builds, with images included in releases:
 
- - [Marvell CN9130][5] CRB (ARM)
- - [GNS3][3]/Qemu[^1] (ARM, x86_64)
+- [Marvell CN9130][5] CRB (ARM64)
+- [GNS3][3]/Qemu[^1] (ARM64, x86_64)
 
 ### Tier 2
 
-Separate `defconfig`, may use custom kernel and bootloader.  May
-graduate to *Tier 1* support depending on community interest and
-participation.
+Separate `defconfig`, may use custom kernel and bootloader. May graduate
+to *Tier 1* support depending on community interest and participation.
 
- - [StarFive VisionFive2][6] (RISC-V)
- - [NanoPi R2S][7] (ARM)
- - [Raspberry Pi 4B][10] (ARM)
+- [Raspberry Pi 4B][10] (ARM64)
+- [Banana Pi-R3][12] (ARM64)
 
 ### Tier 3
 
 Worked at one point but needs more attention to bring on par with the
-Infix boot sequence, and testing:
+Infix boot sequence and testing:
 
- - [Microchip SparX-5i][8] PCB135 (ARM)
- - [Marvell EspressoBIN][9] (ARM)
+- [Microchip SparX-5i][8] PCB135 (ARM64)
+- [Marvell EspressoBIN][9] (ARM64)
+- [StarFive VisionFive2][6] (RISC-V)
+- [NanoPi R2S][7] (ARM64)
 
-
-
-------
+---
 
 ### Footnotes
 
 [^1]: The [Qemu][2] x86_64 support is primarily intended for development
     and testing, but can also be used for evaluation and demo purposes
-    using the [Infix appliance][11] in [GNS3][3].  For more information,
+    using the [Infix appliance][11] in [GNS3][3]. For more information,
     see: [Infix in Virtual Environments][4].
 
 [1]: https://github.com/kernelkit/infix/tree/main/board
@@ -59,3 +56,4 @@ Infix boot sequence, and testing:
 [9]: https://espressobin.net/
 [10]: https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
 [11]: https://www.gns3.com/marketplace/appliances/infix
+[12]: https://wiki.banana-pi.org/Banana_Pi_BPI-R3
