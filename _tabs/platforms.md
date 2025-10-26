@@ -13,23 +13,25 @@ tiers to denote level of support.
 
 ### Tier 1
 
-Fully supported in default builds, with images included in releases:
+Fully supported in default builds, verified continuously in regression test
+system, images included in releases:
 
 - [Marvell CN9130][5] CRB (ARM64)
 - [GNS3][3]/Qemu[^1] (ARM64, x86_64)
 
 ### Tier 2
 
-Separate `defconfig`, may use custom kernel and bootloader. May graduate
-to *Tier 1* support depending on community interest and participation.
+Possibly Separate `defconfig`, may even use custom kernel and bootloader.
+Can graduate to *Tier 1* support by HW included in regression test system
+and being part of default builds.
 
 - [Raspberry Pi 4B][10] (ARM64)
 - [Banana Pi-R3][12] (ARM64)
 
 ### Tier 3
 
-Worked at one point but needs more attention to bring on par with the
-Infix boot sequence and testing:
+Worked at one point but needs more attention to bring on par with the Infix
+boot sequence and testing:
 
 - [Microchip SparX-5i][8] PCB135 (ARM64)
 - [Marvell EspressoBIN][9] (ARM64)
