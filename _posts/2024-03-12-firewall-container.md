@@ -2,6 +2,7 @@
 title: Firewall Container
 author: troglobit
 date: 2024-03-12 08:08:41 +0100
+last_modified_at: 2025-10-29 22:10:00 +0100
 categories: [showcase]
 tags: [container, containers, networking, firewall, docker, podman]
 ---
@@ -10,20 +11,20 @@ tags: [container, containers, networking, firewall, docker, podman]
 
 This is the third post in a series about containers in Infix.  This time
 we dive into using containers as "apps" to extend the system for custom
-firewall setups.  Infix does not yet have native support for setting up
-firewalls or ACLs, so the approach is useful even for more basic setups.
+firewall setups.  Infix has a built-in zone-based firewall that works
+well for common use cases.  The container approach described here is for
+advanced setups requiring full control over nftables rules.
 
 See the [first post][1] for a background and networking basics.
 
-> This post assumes knowledge and familiarity with the [Infix Network
-> Operating System](https://kernelkit.github.io/).  Ensure you have
-> either a network connection or console access to your Infix system and
-> can log in to it using SSH.  Recommended reading includes the
-> [networking documentation][0].
+> This post assumes knowledge and familiarity with [Infix][7].  Ensure
+> you have either a network connection or console access to your Infix
+> system and can log in to it using SSH.  Recommended reading includes
+> both the [networking documentation][0] and the introduction to the
+> [zone-based firewall][6].
 {: .prompt-info }
 
-----
-
+---
 
 ## Introduction
 
@@ -244,7 +245,6 @@ table ip nat {
 }
 ```
 
-
 ## Fin
 
 That concludes the third post about containers in Infix.  As usual,
@@ -256,12 +256,12 @@ admin@infix:/> copy running-config startup-config
 
 Take care! 🧡
 
-----
+---
 
 [^1]: Linux namespaces partition system resources such that one set of
     processes sees one set of resources, while another set of processes
     sees a different set of resources.  There are many types: mount,
-	user, PID, network, ...
+    user, PID, network, ...
 
 [^2]: NAT firewall, in this context an RFC 2636 NAPT, or IP masquerading
     firewall with filtering of incoming traffic.  For more information, see
@@ -273,3 +273,5 @@ Take care! 🧡
 [3]: https://en.wikipedia.org/wiki/Network_address_translation
 [4]: https://github.com/kernelkit/infix/blob/main/doc/cli/text-editor.md
 [5]: https://wiki.nftables.org/wiki-nftables/index.php/Main_Page
+[6]: /posts/zone-based-firewall/
+[7]: https://kernelkit.github.io/
