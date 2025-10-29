@@ -8,22 +8,20 @@ tags: [container, containers, docker, podman]
 
 ![Docker whale](/assets/img/docker.webp){: width="200" .right}
 
-A network operating system for switches and routers, that runs Docker?
+An operating system for switches, routers, and end devices that runs Docker?
 
 Yes, as of Infix v24.02 support for running containers using [podman][1]
-is supported.  Because networking is a first class citizen in Infix, you
-can set up quite advanced *virtual topologies* with containers.  This
-blog post is the first in a series of posts that aims to show this.
+is supported. Because networking is a first class citizen in Infix, you
+can set up quite advanced virtual topologies with containers. This blog
+post is the first in a series that aims to show this.
 
-> This post assumes knowledge and familiarity with the [Infix Network
-> Operating System](https://kernelkit.github.io/).  Ensure you have
-> either a network connection or console access to your Infix system and
-> can log in to it using SSH.  Recommended reading includes the
-> [networking documentation][0].
+> This post assumes knowledge and familiarity with [Infix][4].  Ensure
+> you have either a network connection or console access to your Infix
+> system and can log in to it using SSH. Recommended reading includes
+> the [networking documentation][0].
 {: .prompt-info }
 
-
-----
+---
 
 ## Introduction
 
@@ -42,7 +40,6 @@ Notice the slight change in the prompt.  Return to the Bash shell using
 the `exit` command, or Ctrl-D, from the "admin-exec" top level of the
 CLI.
 
-
 ## Networking Basics
 
 ![Dataplane overview](/assets/img/dataplane.svg){: width="430" .right}
@@ -51,8 +48,8 @@ In Infix all network access has to be set up explicitly, so there is no
 default container networking setup (it's a security thing).  There are
 two types available to choose from:
 
- - `host`: Ethernet interface
- - `bridge`: Masquerading bridge
+- `host`: Ethernet interface
+- `bridge`: Masquerading bridge
 
 The first can be any physical port/interface which is handed over to the
 container or, more commonly, one end of a *VETH pair*.
@@ -72,7 +69,6 @@ admin@infix:/config> edit interface docker0
 admin@infix:/config/interface/docker0> set container-network
 admin@infix:/config/interface/docker0> leave
 ```
-
 
 ## Web Server Container
 
@@ -119,7 +115,6 @@ host's IP address.
 ![](/assets/img/nginx-welcome.png)
 _Nginx default landing page._
 
-
 > See the [end of this post](#container-content-in-device-configuration)
 > for how to store container file content in the Infix configuration!
 > Meaning custom(er) builds of Infix can bundle a built-in container's
@@ -154,9 +149,8 @@ d95ce9f7674d:/# vi /usr/share/nginx/html/
 50x.html    index.html
 d95ce9f7674d:/# vi /usr/share/nginx/html/index.html
 ... edit, save & exit from vi ...
-d95ce9f7674d:/# 
+d95ce9f7674d:/#
 ```
-
 
 ## Container Content in Device Configuration
 
@@ -224,7 +218,6 @@ admin@infix:/config/container/web/mount/index.html/> leave
 
 Reload your browser to see the change.
 
-
 ## Fin
 
 That's the end of the first post about containers in Infix.  Remember to
@@ -240,3 +233,4 @@ Take care! 🧡
 [1]: https://podman.io
 [2]: https://www.docker.com/resources/what-container/
 [3]: https://github.com/kernelkit/infix/blob/main/doc/cli/text-editor.md
+[4]: https://kernelkit.org/

@@ -26,8 +26,7 @@ See the [first post][1] for a background and networking basics.
 > [networking documentation][0].
 {: .prompt-info }
 
-----
-
+---
 
 ## Introduction
 
@@ -41,7 +40,6 @@ which is usually hidden from users.
  2. In Qemu you need to activate separate `/var`, at least 256 MiB: `./qemu.sh -c`
  3. Start Infix: `./qemu.sh`
 
-
 ## Configuration
 
 The Infix configuration consists of two parts: networking setup and the
@@ -51,7 +49,6 @@ be handed over to the container.
 
 Notice the *DHCP client* on interface `e1`, it is required since we need
 Internet access to download the container image below.
-
 
 ```console
 admin@infix:/> configure
@@ -82,7 +79,6 @@ admin@infix:/config/container/system/> leave
 > just as easily kept going all through the new configuration.
 {: .prompt-info }
 
-
 ## The Result
 
 We should now have a running container.
@@ -104,7 +100,7 @@ lo        Link encap:Local Loopback
           UP LOOPBACK RUNNING  MTU:65536  Metric:1
           RX packets:0 errors:0 dropped:0 overruns:0 frame:0
           TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:1000 
+          collisions:0 txqueuelen:1000
           RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
 
 eth0      Link encap:Ethernet  HWaddr D2:A3:70:0D:50:00
@@ -113,11 +109,11 @@ eth0      Link encap:Ethernet  HWaddr D2:A3:70:0D:50:00
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
           RX packets:63 errors:0 dropped:9 overruns:0 frame:0
           TX packets:19 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:1000 
+          collisions:0 txqueuelen:1000
           RX bytes:12867 (12.5 KiB)  TX bytes:3064 (2.9 KiB)
 
 root@sys101:~$ exit
-admin@infix:/> 
+admin@infix:/>
 ```
 
 ## Fin
@@ -131,7 +127,7 @@ admin@infix:/> copy running-config startup-config
 
 Take care! 🧡
 
-----
+---
 
 [0]: https://github.com/kernelkit/infix/blob/main/doc/networking.md
 [1]: /posts/containers/
