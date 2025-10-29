@@ -7,10 +7,9 @@ tags: [firewall, networking, security, zbf]
 ---
 
 As of Infix v25.10, a zone-based firewall (ZBF) built on [firewalld][2]
-is included.  Exposing the most relevant functionality for your network
-security.  Rather than managing rules on a per-interface basis, zones
-group interfaces by trust level and policies control traffic flow
-between zones.
+is included, exposing the most relevant functionality for network security.
+Rather than managing rules on a per-interface basis, zones group interfaces
+by trust level and policies control traffic flow between zones.
 
 ![](/assets/img/fw-concept.svg){: #fig1 width="600" }
 _**Figure 1**: Zone-based firewall concept._
@@ -47,8 +46,8 @@ admin@router:/config/firewall/> set zone wan action drop
 admin@router:/config/firewall/> set zone wan interface eth1
 ```
 
-At this point, the LAN zone trusts all traffic to the host, while the WAN
-zone drops everything by default.  However, we need to allow certain services
+At this point, the LAN zone allows all traffic to the host, while the WAN
+zone drops everything by default. However, we need to allow certain services
 from the WAN side, like DHCPv6 for address assignment:
 
 ```console
