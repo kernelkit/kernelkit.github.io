@@ -27,6 +27,7 @@ and being part of default builds.
 
 - [Raspberry Pi 4B][10] (ARM64)
 - [Banana Pi-R3][12] (ARM64)
+- [NanoPi R2S][7] (ARM64)
 
 ### Tier 3
 
@@ -36,7 +37,6 @@ boot sequence and testing:
 - [Microchip SparX-5i][8] PCB135 (ARM64)
 - [Marvell EspressoBIN][9] (ARM64)
 - [StarFive VisionFive2][6] (RISC-V)
-- [NanoPi R2S][7] (ARM64)
 
 ---
 
