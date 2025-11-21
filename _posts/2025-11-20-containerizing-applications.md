@@ -2,6 +2,7 @@
 title: From Embedded App to Container
 author: troglobit
 date: 2025-11-20 10:00:00 +0100
+last_modified_at: 2025-11-21 05:37:00 +0100
 categories: [howto]
 tags: [containers, docker, podman, embedded, migration]
 ---
@@ -139,6 +140,68 @@ You have two options for creating container images:
 
 1. **Build elsewhere, run on Infix** - recommended for most users
 2. **Build directly on Infix** - useful for prototyping
+
+### Choosing a Base Image
+
+Before creating your container, consider which base image to use:
+
+**Alpine Linux** (used in our examples):
+- Minimal size (~5 MB base image)
+- Uses musl libc instead of glibc
+- Fast package installation with `apk`
+- **Limitation:** Not 100% compatible with glibc - some applications built for
+  standard Linux distributions may not work
+- **Best for:** New applications, Python/Go/Rust apps, size-critical deployments
+
+**Debian/Ubuntu:**
+- Uses standard glibc (better compatibility)
+- Larger base image (~50-100 MB)
+- Familiar `apt` package manager
+- **Best for:** Existing applications, binary compatibility requirements, complex
+  dependencies
+
+**Example alternatives:**
+
+```dockerfile
+FROM debian:bookworm-slim     # Debian 12 (minimal)
+FROM ubuntu:22.04             # Ubuntu LTS
+FROM python:3.11              # Python on Debian (larger but more compatible)
+```
+
+> If you're migrating an existing application from Raspberry Pi OS, Debian, or
+> Ubuntu, starting with a Debian-based image often saves troubleshooting time.
+{: .prompt-tip }
+
+### Cross-Architecture Considerations
+
+Many developers build on x86_64 (amd64) workstations but deploy to ARM devices.
+Here's what you need to know:
+
+**Architecture matching:** Your Infix device might run:
+- `aarch64` (ARM 64-bit) - Raspberry Pi 4/5, most modern ARM devices
+- `armv7l` (ARM 32-bit) - Older Raspberry Pi models
+- `x86_64` (amd64) - PC-based systems
+
+**Build strategies:**
+
+1. **Multi-architecture builds** (recommended for distribution):
+   ```console
+   $ docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 \
+       -t myapp/temp-monitor:v1.0 --push .
+   ```
+
+2. **Target-specific builds** (simplest for single deployment):
+   ```console
+   $ docker build --platform linux/arm64 -t myapp/temp-monitor:v1.0 .
+   ```
+
+3. **Native builds** (build directly on target architecture)
+
+**Important notes:**
+- Pure interpreted languages (Python, Ruby) work across architectures
+- Compiled code must match the target architecture
+- Pre-built binaries in your container must be for the target architecture
+- Cross-compilation may require QEMU emulation (slower builds)
 
 ### Option 1: Build on Your Development Machine
 
@@ -509,17 +572,6 @@ admin@infix:/config/container/temp-monitor/mount/i2c/> set source /dev/i2c-1
 admin@infix:/config/container/temp-monitor/mount/i2c/> set target /dev/i2c-1
 admin@infix:/config/container/temp-monitor/mount/i2c/> set read-only false
 ```
-
-### Multi-Architecture Support
-
-Build for multiple CPU architectures:
-
-```console
-$ docker build --platform linux/amd64,linux/arm64,linux/arm/v7 \
-    -t ghcr.io/username/temp-monitor:v1.0 .
-```
-
-Infix automatically pulls the correct architecture.
 
 ### Running Multiple Instances
 
