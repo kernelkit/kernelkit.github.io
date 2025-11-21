@@ -87,4 +87,4 @@ admin@example:/config/nacm/group/admin/> leave
 Read more about [user management][1] in the official documentation.
 
 [0]: https://datatracker.ietf.org/doc/html/rfc8341
-[1]: https://github.com/kernelkit/infix/blob/main/doc/system.md#multiple-users
+[1]: https://kernelkit.org/infix/latest/system/#multiple-users

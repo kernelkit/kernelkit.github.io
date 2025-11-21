@@ -19,8 +19,8 @@ left as an exercise to the reader.
 
 See the [first post][1] for a background and networking basics.
 
-> This post assumes knowledge and familiarity with the [Infix Network
-> Operating System](https://kernelkit.github.io/).  Ensure you have
+> This post assumes knowledge and familiarity with the [Infix
+> Operating System](https://kernelkit.org/).  Ensure you have
 > either a network connection or console access to your Infix system and
 > can log in to it using SSH.  Recommended reading includes the
 > [networking documentation][0].
@@ -129,11 +129,11 @@ Take care! 🧡
 
 ---
 
-[0]: https://github.com/kernelkit/infix/blob/main/doc/networking.md
+[0]: https://kernelkit.org/infix/latest/networking/
 [1]: /posts/containers/
 [2]: https://github.com/kernelkit/curiOS/
 [3]: https://en.wikipedia.org/wiki/Network_address_translation
-[4]: https://github.com/kernelkit/infix/blob/main/doc/cli/text-editor.md
+[4]: https://kernelkit.org/infix/latest/cli/text-editor/
 [5]: https://wiki.nftables.org/wiki-nftables/index.php/Main_Page
-[6]: https://github.com/kernelkit/infix/blob/main/doc/virtual.md
+[6]: https://kernelkit.org/infix/latest/virtual/
 [7]: https://github.com/kernelkit/infix/releases/tag/latest

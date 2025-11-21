@@ -51,4 +51,4 @@ your LAN.
 {: .prompt-info }
 
 
-[0]: https://github.com/kernelkit/infix/blob/main/doc/branding.md
+[0]: https://kernelkit.org/infix/latest/branding/

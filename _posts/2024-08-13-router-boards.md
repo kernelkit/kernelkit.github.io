@@ -106,7 +106,7 @@ the M.2 slot stand out as candidates for exploration.
 [8]: https://doc-en.rvspace.org/VisionFive2/Landing_Page/VisionFive_2/introduction.html
 [9]: https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R2S
 [0]: https://www.qemu.org/
-[10]: https://github.com/kernelkit/infix/blob/main/doc/virtual.md
+[10]: https://kernelkit.org/infix/latest/virtual/
 [11]: https://www.friendlyelec.com/index.php?route=product/product&product_id=284
 [12]: https://www.friendlyelec.com/index.php?route=product/product&product_id=287&search=r5s&description=true&category_id=0&sub_category=true
 [13]: https://www.friendlyelec.com/index.php?route=product/product&product_id=289

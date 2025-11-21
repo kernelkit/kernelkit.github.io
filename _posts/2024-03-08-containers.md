@@ -229,8 +229,8 @@ admin@infix:/> copy running-config startup-config
 
 Take care! 🧡
 
-[0]: https://github.com/kernelkit/infix/blob/main/doc/networking.md
+[0]: https://kernelkit.org/infix/latest/networking/
 [1]: https://podman.io
 [2]: https://www.docker.com/resources/what-container/
-[3]: https://github.com/kernelkit/infix/blob/main/doc/cli/text-editor.md
+[3]: https://kernelkit.org/infix/latest/cli/text-editor/
 [4]: https://kernelkit.org/

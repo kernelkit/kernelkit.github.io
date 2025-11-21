@@ -98,4 +98,4 @@ admin@infix:/> copy running-config startup-config
 > documentation][0].
 {: .prompt-info }
 
-[0]: https://github.com/kernelkit/infix/blob/main/doc/networking.md
+[0]: https://kernelkit.org/infix/latest/networking/

@@ -676,7 +676,7 @@ admin@infix:/> copy running-config startup-config
 Take care!
 
 [0]: https://github.com/kernelkit/infix/
-[1]: https://github.com/kernelkit/infix/blob/main/doc/container.md
+[1]: https://kernelkit.org/infix/latest/container/
 [2]: https://github.com/kernelkit/infix/releases/tag/latest
 [3]: https://github.com/kernelkit/infix/blob/main/src/confd/yang/confd/infix-containers.yang
 [4]: https://podman.io
