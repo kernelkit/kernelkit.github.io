@@ -2,8 +2,10 @@
 title:  Infix Compatible Boards
 author: troglobit
 date:   2024-08-13 10:06:42 +0100
+last_modified_at: 2026-01-23 12:00:00 +0100
 categories: [showcase]
 tags: [boards]
+pin: true
 ---
 
 Much thanks to the solid foundation curated by [Buildroot][1], Infix can
@@ -16,6 +18,8 @@ been known to work, but have not been updated or tested continuously.
 
  - [Marvell CN9130][7] CRB (ARM)
  - [FriendlyELEC NanoPi R2S][9] (ARM)
+ - [Banana Pi BPi-R3][14] (ARM)
+ - [Raspberry Pi][16] 2B, 3B, 4B, CM4 (ARM)
  - [StarFive VisionFive2][8] (RISC-V)
  - [Qemu][0] (x86_64)
 
@@ -77,6 +81,70 @@ _**Figure 3**: NanoPi R2S Plus Overview of functions._
 > and patience.
 
 
+### Banana Pi BPi-R3
+
+The [BPi-R3][14] is an affordable (€130-€150) WiFi-capable router board
+built around the MediaTek MT7986A (Filogic 830), a quad-core Cortex-A53
+at 2.0 GHz with 2 GB DDR4 RAM.
+
+![](/assets/img/bpi-r3-board.jpg){: #fig4}
+_**Figure 4**: Banana Pi BPi-R3._
+
+What makes this board stand out is its networking hardware: a MediaTek
+MT7531A 5-port gigabit switch with full switchdev offload, plus two 2.5
+Gbps SFP ports.  Storage options include microSD, eMMC, and M.2 NVMe.
+
+Infix supports most hardware features:
+
+ - routing between interfaces
+ - built-in 5-port switch with switchdev offload
+ - 2.5 Gbps Ethernet and SFP connectivity
+ - USB 3.0 port, microSD, eMMC, and M.2 NVMe storage
+ - system LEDs and reset button
+
+WiFi access point support is still in development, though WiFi client
+mode is available.  The board is currently Tier 2 support, meaning
+images are built and included in official releases but it's not yet part
+of automated regression testing.
+
+For detailed setup instructions, see the [BPi-R3 announcement][15].
+
+
+### Raspberry Pi
+
+The Raspberry Pi family needs no introduction.  Infix supports several
+models across both 32-bit and 64-bit ARM architectures:
+
+**64-bit (aarch64):**
+
+ - **Pi 3B**: BCM2837B0 quad-core Cortex-A53 @ 1.4 GHz, 1 GB RAM, 100 Mbps Ethernet
+ - **Pi 4B**: BCM2711 quad-core Cortex-A72 @ 1.5 GHz, 1-8 GB RAM, Gigabit Ethernet
+ - **Compute Module 4**: Same processor as Pi 4B, optional eMMC, compact form factor
+
+**32-bit (aarch32):**
+
+ - **Pi 2B**: BCM2836 quad-core Cortex-A7 @ 900 MHz, 1 GB RAM, 100 Mbps Ethernet
+
+![](/assets/img/[Iraspberrypi4b.png){: #fig5}
+_**Figure 5**: Raspberry Pi 4 Model B._
+
+All models include WiFi (dual-band on Pi 3B/4B) and Bluetooth.  The Pi 4B
+and CM4 also support various carrier boards, including the [CM4 IoT Router
+Board Mini][17] and [CM4 NVMe NAS][18] enclosures.
+
+Infix provides DHCP-enabled Ethernet out of the box, with WiFi available
+for client or access point modes.  However, these boards have limitations
+for routing use cases: a single Ethernet port and CPU-based packet
+processing (no hardware switching offload).
+
+> **Note:** Pi 2B revision 1.2 uses a BCM2837 and is *not* supported.
+> The supported Pi 2B uses BCM2836.
+
+For installation, download an SD card image from the [latest bootloader][21]
+builds and flash to a microSD card.  Default credentials are `admin`/`admin`
+via SSH.  See the [64-bit README][19] or [32-bit README][20] for details.
+
+
 ### StarFive VisionFive2
 
 One of the most exciting things to witness, over past decade or so, is
@@ -89,8 +157,8 @@ The board is actually very similar to the RaspberryPi family, with the
 distinct difference of having two Ethernet ports, making it suitable
 for use as a home network router.
 
-![](/assets/img/visionfive2-overview.png){: #fig4}
-_**Figure 4**: StarFive VisionFive2._
+![](/assets/img/visionfive2-overview.png){: #fig6}
+_**Figure 6**: StarFive VisionFive2._
 
 Infix supports only a subset of all the features of this board.  As
 always, the focus is on networking, but [PoE][4], eMMC support, and
@@ -110,3 +178,11 @@ the M.2 slot stand out as candidates for exploration.
 [11]: https://www.friendlyelec.com/index.php?route=product/product&product_id=284
 [12]: https://www.friendlyelec.com/index.php?route=product/product&product_id=287&search=r5s&description=true&category_id=0&sub_category=true
 [13]: https://www.friendlyelec.com/index.php?route=product/product&product_id=289
+[14]: https://wiki.banana-pi.org/Banana_Pi_BPI-R3
+[15]: /posts/banana-pi-r3/
+[16]: https://www.raspberrypi.com/
+[17]: https://www.waveshare.com/wiki/CM4-IO-BASE-A
+[18]: https://www.waveshare.com/wiki/CM4-NAS-Double-Deck
+[19]: https://github.com/kernelkit/infix/blob/main/board/aarch64/raspberrypi-rpi64/README.md
+[20]: https://github.com/kernelkit/infix/blob/main/board/aarch32/raspberrypi-rpi2/README.md
+[21]: https://github.com/kernelkit/infix/releases/tag/latest-boot
