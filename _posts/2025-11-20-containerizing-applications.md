@@ -2,7 +2,7 @@
 title: From Embedded App to Container
 author: troglobit
 date: 2025-11-20 10:00:00 +0100
-last_modified_at: 2025-11-21 05:37:00 +0100
+last_modified_at: 2026-01-23 11:00:00 +0100
 categories: [howto]
 tags: [containers, docker, podman, embedded, migration]
 ---
@@ -231,8 +231,17 @@ CMD ["/usr/local/bin/temp-monitor.py"]
 Build the image:
 
 ```console
+# If your dev machine matches target (e.g., both x86_64, or both ARM64)
 $ docker build -t myapp/temp-monitor:v1.0 .
+
+# If your dev machine differs from target (e.g., x86_64 PC → Raspberry Pi 4B)
+$ docker build --platform linux/arm64 -t myapp/temp-monitor:v1.0 .
 ```
+
+> **Important:** Raspberry Pi 4/5 and most modern ARM boards use `linux/arm64`.
+> Older 32-bit ARM boards use `linux/arm/v7`. PC-based Infix systems use
+> `linux/amd64`. When in doubt, run `uname -m` on your Infix device.
+{: .prompt-warning }
 
 Export as OCI archive:
 
