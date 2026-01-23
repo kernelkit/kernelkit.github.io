@@ -125,7 +125,7 @@ models across both 32-bit and 64-bit ARM architectures:
 
  - **Pi 2B**: BCM2836 quad-core Cortex-A7 @ 900 MHz, 1 GB RAM, 100 Mbps Ethernet
 
-![](/assets/img/[Iraspberrypi4b.png){: #fig5}
+![](/assets/img/raspberrypi4b.png){: #fig5}
 _**Figure 5**: Raspberry Pi 4 Model B._
 
 All models include WiFi (dual-band on Pi 3B/4B) and Bluetooth.  The Pi 4B
