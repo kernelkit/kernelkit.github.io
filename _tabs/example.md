@@ -7,51 +7,58 @@ The CLI configure context is generated from the loaded [YANG][1] models
 and their corresponding [sysrepo][2] plugins.  The following is brief
 example of how to set the IP address of an interface.
 
-> The `<TAB>` shown here means press the Tab key to show possible
+> The <kbd>TAB</kbd> shown here means press the Tab key to show possible
 > command completions.
 {: .prompt-tip }
 
-```console
-admin@infix-12-34-56:/> configure
-admin@infix-12-34-56:/config/> edit interface eth0
-admin@infix-12-34-56:/config/interface/eth0/> set ipv4 <TAB>
-      address     autoconf bind-ni-name      enabled
-      forwarding  mtu      neighbor
-admin@infix-12-34-56:/config/interface/eth0/> set ipv4 address 192.168.2.200 prefix-length 24
-admin@infix-12-34-56:/config/interface/eth0/> show
+<div class="language-console">
+<div class="code-header">
+<span data-label-text="CLI"><i class="fas fa-code fa-fw small"></i></span>
+<button aria-label="copy" data-title-succeed="Copied!"><i class="fas fa-terminal"></i></button></div>
+<pre class="highlight"><code class="language-console">admin@infix-12-34-56:/> <b>configure</b>
+admin@infix-12-34-56:/config/> <b>edit interface eth0</b>
+admin@infix-12-34-56:/config/interface/eth0/> <b>set ipv4 <kbd>TAB</kbd></b>
+      address     autoconf      bind-ni-name     dhcp
+      enabled     forwarding    mtu              neighbor
+admin@infix-12-34-56:/config/interface/eth0/> <b>set ipv4 address 192.168.2.200 prefix-length 24</b>
+admin@infix-12-34-56:/config/interface/eth0/> <b>show</b>
 type ethernet;
 ipv4 {
   address 192.168.2.200 {
     prefix-length 24
   }
 }
-ipv6
-```
+ipv6</code></pre></div>
 
 Whenever you've made a change in configure context, you can see inspect
 the modifications with the `diff` command:
 
 
-```diff
-admin@infix-12-34-56:/config/interface/eth0/> diff
+<div class="language-console">
+<div class="code-header">
+<span data-label-text="diff"><i class="fas fa-code fa-fw small"></i></span>
+<button aria-label="copy" data-title-succeed="Copied!"><i class="fas fa-terminal"></i></button></div>
+<pre class="highlight"><code class="language-diff">admin@infix-12-34-56:/config/interface/eth0/> <b>diff</b>
 interfaces {
   interface eth0 {
-+    ipv4 {
+<span class="gi">+    ipv4 {
 +      address 192.168.2.200 {
 +        prefix-length 24
 +      }
-+    }
++    }</span>
   }
-}
-```
+}</code></pre></div>
 
 To activate the changes you can issue the `leave` command anywhere.
 (Use the `abort` command to cancel all changes.)  Inspect the changes
 made, and remember to save your changes to `startup-config`.
 
-```console
-admin@infix-12-34-56:/config/interface/eth0/> leave
-admin@infix-12-34-56:/> show interfaces
+<div class="language-console">
+<div class="code-header">
+<span data-label-text="CLI"><i class="fas fa-code fa-fw small"></i></span>
+<button aria-label="copy" data-title-succeed="Copied!"><i class="fas fa-terminal"></i></button></div>
+<pre class="highlight"><code class="language-console">admin@infix-12-34-56:/config/interface/eth0/> <b>leave</b>
+admin@infix-12-34-56:/> <b>show interfaces</b>
 INTERFACE       PROTOCOL   STATE       DATA
 lo              ethernet   UP          00:00:00:00:00:00
                 ipv4                   127.0.0.1/8 (static)
@@ -59,8 +66,7 @@ lo              ethernet   UP          00:00:00:00:00:00
 eth0            ethernet   UP          52:54:00:12:34:56
                 ipv4                   192.168.2.200/24 (static)
                 ipv6                   fe80::5054:ff:fe12:3456/64 (link-layer)
-admin@infix-12-34-56:/> copy running-config startup-config
-```
+admin@infix-12-34-56:/> <b>copy running-config startup-config</b></code></pre></div>
 
 > In the CLI all changes are made to the `running-config`, providing you
 > with a basic "undo" mechanism -- in case you make a change that locks
@@ -77,5 +83,5 @@ Curious?  Continue reading:
 
 [1]: https://datatracker.ietf.org/doc/html/rfc7950
 [2]: https://www.sysrepo.org/
-[3]: https://github.com/kernelkit/infix/tree/main/doc/cli
-[6]: https://github.com/kernelkit/infix/blob/main/doc/networking.md
+[3]: /infix/latest/cli/introduction/
+[6]: /infix/latest/networking/

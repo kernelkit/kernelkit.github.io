@@ -1,0 +1,22 @@
+---
+---
+
+@import 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* append your custom style below */
+pre.highlight {
+  line-height: 1.2em;
+}
+
+/* Raw HTML code blocks (with code-header title bar) lack the Rouge table
+   structure that normally provides padding via td.rouge-code. */
+div[class^='language-'] > pre.highlight {
+  padding-top: 0.6rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1rem;
+  padding-right: 1.5rem;
+}
