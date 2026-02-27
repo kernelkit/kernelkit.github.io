@@ -2,7 +2,7 @@
 title:  Infix Compatible Boards
 author: troglobit
 date:   2024-08-13 10:06:42 +0100
-last_modified_at: 2026-01-23 12:00:00 +0100
+last_modified_at: 2026-02-27 12:00:00 +0100
 categories: [showcase]
 tags: [boards]
 pin: true
@@ -16,9 +16,10 @@ built-in switch, that it is supported by switchdev.
 Currently the following boards are fully supported.  Other boards have
 been known to work, but have not been updated or tested continuously.
 
- - [Marvell CN9130][7] CRB (ARM)
- - [FriendlyELEC NanoPi R2S][9] (ARM)
  - [Banana Pi BPi-R3][14] (ARM)
+ - [Banana Pi BPi-R3 Mini][22] (ARM) — *added in v26.02*
+ - [FriendlyELEC NanoPi R2S][9] (ARM)
+ - [Marvell CN9130][7] CRB (ARM)
  - [Raspberry Pi][16] 2B, 3B, 4B, CM4 (ARM)
  - [StarFive VisionFive2][8] (RISC-V)
  - [Qemu][0] (x86_64)
@@ -29,23 +30,57 @@ been known to work, but have not been updated or tested continuously.
 > on any Linux PC with Qemu installed ([instructions][10]).
 
 
-### Marvell CN9130 CRB
+### Banana Pi BPi-R3
 
-This *Customer Reference Board* is really expensive and not really
-suited to everyone, even if you can get hold of one (!), but it remains
-*the* main reference for Infix so far and has seen multiple customer
-specific board spin-offs.
+The [BPi-R3][14] is an affordable (€130-€150) WiFi-capable router board
+built around the MediaTek MT7986A (Filogic 830), a quad-core Cortex-A53
+at 2.0 GHz with 2 GB DDR4 RAM.
 
-![](/assets/img/cn9130-crb.png){: #fig1}
-_**Figure 1**: Marvell CN9130 CRB._
+![](/assets/img/bpi-r3-board.jpg){: #fig1}
+_**Figure 1**: Banana Pi BPi-R3._
 
-The CN9130 is a quad-core Cortex-A72 coupled with a Marvell 88E6393X
-11-port switchcore (one port connected to the SoC).  Only 9 of the
-remaining switch ports are accessible, however.
+What makes this board stand out is its networking hardware: a MediaTek
+MT7531A 5-port gigabit switch with full switchdev offload, plus two 2.5
+Gbps SFP ports.  Storage options include microSD, eMMC, and M.2 NVMe.
 
-Thanks to Linux switchdev, when Infix runs on this board, all bridging
-(switching) configuration, including VLANs, is fully offloaded to the
-switchcore.  Allowing full wirespeed switching between switch ports.
+Infix supports all hardware features:
+
+ - routing between interfaces
+ - built-in 5-port switch with switchdev offload
+ - 2.5 Gbps Ethernet and SFP connectivity
+ - USB 3.0 port, microSD, eMMC, and M.2 NVMe storage
+ - system LEDs and reset button
+ - dual-band 802.11ax WiFi (access point and station modes)
+
+For detailed setup instructions, see the [BPi-R3 announcement][15].
+
+
+### Banana Pi BPi-R3 Mini
+
+The [BPi-R3 Mini][22] is a more compact variant of the BPi-R3, built
+around the same MediaTek MT7986A (Filogic 830) SoC.  It trades the R3's
+SFP ports and microSD slot for a smaller form factor with 2× 2.5 Gbps
+RJ45 ports and 8 GB onboard eMMC.
+
+![](/assets/img/bpi-r3-mini-board.jpeg){: #fig2}
+_**Figure 2**: Banana Pi BPi-R3 Mini._
+
+With 2 GB DDR4 RAM, dual-band WiFi 6 (802.11ax) across two radios, and
+support for up to 16 virtual APs per radio, it is a natural fit as a
+managed WiFi AP router or wireless repeater.
+
+![Banana Pi BPi-R3 Mini](/assets/img/bpi-r3-mini.jpg){: width="300" .right}
+
+Infix supports all hardware features:
+
+ - routing between interfaces
+ - 2× 2.5 Gbps Ethernet (RJ45) connectivity
+ - 8 GB onboard eMMC storage
+ - USB 2.0 port
+ - system LEDs and reset button
+ - dual-band 802.11ax WiFi (access point and station modes)
+
+Support for the BPi-R3 Mini was added in Infix v26.02.
 
 
 ### FriendlyELEC NanoPi R2S
@@ -54,8 +89,8 @@ In stark contrast to the CRB, the tiny little R2S is *very* cheap and
 available from many sources.  It's nowhere near as powerful, of course,
 but gives you much bang for [the buck][5]!
 
-![](/assets/img/nanopi-r2s-board.png){: #fig2}
-_**Figure 2**: NanoPi R2S._
+![](/assets/img/nanopi-r2s-board.png){: #fig3}
+_**Figure 3**: NanoPi R2S._
 
 Only two 1 Gbps Ethernet ports and no WiFi (on this version), and the
 SoC is "only" a quad-core Cortex-A53.  Still, considering its size and
@@ -72,8 +107,8 @@ The board has become so popular that they've now made an R2S *Plus* with
 onboard eMMC, and WiFi over SDIO.  Support for the Plus is coming very
 soon to Infix.
 
-![](/assets/img/nanopi-r2s-overview.jpg){: #fig3}
-_**Figure 3**: NanoPi R2S Plus Overview of functions._
+![](/assets/img/nanopi-r2s-overview.jpg){: #fig4}
+_**Figure 4**: NanoPi R2S Plus Overview of functions._
 
 > There are also spin-offs on the same theme with more powerful CPUs and
 > 2.5 Gbps Ethernet: [R4S][11], [R5S][12], [R6S][13] ... all of which
@@ -81,33 +116,23 @@ _**Figure 3**: NanoPi R2S Plus Overview of functions._
 > and patience.
 
 
-### Banana Pi BPi-R3
+### Marvell CN9130 CRB
 
-The [BPi-R3][14] is an affordable (€130-€150) WiFi-capable router board
-built around the MediaTek MT7986A (Filogic 830), a quad-core Cortex-A53
-at 2.0 GHz with 2 GB DDR4 RAM.
+This *Customer Reference Board* is really expensive and not really
+suited to everyone, even if you can get hold of one (!), but it remains
+*the* main reference for Infix so far and has seen multiple customer
+specific board spin-offs.
 
-![](/assets/img/bpi-r3-board.jpg){: #fig4}
-_**Figure 4**: Banana Pi BPi-R3._
+![](/assets/img/cn9130-crb.png){: #fig5}
+_**Figure 5**: Marvell CN9130 CRB._
 
-What makes this board stand out is its networking hardware: a MediaTek
-MT7531A 5-port gigabit switch with full switchdev offload, plus two 2.5
-Gbps SFP ports.  Storage options include microSD, eMMC, and M.2 NVMe.
+The CN9130 is a quad-core Cortex-A72 coupled with a Marvell 88E6393X
+11-port switchcore (one port connected to the SoC).  Only 9 of the
+remaining switch ports are accessible, however.
 
-Infix supports most hardware features:
-
- - routing between interfaces
- - built-in 5-port switch with switchdev offload
- - 2.5 Gbps Ethernet and SFP connectivity
- - USB 3.0 port, microSD, eMMC, and M.2 NVMe storage
- - system LEDs and reset button
-
-WiFi access point support is still in development, though WiFi client
-mode is available.  The board is currently Tier 2 support, meaning
-images are built and included in official releases but it's not yet part
-of automated regression testing.
-
-For detailed setup instructions, see the [BPi-R3 announcement][15].
+Thanks to Linux switchdev, when Infix runs on this board, all bridging
+(switching) configuration, including VLANs, is fully offloaded to the
+switchcore.  Allowing full wirespeed switching between switch ports.
 
 
 ### Raspberry Pi
@@ -125,8 +150,9 @@ models across both 32-bit and 64-bit ARM architectures:
 
  - **Pi 2B**: BCM2836 quad-core Cortex-A7 @ 900 MHz, 1 GB RAM, 100 Mbps Ethernet
 
-![](/assets/img/raspberrypi4b.png){: #fig5}
-_**Figure 5**: Raspberry Pi 4 Model B._
+![](/assets/img/raspberrypi4b.png){: #fig6}
+_**Figure 6**: Raspberry Pi 4 Model B._
+
 
 All models include WiFi (dual-band on Pi 3B/4B) and Bluetooth.  The Pi 4B
 and CM4 also support various carrier boards, including the [CM4 IoT Router
@@ -157,8 +183,8 @@ The board is actually very similar to the RaspberryPi family, with the
 distinct difference of having two Ethernet ports, making it suitable
 for use as a home network router.
 
-![](/assets/img/visionfive2-overview.png){: #fig6}
-_**Figure 6**: StarFive VisionFive2._
+![](/assets/img/visionfive2-overview.png){: #fig7}
+_**Figure 7**: StarFive VisionFive2._
 
 Infix supports only a subset of all the features of this board.  As
 always, the focus is on networking, but [PoE][4], eMMC support, and
@@ -186,3 +212,4 @@ the M.2 slot stand out as candidates for exploration.
 [19]: https://github.com/kernelkit/infix/blob/main/board/aarch64/raspberrypi-rpi64/README.md
 [20]: https://github.com/kernelkit/infix/blob/main/board/aarch32/raspberrypi-rpi2/README.md
 [21]: https://github.com/kernelkit/infix/releases/tag/latest-boot
+[22]: https://wiki.banana-pi.org/Banana_Pi_BPI-R3_Mini
