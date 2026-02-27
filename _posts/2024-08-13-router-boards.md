@@ -16,18 +16,18 @@ built-in switch, that it is supported by switchdev.
 Currently the following boards are fully supported.  Other boards have
 been known to work, but have not been updated or tested continuously.
 
- - [Banana Pi BPi-R3][14] (ARM)
- - [Banana Pi BPi-R3 Mini][22] (ARM) — *added in v26.02*
- - [FriendlyELEC NanoPi R2S][9] (ARM)
- - [Marvell CN9130][7] CRB (ARM)
- - [Raspberry Pi][16] 2B, 3B, 4B, CM4 (ARM)
- - [StarFive VisionFive2][8] (RISC-V)
- - [Qemu][0] (x86_64)
-
-> Although not really a "board", Qemu can be quite useful for anyone who
-> just want to understand what Infix is.  All releases, as well as the
-> [*latest*][2] (nightly) builds, have an x86_64 image that can be run
-> on any Linux PC with Qemu installed ([instructions][10]).
+| **Board**                                           | **Arch** | **Since** | **Notes**                  |
+|-----------------------------------------------------|----------|-----------|----------------------------|
+| [Banana Pi BPi-R3](#banana-pi-bpi-r3)               | Aarch64  | v25.09    |                            |
+| [Banana Pi BPi-R3 Mini](#banana-pi-bpi-r3-mini)     | Aarch64  | v26.02    |                            |
+| [FriendlyELEC NanoPi R2S](#friendlyelec-nanopi-r2s) | Aarch64  | v24.02    | Fully supported in v24.08  |
+| [Marvell CN9130 CRB](#marvell-cn9130-crb)           | Aarch64  | v23.06    |                            |
+| [Microchip SAMA7G54-EK](#microchip-sama7g54-ek)     | Arm      | v26.02    |                            |
+| [Raspberry Pi](#raspberry-pi) 4B, 3B, CM4           | Aarch64  | v25.05    | 3B and CM4 added in v25.10 |
+| [Raspberry Pi](#raspberry-pi) 2B                    | Arm      | v25.11    |                            |
+| [StarFive VisionFive2](#starfive-visionfive2)       | RISC-V   | v24.08    |                            |
+| [Qemu](#qemu)                                       | x86_64   | v23.06    |                            |
+{: style="margin: 0 auto; width: auto" }
 
 
 ### Banana Pi BPi-R3
@@ -85,9 +85,9 @@ Support for the BPi-R3 Mini was added in Infix v26.02.
 
 ### FriendlyELEC NanoPi R2S
 
-In stark contrast to the CRB, the tiny little R2S is *very* cheap and
-available from many sources.  It's nowhere near as powerful, of course,
-but gives you much bang for [the buck][5]!
+In stark contrast to the CRB, the tiny [NanoPi R2S][9] is *very* cheap
+and available from many sources.  It's nowhere near as powerful, of
+course, but gives you much bang for [the buck][5]!
 
 ![](/assets/img/nanopi-r2s-board.png){: #fig3}
 _**Figure 3**: NanoPi R2S._
@@ -118,10 +118,9 @@ _**Figure 4**: NanoPi R2S Plus Overview of functions._
 
 ### Marvell CN9130 CRB
 
-This *Customer Reference Board* is really expensive and not really
-suited to everyone, even if you can get hold of one (!), but it remains
-*the* main reference for Infix so far and has seen multiple customer
-specific board spin-offs.
+The [CN9130 CRB][7] is a *Customer Reference Board* — really expensive
+and not easy to get hold of — but it remains *the* main reference for
+Infix so far and has seen multiple customer specific board spin-offs.
 
 ![](/assets/img/cn9130-crb.png){: #fig5}
 _**Figure 5**: Marvell CN9130 CRB._
@@ -135,10 +134,18 @@ Thanks to Linux switchdev, when Infix runs on this board, all bridging
 switchcore.  Allowing full wirespeed switching between switch ports.
 
 
+### Microchip SAMA7G54-EK
+
+The [SAMA7G54-EK][23] is the evaluation kit for Microchip's SAMA7G54
+SoC, an Arm Cortex-A7 processor.
+
+Support for the SAMA7G54-EK was added in Infix v26.02.
+
+
 ### Raspberry Pi
 
-The Raspberry Pi family needs no introduction.  Infix supports several
-models across both 32-bit and 64-bit ARM architectures:
+The [Raspberry Pi][16] family needs no introduction.  Infix supports
+several models across both 32-bit and 64-bit ARM architectures:
 
 **64-bit (aarch64):**
 
@@ -179,9 +186,9 @@ very popular VisionFive, with a bit more powerful CPU, quad-core U74
 called [JH7110][3], yet keeping with the values of the original.  Not as
 cheap as the R2S, it still brings a [lot of value][6].
 
-The board is actually very similar to the RaspberryPi family, with the
-distinct difference of having two Ethernet ports, making it suitable
-for use as a home network router.
+The [VisionFive2][8] is actually very similar to the RaspberryPi family,
+with the distinct difference of having two Ethernet ports, making it
+suitable for use as a home network router.
 
 ![](/assets/img/visionfive2-overview.png){: #fig7}
 _**Figure 7**: StarFive VisionFive2._
@@ -189,6 +196,14 @@ _**Figure 7**: StarFive VisionFive2._
 Infix supports only a subset of all the features of this board.  As
 always, the focus is on networking, but [PoE][4], eMMC support, and
 the M.2 slot stand out as candidates for exploration.
+
+
+### Qemu
+
+Although not really a "board", [Qemu][0] can be quite useful for anyone
+who just wants to understand what Infix is.  All releases, as well as
+the [*latest*][2] (nightly) builds, have an x86_64 image that can be
+run on any Linux PC with Qemu installed ([instructions][10]).
 
 [1]: https://buildroot.org
 [2]: https://github.com/kernelkit/infix/releases/tag/latest
@@ -213,3 +228,4 @@ the M.2 slot stand out as candidates for exploration.
 [20]: https://github.com/kernelkit/infix/blob/main/board/aarch32/raspberrypi-rpi2/README.md
 [21]: https://github.com/kernelkit/infix/releases/tag/latest-boot
 [22]: https://wiki.banana-pi.org/Banana_Pi_BPI-R3_Mini
+[23]: https://www.microchip.com/en-us/development-tool/ev21h18a
