@@ -2,6 +2,7 @@
 title: Gentle Container Introduction
 author: troglobit
 date: 2024-10-15 07:00:00 +0100
+last_modified_at: 2026-02-27 12:00:00 +0100
 categories: [showcase]
 tags: [container, containers, networking, docker, podman]
 ---
@@ -42,23 +43,24 @@ which is usually hidden from users.
 
 ## Configuration
 
-The Infix configuration consists of two parts: networking setup and the
-container.  We start with the networking, we want a single port as our
-WAN port, connected to the Internet, and a VETH pair where one end will
-be handed over to the container.
+We start with the networking: a single port as WAN, connected to the
+Internet, and a VETH pair where one end will be handed over to the
+container.
 
 Notice the *DHCP client* on interface `e1`, it is required since we need
 Internet access to download the container image below.
 
 ```console
 admin@infix:/> configure
-admin@infix:/config/> set dhcp-client client-if e1
+admin@infix:/config/> edit interface e1
+admin@infix:/config/interface/e1/> set ipv4 dhcp
+admin@infix:/config/interface/e1/> end
 admin@infix:/config/> edit interface veth0a
 admin@infix:/config/interface/veth0a/> set veth peer veth0b
-admin@infix:/config/interface/veth0a/> set ipv4 address 192.168.0.1 prefix-length 24
+admin@infix:/config/interface/veth0a/> set ipv4 address 192.168.0.1 prefix-length 30
 admin@infix:/config/interface/veth0a/> end
 admin@infix:/config/> edit interface veth0b
-admin@infix:/config/interface/veth0b/> set ipv4 address 192.168.0.2 prefix-length 24
+admin@infix:/config/interface/veth0b/> set ipv4 address 192.168.0.2 prefix-length 30
 admin@infix:/config/interface/veth0b/> set container-network
 admin@infix:/config/interface/veth0b/> leave
 ```
@@ -68,10 +70,13 @@ containers.
 
 ```console
 admin@infix:/> configure
-admin@infix:/config> edit container system
-admin@infix:/config/container/system/> set image docker://ghcr.io/kernelkit/curios:edge
+admin@infix:/config/> edit container system
+admin@infix:/config/container/system/> set image docker://ghcr.io/kernelkit/curios:latest
 admin@infix:/config/container/system/> set hostname sys101
+admin@infix:/config/container/system/> set privileged true
 admin@infix:/config/container/system/> set network interface veth0b
+admin@infix:/config/container/system/> set volume etc target /etc
+admin@infix:/config/container/system/> set volume var target /var
 admin@infix:/config/container/system/> leave
 ```
 
@@ -79,14 +84,61 @@ admin@infix:/config/container/system/> leave
 > just as easily kept going all through the new configuration.
 {: .prompt-info }
 
+## Firewall
+
+To route traffic between the container and the WAN we first enable IP
+forwarding on both ends of the VETH pair:
+
+```console
+admin@infix:/> configure
+admin@infix:/config/> edit interface veth0a
+admin@infix:/config/interface/veth0a/> set ipv4 forwarding true
+admin@infix:/config/interface/veth0a/> end
+admin@infix:/config/> edit interface veth0b
+admin@infix:/config/interface/veth0b/> set ipv4 forwarding true
+admin@infix:/config/interface/veth0b/> leave
+```
+
+Next, a [zone-based firewall][8] to protect the WAN port and let the
+container reach the Internet via masquerade (NAT).  The `containers`
+zone covers `veth0a` — the host end of the pair — and the policy routes
+traffic from there out through the `public` zone on `e1`:
+
+```console
+admin@infix:/> configure
+admin@infix:/config/> edit firewall
+admin@infix:/config/firewall/> set default public
+admin@infix:/config/firewall/> set zone public action reject
+admin@infix:/config/firewall/> set zone public interface e1
+admin@infix:/config/firewall/> set zone public service ssh
+admin@infix:/config/firewall/> set zone containers action accept
+admin@infix:/config/firewall/> set zone containers interface veth0a
+admin@infix:/config/firewall/> set policy container-access ingress containers
+admin@infix:/config/firewall/> set policy container-access egress public
+admin@infix:/config/firewall/> set policy container-access action accept
+admin@infix:/config/firewall/> set policy container-access masquerade true
+admin@infix:/config/firewall/> leave
+```
+
+If the container runs a service you want reachable from the WAN, add a
+port-forward rule to the public zone.  Here we forward TCP port 8080 on
+the WAN to port 80 in the container:
+
+```console
+admin@infix:/> configure
+admin@infix:/config/> edit firewall
+admin@infix:/config/firewall/> set zone public port-forward 8080 proto tcp to addr 192.168.0.2 port 80
+admin@infix:/config/firewall/> leave
+```
+
 ## The Result
 
 We should now have a running container.
 
 ```console
 admin@infix:/> show container 
-CONTAINER ID  IMAGE                          COMMAND     CREATED       STATUS        PORTS       NAMES
-1cd99db1f518  ghcr.io/kernelkit/curios:edge              16 hours ago  Up 6 seconds              system
+CONTAINER ID  IMAGE                            COMMAND     CREATED       STATUS        PORTS       NAMES
+1cd99db1f518  ghcr.io/kernelkit/curios:latest              16 hours ago  Up 6 seconds              system
 ```
 
 We can enter the container using:
@@ -104,7 +156,7 @@ lo        Link encap:Local Loopback
           RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
 
 eth0      Link encap:Ethernet  HWaddr D2:A3:70:0D:50:00
-          inet addr:192.168.0.2  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet addr:192.168.0.2  Bcast:192.168.0.3  Mask:255.255.255.252
           inet6 addr: fe80::d0a3:70ff:fe0d:5000/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
           RX packets:63 errors:0 dropped:9 overruns:0 frame:0
@@ -137,3 +189,4 @@ Take care! 🧡
 [5]: https://wiki.nftables.org/wiki-nftables/index.php/Main_Page
 [6]: https://kernelkit.org/infix/latest/virtual/
 [7]: https://github.com/kernelkit/infix/releases/tag/latest
+[8]: /posts/zone-based-firewall/
