@@ -62,6 +62,7 @@ admin@infix:/config/interface/veth0a/> end
 admin@infix:/config/> edit interface veth0b
 admin@infix:/config/interface/veth0b/> set ipv4 address 192.168.0.2 prefix-length 30
 admin@infix:/config/interface/veth0b/> set container-network
+admin@infix:/config/interface/veth0b/> set container-network route 0.0.0.0/0 gateway 192.168.0.1
 admin@infix:/config/interface/veth0b/> leave
 ```
 
@@ -75,6 +76,7 @@ admin@infix:/config/container/system/> set image docker://ghcr.io/kernelkit/curi
 admin@infix:/config/container/system/> set hostname sys101
 admin@infix:/config/container/system/> set privileged true
 admin@infix:/config/container/system/> set network interface veth0b
+admin@infix:/config/container/system/> set network dns 192.168.0.1
 admin@infix:/config/container/system/> set volume etc target /etc
 admin@infix:/config/container/system/> set volume var target /var
 admin@infix:/config/container/system/> leave
@@ -101,8 +103,8 @@ admin@infix:/config/interface/veth0b/> leave
 
 Next, a [zone-based firewall][8] to protect the WAN port and let the
 container reach the Internet via masquerade (NAT).  The `containers`
-zone covers `veth0a` — the host end of the pair — and the policy routes
-traffic from there out through the `public` zone on `e1`:
+zone covers the VETH subnet and the policy routes traffic from there out
+through the `public` zone on `e1`:
 
 ```console
 admin@infix:/> configure
@@ -112,7 +114,7 @@ admin@infix:/config/firewall/> set zone public action reject
 admin@infix:/config/firewall/> set zone public interface e1
 admin@infix:/config/firewall/> set zone public service ssh
 admin@infix:/config/firewall/> set zone containers action accept
-admin@infix:/config/firewall/> set zone containers interface veth0a
+admin@infix:/config/firewall/> set zone containers network 192.168.0.0/30
 admin@infix:/config/firewall/> set policy container-access ingress containers
 admin@infix:/config/firewall/> set policy container-access egress public
 admin@infix:/config/firewall/> set policy container-access action accept
@@ -130,6 +132,12 @@ admin@infix:/config/> edit firewall
 admin@infix:/config/firewall/> set zone public port-forward 8080 proto tcp to addr 192.168.0.2 port 80
 admin@infix:/config/firewall/> leave
 ```
+
+> Port forwarding only works when the destination zone is defined using
+> `network`, not `interface`.  If the `containers` zone were set with
+> `set zone containers interface veth0a` instead, forwarded packets
+> would be dropped silently.
+{: .prompt-warning }
 
 ## The Result
 
