@@ -2,6 +2,7 @@
 title: Basic Bridge Networking
 author: troglobit
 date: 2024-07-25 08:23:00 +0100
+last_modified_at: 2026-02-27 12:00:00 +0100
 categories: [examples]
 tags: [cli, networking, bridge]
 pin: false
@@ -65,8 +66,9 @@ interfaces {
 Now we enable a DHCP client on `br0` and activate the changes.
 
 ```console
-admin@example:/config/> set dhcp-client client-if br0
-admin@example:/config/> leave
+admin@example:/config/> edit interface br0
+admin@example:/config/interface/br0/> set ipv4 dhcp
+admin@example:/config/interface/br0/> leave
 admin@example:/>
 ```
 

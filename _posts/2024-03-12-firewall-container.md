@@ -2,7 +2,7 @@
 title: Firewall Container
 author: troglobit
 date: 2024-03-12 08:08:41 +0100
-last_modified_at: 2025-10-29 22:10:00 +0100
+last_modified_at: 2026-02-27 12:00:00 +0100
 categories: [showcase]
 tags: [container, containers, networking, firewall, docker, podman]
 ---
@@ -62,7 +62,9 @@ in a LAN configuration.
 
 ```console
 admin@infix:/> configure
-admin@infix:/config/> set dhcp-client client-if eth0
+admin@infix:/config/> edit interface eth0
+admin@infix:/config/interface/eth0/> set ipv4 dhcp
+admin@infix:/config/interface/eth0/> end
 admin@infix:/config/> edit interface br0
 admin@infix:/config/interface/br0/> set ipv4 address 192.168.0.1 prefix-length 24
 admin@infix:/config/interface/br0/> end
