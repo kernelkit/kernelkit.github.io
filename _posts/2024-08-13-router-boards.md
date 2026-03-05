@@ -2,7 +2,7 @@
 title:  Infix Compatible Boards
 author: troglobit
 date:   2024-08-13 10:06:42 +0100
-last_modified_at: 2026-02-27 12:00:00 +0100
+last_modified_at: 2026-03-05 16:00:00 +0100
 categories: [showcase]
 tags: [boards]
 pin: true
@@ -23,6 +23,7 @@ been known to work, but have not been updated or tested continuously.
 | [FriendlyELEC NanoPi R2S](#friendlyelec-nanopi-r2s) | Aarch64  | v24.02    | Fully supported in v24.08  |
 | [Marvell CN9130 CRB](#marvell-cn9130-crb)           | Aarch64  | v23.06    |                            |
 | [Microchip SAMA7G54-EK](#microchip-sama7g54-ek)     | Arm      | v26.02    |                            |
+| [NXP i.MX8MP EVK](#nxp-imx8mp-evk)                  | Aarch64  | v25.02    |                            |
 | [Raspberry Pi](#raspberry-pi) 4B, 3B, CM4           | Aarch64  | v25.05    | 3B and CM4 added in v25.10 |
 | [Raspberry Pi](#raspberry-pi) 2B                    | Arm      | v25.11    |                            |
 | [StarFive VisionFive2](#starfive-visionfive2)       | RISC-V   | v24.08    |                            |
@@ -54,6 +55,9 @@ Infix supports all hardware features:
 
 For detailed setup instructions, see the [BPi-R3 announcement][15].
 
+ - <https://www.amazon.com/OpenSource-Wireless-Dual-Band-MediaTek-Bundle3-BPI/dp/B0BDG9VNJP>
+ - <https://www.conrad.se/sv/p/banana-pi-bananapi-r3-banana-pi-bpi-r3-2-gb-2798410.html>
+ - <https://www.aliexpress.com/w/wholesale-Banana-Pi-Bpi-R3.html>
 
 ### Banana Pi BPi-R3 Mini
 
@@ -82,6 +86,7 @@ Infix supports all hardware features:
 
 Support for the BPi-R3 Mini was added in Infix v26.02.
 
+ - <https://www.amazon.com/OpenWRT-Wireless-Dual-Band-MediaTek-Filogic/dp/B0CH37C83X>
 
 ### FriendlyELEC NanoPi R2S
 
@@ -109,6 +114,10 @@ soon to Infix.
 
 ![](/assets/img/nanopi-r2s-overview.jpg){: #fig4}
 _**Figure 4**: NanoPi R2S Plus Overview of functions._
+
+ - <https://www.friendlyelec.com/index.php?route=product/product&product_id=282>
+ - <https://www.amazon.com/FriendlyElec-NanoPi-R2S-Computer-Dual-Gbps/dp/B0869K2P8R>
+ - <https://www.aliexpress.com/w/wholesale-FriendlyELEC-NanoPi-R2S.html>
 
 > There are also spin-offs on the same theme with more powerful CPUs and
 > 2.5 Gbps Ethernet: [R4S][11], [R5S][12], [R6S][13] ... all of which
@@ -142,6 +151,31 @@ SoC, an Arm Cortex-A7 processor.
 Support for the SAMA7G54-EK was added in Infix v26.02.
 
 
+### NXP i.MX8MP EVK
+
+The [i.MX8MP EVK][24] is NXP's evaluation kit for the i.MX 8M Plus SoC,
+a quad-core Cortex-A53 at up to 1.8 GHz.  Beyond its CPU cores, the SoC
+integrates a 2.3 TOPS Neural Processing Unit, making it a platform of
+interest for edge inference workloads.
+
+The board ships with 6 GB LPDDR4 RAM, dual Gigabit Ethernet (one via the
+SoC's FEC controller and one via the STMMAC/DWMAC IP block), two CAN FD
+ports (FlexCAN), eMMC and SD card storage, USB 3.0 (USB-C with Power
+Delivery), and HDMI output.
+
+Infix supports all hardware features relevant to networking:
+
+ - routing between the two Gigabit Ethernet interfaces
+ - two CAN FD interfaces (FlexCAN)
+ - eMMC and SD card storage
+ - USB 3.0 (USB-C with Power Delivery)
+ - HDMI output
+
+Support for the i.MX8MP EVK was added in Infix v25.02.
+
+ - <https://www.nxp.com/design/design-center/development-boards-and-designs/i-mx-evaluation-and-development-boards/evaluation-kit-for-the-i-mx-8m-plus-applications-processor:8MPLUSLPD4-EVK>
+
+
 ### Raspberry Pi
 
 The [Raspberry Pi][16] family needs no introduction.  Infix supports
@@ -149,13 +183,13 @@ several models across both 32-bit and 64-bit ARM architectures:
 
 **64-bit (aarch64):**
 
- - **Pi 3B**: BCM2837B0 quad-core Cortex-A53 @ 1.4 GHz, 1 GB RAM, 100 Mbps Ethernet
- - **Pi 4B**: BCM2711 quad-core Cortex-A72 @ 1.5 GHz, 1-8 GB RAM, Gigabit Ethernet
- - **Compute Module 4**: Same processor as Pi 4B, optional eMMC, compact form factor
+ - **[Pi 3B][25]**: BCM2837B0 quad-core Cortex-A53 @ 1.4 GHz, 1 GB RAM, 100 Mbps Ethernet
+ - **[Pi 4B][26]**: BCM2711 quad-core Cortex-A72 @ 1.5 GHz, 1-8 GB RAM, Gigabit Ethernet
+ - **[Compute Module 4][27]**: Same processor as Pi 4B, optional eMMC, compact form factor
 
 **32-bit (aarch32):**
 
- - **Pi 2B**: BCM2836 quad-core Cortex-A7 @ 900 MHz, 1 GB RAM, 100 Mbps Ethernet
+ - **[Pi 2B][28]**: BCM2836 quad-core Cortex-A7 @ 900 MHz, 1 GB RAM, 100 Mbps Ethernet
 
 ![](/assets/img/raspberrypi4b.png){: #fig6}
 _**Figure 6**: Raspberry Pi 4 Model B._
@@ -172,6 +206,8 @@ processing (no hardware switching offload).
 
 > **Note:** Pi 2B revision 1.2 uses a BCM2837 and is *not* supported.
 > The supported Pi 2B uses BCM2836.
+
+ - <https://www.raspberrypi.com/resellers/>
 
 For installation, download an SD card image from the [latest bootloader][21]
 builds and flash to a microSD card.  Default credentials are `admin`/`admin`
@@ -196,6 +232,9 @@ _**Figure 7**: StarFive VisionFive2._
 Infix supports only a subset of all the features of this board.  As
 always, the focus is on networking, but [PoE][4], eMMC support, and
 the M.2 slot stand out as candidates for exploration.
+
+ - <https://www.amazon.com/VisionFive2-StarFive-JH7110-64-bit-Integrated/dp/B0C7MV1RJ8>
+ - <https://www.aliexpress.com/w/wholesale-visionfive2.html>
 
 
 ### Qemu
@@ -229,3 +268,8 @@ run on any Linux PC with Qemu installed ([instructions][10]).
 [21]: https://github.com/kernelkit/infix/releases/tag/latest-boot
 [22]: https://wiki.banana-pi.org/Banana_Pi_BPI-R3_Mini
 [23]: https://www.microchip.com/en-us/development-tool/ev21h18a
+[24]: https://www.nxp.com/design/design-center/development-boards-and-designs/i-mx-evaluation-and-development-boards/evaluation-kit-for-the-i-mx-8m-plus-applications-processor:8MPLUSLPD4-EVK
+[25]: https://www.raspberrypi.com/products/raspberry-pi-3-model-b/
+[26]: https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
+[27]: https://www.raspberrypi.com/products/compute-module-4/
+[28]: https://www.raspberrypi.com/products/raspberry-pi-2-model-b/

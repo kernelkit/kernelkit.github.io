@@ -21,13 +21,17 @@ system, images included in releases:
 
 ### Tier 2
 
-Possibly Separate `defconfig`, may even use custom kernel and bootloader.
-Can graduate to *Tier 1* support by HW included in regression test system
-and being part of default builds.
+Possibly Separate `defconfig` and may even use custom kernel.  Candidate
+for graduating to *Tier 1* support when HW is included in a regression
+test system and being part of default builds.
 
-- [Raspberry Pi 4B][10] (ARM64)
-- [Banana Pi-R3][12] (ARM64)
-- [NanoPi R2S][7] (ARM64)
+- [Banana Pi BPi-R3][12] (ARM64)
+- [Banana Pi BPi-R3 Mini][13] (ARM64)
+- [FriendlyELEC NanoPi R2S][7] (ARM64)
+- [Microchip SAMA7G54-EK][14] (ARM)
+- [NXP i.MX8MP EVK][15] (ARM64)
+- Raspberry Pi [4B][10], [3B][16], [CM4][17] (ARM64)
+- Raspberry Pi [2B][18] (ARM)
 
 ### Tier 3
 
@@ -57,5 +61,11 @@ boot sequence and testing:
 [8]: https://ww1.microchip.com/downloads/en/DeviceDoc/00002854B.pdf
 [9]: https://espressobin.net/
 [10]: https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
+[16]: https://www.raspberrypi.com/products/raspberry-pi-3-model-b/
+[17]: https://www.raspberrypi.com/products/compute-module-4/
+[18]: https://www.raspberrypi.com/products/raspberry-pi-2-model-b/
 [11]: https://www.gns3.com/marketplace/appliances/infix
 [12]: https://wiki.banana-pi.org/Banana_Pi_BPI-R3
+[13]: https://wiki.banana-pi.org/Banana_Pi_BPI-R3_Mini
+[14]: https://www.microchip.com/en-us/development-tool/ev21h18a
+[15]: https://www.nxp.com/design/design-center/development-boards-and-designs/i-mx-evaluation-and-development-boards/evaluation-kit-for-the-i-mx-8m-plus-applications-processor:8MPLUSLPD4-EVK
