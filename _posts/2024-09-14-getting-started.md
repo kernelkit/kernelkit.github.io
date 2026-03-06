@@ -2,6 +2,7 @@
 title: Getting Started with Infix
 author: troglobit
 date: 2024-09-14 12:11:00 +0100
+last_modified_at: 2026-03-06 06:30:00 +0100
 categories: [howto]
 tags: [beginner]
 pin: true
@@ -22,19 +23,20 @@ up and running.  Time to start your favorite terminal application! 😃
 
 ```bash
 $ sudo apt install qemu-system-x86 virt-manager
+...
 ```
 
 ### Download Infix
 
 Go to https://github.com/kernelkit/infix/releases/latest and scroll down
-to *Assets*.  Download the tarball named `infix-x86_64-VERSION.tar.gz`,
-where VERSION is the year+month+patch release number.
+to *Assets*.  Download the tarball named `infix-x86_64-VER.tar.gz`,
+where VER is the `YY.MM.PATCH` release number, e.g. `26.02.1`.
 
-It extracts to a subdirectory:
-
+It extracts to a subdirectory with the same name:
 
 ```bash
-$ sudo apt install qemu-system-x86 virt-manager
+$ tar xf infix-x86_64-26.02.1.tar.gz
+$ cd infix-x86_64-26.02.1/
 ```
 
 
@@ -43,6 +45,16 @@ $ sudo apt install qemu-system-x86 virt-manager
 > Depending on how you have [set up your Linux][sudo] installation, the
 > following may require being run with superuser privileges, i.e., you
 > may need to prepend the command with `sudo`.
+
+```bash
+$ ./qemu/run.sh
+```
+
+You should now see Infix booting.  When the login prompt appears, the
+default credentials are `admin` / `admin`.
+
+
+### More Ethernet Ports
 
 For more Ethernet ports in your emulated system you need to change the
 Qemu configuration used for Infix.  This can be done using a menuconfig
@@ -55,14 +67,15 @@ $ sudo apt install kconfig-frontends
 We can now enter the configuration:
 
 ```bash
-$ ./qemu.sh -c
+$ ./qemu/run.sh -c
 ```
 
 Go down to *Networking*, select *TAP*, now you can change the *Number of
-TAPs*, e.g. to 10.  Exit and save the configuration, then you can start
-Qemu again:
+TAPs*, e.g. to 10.  Exit and save the configuration, then start Qemu again:
 
-   ./qemu.sh
+```bash
+$ ./qemu/run.sh
+```
 
 > Make sure to do a factory reset from the CLI, otherwise you will be
 > stuck with that single interface from before.
