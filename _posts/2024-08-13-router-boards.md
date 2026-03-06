@@ -86,7 +86,7 @@ Infix supports all hardware features:
 
 Support for the BPi-R3 Mini was added in Infix v26.02.
 
- - <https://www.amazon.com/OpenWRT-Wireless-Dual-Band-MediaTek-Filogic/dp/B0CH37C83X>
+ - <https://amzn.eu/d/0daRJUOn>
 
 ### FriendlyELEC NanoPi R2S
 
