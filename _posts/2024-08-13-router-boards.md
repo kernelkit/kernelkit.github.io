@@ -56,6 +56,7 @@ Infix supports all hardware features:
 For detailed setup instructions, see the [BPi-R3 announcement][15].
 
  - <https://www.amazon.com/OpenSource-Wireless-Dual-Band-MediaTek-Bundle3-BPI/dp/B0BDG9VNJP>
+ - <https://www.amazon.se/Banana-Pi-BPI-R3-OpenWRT-router-br%C3%A4da-Bundle3-BPI/dp/B0BJZQ3TW7>
  - <https://www.conrad.se/sv/p/banana-pi-bananapi-r3-banana-pi-bpi-r3-2-gb-2798410.html>
  - <https://www.aliexpress.com/w/wholesale-Banana-Pi-Bpi-R3.html>
 
