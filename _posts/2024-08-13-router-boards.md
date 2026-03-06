@@ -90,16 +90,18 @@ Support for the BPi-R3 Mini was added in Infix v26.02.
 
 ### FriendlyELEC NanoPi R2S
 
-In stark contrast to the CRB, the tiny [NanoPi R2S][9] is *very* cheap
-and available from many sources.  It's nowhere near as powerful, of
-course, but gives you much bang for [the buck][5]!
+The [NanoPi R2S][9] is a compact, affordable router board built around
+the Rockchip RK3328, a quad-core Cortex-A53.  With two Gigabit Ethernet
+ports, a USB 3.0 port, and a reset button, it has everything you need
+for a capable home router — at a price that's hard to beat.
 
 ![](/assets/img/nanopi-r2s-board.png){: #fig3}
 _**Figure 3**: NanoPi R2S._
 
-Only two 1 Gbps Ethernet ports and no WiFi (on this version), and the
-SoC is "only" a quad-core Cortex-A53.  Still, considering its size and
-cost, a very capable little device.
+Small enough to fit in a pocket yet powerful enough to handle NAT,
+firewalling, and VLANs at wire speed, it is an excellent choice for
+anyone looking to run a proper network OS at home without breaking
+the bank.
 
 Infix supports *all* features of this device:
 
@@ -248,7 +250,6 @@ run on any Linux PC with Qemu installed ([instructions][10]).
 [2]: https://github.com/kernelkit/infix/releases/tag/latest
 [3]: https://www.cnx-software.com/2022/08/29/starfive-jh7110-risc-v-processor-specifications/
 [4]: https://bootlin.com/blog/power-over-ethernet-poe-support-into-the-official-linux-kernel/
-[5]: https://www.aliexpress.com/w/wholesale-nanopi-r2s-metal-case.html?spm=a2g0o.detail.search.0
 [6]: https://www.aliexpress.com/w/wholesale-visionfive2.html?spm=a2g0o.productlist.search.0
 [7]: https://www.marvell.com/content/dam/marvell/en/public-collateral/embedded-processors/marvell-infrastructure-processors-octeon-tx2-cn913x-product-brief.pdf
 [8]: https://doc-en.rvspace.org/VisionFive2/Landing_Page/VisionFive_2/introduction.html
