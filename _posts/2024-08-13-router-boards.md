@@ -86,7 +86,7 @@ Infix supports all hardware features:
 
 Support for the BPi-R3 Mini was added in Infix v26.02.
 
- - <https://amzn.eu/d/0daRJUOn>
+ - <https://www.amazon.se/dp/B0CL9FBMWG>
 
 ### FriendlyELEC NanoPi R2S
 
