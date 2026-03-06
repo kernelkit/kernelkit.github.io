@@ -122,10 +122,10 @@ _**Figure 4**: NanoPi R2S Plus Overview of functions._
  - <https://www.aliexpress.com/w/wholesale-FriendlyELEC-NanoPi-R2S.html>
 
 > There are also spin-offs on the same theme with more powerful CPUs and
-> 2.5 Gbps Ethernet: [R4S][11], [R5S][12], [R6S][13] ... all of which
-> could easily be supported as well on Infix with a little bit of time
-> and patience.
-
+> 2.5 Gbps Ethernet: [R3S][5], [R4S][11], [R5S][12], [R6S][13] ... all
+> of which could easily be supported as well on Infix with a little bit
+> of time and patience.
+{: .prompt-info }
 
 ### Marvell CN9130 CRB
 
@@ -144,14 +144,12 @@ Thanks to Linux switchdev, when Infix runs on this board, all bridging
 (switching) configuration, including VLANs, is fully offloaded to the
 switchcore.  Allowing full wirespeed switching between switch ports.
 
-
 ### Microchip SAMA7G54-EK
 
 The [SAMA7G54-EK][23] is the evaluation kit for Microchip's SAMA7G54
 SoC, an Arm Cortex-A7 processor.
 
 Support for the SAMA7G54-EK was added in Infix v26.02.
-
 
 ### NXP i.MX8MP EVK
 
@@ -206,8 +204,9 @@ for client or access point modes.  However, these boards have limitations
 for routing use cases: a single Ethernet port and CPU-based packet
 processing (no hardware switching offload).
 
-> **Note:** Pi 2B revision 1.2 uses a BCM2837 and is *not* supported.
-> The supported Pi 2B uses BCM2836.
+> Pi 2B revision 1.2, which admittedly is a bit of a unicorn, uses a
+> BCM2837 and is *not* supported.  The supported Pi 2B uses BCM2836.
+{: .prompt-warning }
 
  - <https://www.raspberrypi.com/resellers/>
 
@@ -250,6 +249,7 @@ run on any Linux PC with Qemu installed ([instructions][10]).
 [2]: https://github.com/kernelkit/infix/releases/tag/latest
 [3]: https://www.cnx-software.com/2022/08/29/starfive-jh7110-risc-v-processor-specifications/
 [4]: https://bootlin.com/blog/power-over-ethernet-poe-support-into-the-official-linux-kernel/
+[5]: https://www.friendlyelec.com/index.php?route=product/product&product_id=311
 [6]: https://www.aliexpress.com/w/wholesale-visionfive2.html?spm=a2g0o.productlist.search.0
 [7]: https://www.marvell.com/content/dam/marvell/en/public-collateral/embedded-processors/marvell-infrastructure-processors-octeon-tx2-cn913x-product-brief.pdf
 [8]: https://doc-en.rvspace.org/VisionFive2/Landing_Page/VisionFive_2/introduction.html
