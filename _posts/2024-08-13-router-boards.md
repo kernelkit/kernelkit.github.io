@@ -2,7 +2,7 @@
 title:  Infix Compatible Boards
 author: troglobit
 date:   2024-08-13 10:06:42 +0100
-last_modified_at: 2026-03-05 16:00:00 +0100
+last_modified_at: 2026-03-08 10:00:00 +0100
 categories: [showcase]
 tags: [boards]
 pin: true
@@ -20,6 +20,7 @@ been known to work, but have not been updated or tested continuously.
 |-----------------------------------------------------|----------|-----------|----------------------------|
 | [Banana Pi BPi-R3](#banana-pi-bpi-r3)               | Aarch64  | v25.09    |                            |
 | [Banana Pi BPi-R3 Mini](#banana-pi-bpi-r3-mini)     | Aarch64  | v26.02    |                            |
+| [Banana Pi BPi-R64](#banana-pi-bpi-r64)             | Aarch64  | v26.03    |                            |
 | [FriendlyELEC NanoPi R2S](#friendlyelec-nanopi-r2s) | Aarch64  | v24.02    | Fully supported in v24.08  |
 | [Marvell CN9130 CRB](#marvell-cn9130-crb)           | Aarch64  | v23.06    |                            |
 | [Microchip SAMA7G54-EK](#microchip-sama7g54-ek)     | Arm      | v26.02    |                            |
@@ -29,7 +30,6 @@ been known to work, but have not been updated or tested continuously.
 | [StarFive VisionFive2](#starfive-visionfive2)       | RISC-V   | v24.08    |                            |
 | [Qemu](#qemu)                                       | x86_64   | v23.06    |                            |
 {: style="margin: 0 auto; width: auto" }
-
 
 ### Banana Pi BPi-R3
 
@@ -88,6 +88,27 @@ Infix supports all hardware features:
 Support for the BPi-R3 Mini was added in Infix v26.02.
 
  - <https://www.amazon.se/dp/B0CL9FBMWG>
+
+### Banana Pi BPi-R64
+
+The [BPi-R64][29] is the predecessor to the BPi-R3, built around the
+MediaTek MT7622, a dual-core Cortex-A53 at 1.35 GHz with 1 GB DDR3L RAM.
+It offers a MediaTek MT7531 5-port Gigabit switch (4× LAN + 1× WAN) with
+full switchdev offload, 8 GB eMMC, microSD, and a USB 3.0 port.
+
+![](/assets/img/bpi-r64-overview.jpg){: #fig-r64}
+_**Figure**: Banana Pi BPi-R64 with interfaces and chipsets._
+
+Built-in WiFi is 2.4 GHz 802.11n (MT7603E), but one of the two Mini PCIe
+slots accepts a MediaTek MT7615 card for dual-band 802.11ac — Infix
+automatically prefers it when fitted.
+
+For detailed setup and eMMC installation instructions, see the [BPi-R64
+announcement][30].
+
+ - <https://www.amazon.com/Router-High-Wireless-Gigabit-MediaTek-Dual-Band/dp/B08F2K73G3>
+ - <https://www.youyeetoo.com/products/youyeetoo-bpi-r64>
+ - <https://www.aliexpress.com/w/wholesale-banana-pi-bpi-r64.html>
 
 ### FriendlyELEC NanoPi R2S
 
@@ -275,3 +296,5 @@ run on any Linux PC with Qemu installed ([instructions][10]).
 [26]: https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
 [27]: https://www.raspberrypi.com/products/compute-module-4/
 [28]: https://www.raspberrypi.com/products/raspberry-pi-2-model-b/
+[29]: https://wiki.banana-pi.org/Banana_Pi_BPI-R64
+[30]: /posts/banana-pi-r64/

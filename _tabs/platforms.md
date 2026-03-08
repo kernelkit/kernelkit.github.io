@@ -27,6 +27,7 @@ test system and being part of default builds.
 
 - [Banana Pi BPi-R3][12] (ARM64)
 - [Banana Pi BPi-R3 Mini][13] (ARM64)
+- [Banana Pi BPi-R64][19] (ARM64)
 - [FriendlyELEC NanoPi R2S][7] (ARM64)
 - [Microchip SAMA7G54-EK][14] (ARM)
 - [NXP i.MX8MP EVK][15] (ARM64)
@@ -69,3 +70,4 @@ boot sequence and testing:
 [13]: https://wiki.banana-pi.org/Banana_Pi_BPI-R3_Mini
 [14]: https://www.microchip.com/en-us/development-tool/ev21h18a
 [15]: https://www.nxp.com/design/design-center/development-boards-and-designs/i-mx-evaluation-and-development-boards/evaluation-kit-for-the-i-mx-8m-plus-applications-processor:8MPLUSLPD4-EVK
+[19]: https://wiki.banana-pi.org/Banana_Pi_BPI-R64
