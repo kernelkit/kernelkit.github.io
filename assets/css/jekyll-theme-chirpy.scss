@@ -8,6 +8,16 @@
 ';
 
 /* append your custom style below */
+
+/* Sync CSS color-scheme with Chirpy's JS dark mode toggle so that SVGs
+   using the light-dark() CSS function (e.g. draw.io diagrams) respond to
+   the blog's dark/light toggle rather than only the OS-level preference. */
+html[data-mode=dark] {
+  color-scheme: dark;
+}
+html[data-mode=light] {
+  color-scheme: light;
+}
 pre.highlight {
   line-height: 1.2em;
 }
