@@ -2,6 +2,7 @@
 title:  OSPF Unnumbered Interfaces
 author: vatn
 date:   2024-01-30 17:06:42 +0200
+last_modified_at: 2026-03-11 12:25:00 +0100
 tags: [networking, ospf]
 image:
   path: /assets/img/ospf-unnumbered-fig1.svg
@@ -12,6 +13,12 @@ image:
 This post explains how to use *Unnumbered Interfaces* to simplify OSPF
 network setup and maintenance in [Infix][1].
 
+> The topology in this post was built and tested in [GNS3][3], using
+> the Infix appliance from the [GNS3 Marketplace][4].  If you want to
+> follow along without any physical hardware, that is the quickest way
+> to get started — see the [virtual environments][5] documentation for
+> more details.
+{: .prompt-tip }
 
 ## Introduction
 
@@ -400,3 +407,6 @@ Done!
 
 [1]: https://github.com/kernelkit/infix
 [2]: https://github.com/kernelkit/infix/tree/main/doc/cli
+[3]: https://gns3.com/infix
+[4]: https://gns3.com/marketplace/appliances/infix
+[5]: https://www.kernelkit.org/infix/latest/virtual/
