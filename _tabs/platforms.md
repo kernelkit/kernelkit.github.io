@@ -66,8 +66,8 @@ boot sequence and testing:
 [17]: https://www.raspberrypi.com/products/compute-module-4/
 [18]: https://www.raspberrypi.com/products/raspberry-pi-2-model-b/
 [11]: https://www.gns3.com/marketplace/appliances/infix
-[12]: https://wiki.banana-pi.org/Banana_Pi_BPI-R3
-[13]: https://wiki.banana-pi.org/Banana_Pi_BPI-R3_Mini
+[12]: https://docs.banana-pi.org/en/BPI-R3/BananaPi_BPI-R3
+[13]: https://docs.banana-pi.org/en/BPI-R3_Mini/BananaPi_BPI-R3_Mini
 [14]: https://www.microchip.com/en-us/development-tool/ev21h18a
 [15]: https://www.nxp.com/design/design-center/development-boards-and-designs/i-mx-evaluation-and-development-boards/evaluation-kit-for-the-i-mx-8m-plus-applications-processor:8MPLUSLPD4-EVK
-[19]: https://wiki.banana-pi.org/Banana_Pi_BPI-R64
+[19]: https://docs.banana-pi.org/en/BPI-R64/BananaPi_BPI-R64

@@ -285,7 +285,7 @@ run on any Linux PC with Qemu installed ([instructions][10]).
 [11]: https://www.friendlyelec.com/index.php?route=product/product&product_id=284
 [12]: https://www.friendlyelec.com/index.php?route=product/product&product_id=287&search=r5s&description=true&category_id=0&sub_category=true
 [13]: https://www.friendlyelec.com/index.php?route=product/product&product_id=289
-[14]: https://wiki.banana-pi.org/Banana_Pi_BPI-R3
+[14]: https://docs.banana-pi.org/en/BPI-R3/BananaPi_BPI-R3
 [15]: /posts/banana-pi-r3/
 [16]: https://www.raspberrypi.com/
 [17]: https://www.waveshare.com/wiki/CM4-IO-BASE-A
@@ -293,12 +293,12 @@ run on any Linux PC with Qemu installed ([instructions][10]).
 [19]: https://github.com/kernelkit/infix/blob/main/board/aarch64/raspberrypi-rpi64/README.md
 [20]: https://github.com/kernelkit/infix/blob/main/board/aarch32/raspberrypi-rpi2/README.md
 [21]: https://github.com/kernelkit/infix/releases/tag/latest-boot
-[22]: https://wiki.banana-pi.org/Banana_Pi_BPI-R3_Mini
+[22]: https://docs.banana-pi.org/en/BPI-R3_Mini/BananaPi_BPI-R3_Mini
 [23]: https://www.microchip.com/en-us/development-tool/ev21h18a
 [24]: https://www.nxp.com/design/design-center/development-boards-and-designs/i-mx-evaluation-and-development-boards/evaluation-kit-for-the-i-mx-8m-plus-applications-processor:8MPLUSLPD4-EVK
 [25]: https://www.raspberrypi.com/products/raspberry-pi-3-model-b/
 [26]: https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
 [27]: https://www.raspberrypi.com/products/compute-module-4/
 [28]: https://www.raspberrypi.com/products/raspberry-pi-2-model-b/
-[29]: https://wiki.banana-pi.org/Banana_Pi_BPI-R64
+[29]: https://docs.banana-pi.org/en/BPI-R64/BananaPi_BPI-R64
 [30]: /posts/banana-pi-r64/
