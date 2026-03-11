@@ -3,6 +3,10 @@ title:  OSPF Unnumbered Interfaces
 author: vatn
 date:   2024-01-30 17:06:42 +0200
 tags: [networking, ospf]
+image:
+  path: /assets/img/ospf-unnumbered-fig1.svg
+  alt: OSPF unnumbered interfaces network diagram
+  show_in_post: false
 ---
 
 This post explains how to use *Unnumbered Interfaces* to simplify OSPF

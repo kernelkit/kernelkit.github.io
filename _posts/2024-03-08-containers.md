@@ -4,6 +4,10 @@ author: troglobit
 date: 2024-03-08 15:44:42 +0100
 categories: [showcase]
 tags: [container, containers, docker, podman]
+image:
+  path: /assets/img/docker.webp
+  alt: Docker whale
+  show_in_post: false
 ---
 
 ![Docker whale](/assets/img/docker.webp){: width="200" .right}

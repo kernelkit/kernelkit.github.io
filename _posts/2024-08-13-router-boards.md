@@ -6,6 +6,10 @@ last_modified_at: 2026-03-08 10:00:00 +0100
 categories: [showcase]
 tags: [boards]
 pin: true
+image:
+  path: /assets/img/bpi-r3-mini.jpg
+  alt: Banana Pi BPi-R3 Mini Router
+  show_in_post: false
 ---
 
 Much thanks to the solid foundation curated by [Buildroot][1], Infix can

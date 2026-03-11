@@ -5,6 +5,10 @@ date: 2025-11-20 10:00:00 +0100
 last_modified_at: 2026-01-23 11:00:00 +0100
 categories: [howto]
 tags: [containers, docker, podman, embedded, migration]
+image:
+  path: /assets/img/docker.webp
+  alt: Docker whale
+  show_in_post: false
 ---
 
 ![Docker whale](/assets/img/docker.webp){: width="200" .right}

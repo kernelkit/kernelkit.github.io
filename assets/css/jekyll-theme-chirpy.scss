@@ -18,6 +18,13 @@ html[data-mode=dark] {
 html[data-mode=light] {
   color-scheme: light;
 }
+
+/* Use contain instead of cover for post card thumbnails so images are not
+   cropped. The --img-bg background fills any remaining space. */
+#post-list .preview-img img {
+  object-fit: contain;
+}
+
 pre.highlight {
   line-height: 1.2em;
 }

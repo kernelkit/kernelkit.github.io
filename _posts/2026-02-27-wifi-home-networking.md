@@ -4,6 +4,10 @@ author: troglobit
 date: 2026-02-27 10:00:00 +0100
 categories: [showcase]
 tags: [boards, wifi, networking, firewall, wireguard]
+image:
+  path: /assets/img/spider-on-wall.jpeg
+  alt: Banana Pi BPi-R3 mounted on the wall, running a full home network
+  show_in_post: false
 ---
 
 ![Banana Pi BPi-R3](/assets/img/spider-on-wall.jpeg){: width="400" .right}

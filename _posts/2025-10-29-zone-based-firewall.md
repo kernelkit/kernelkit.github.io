@@ -4,6 +4,10 @@ author: troglobit
 date: 2025-10-29 08:10:00 +0100
 categories: [howto]
 tags: [firewall, networking, security, zbf]
+image:
+  path: /assets/img/fw-zones.svg
+  alt: Traffic flow diagram showing zone-based firewall policies including a DMZ
+  show_in_post: false
 ---
 
 As of Infix v25.10, a zone-based firewall (ZBF) built on [firewalld][2]
