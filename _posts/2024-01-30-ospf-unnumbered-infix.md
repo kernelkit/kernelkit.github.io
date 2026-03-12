@@ -3,6 +3,7 @@ title:  OSPF Unnumbered Interfaces
 author: vatn
 date:   2024-01-30 17:06:42 +0200
 last_modified_at: 2026-03-11 12:25:00 +0100
+categories: [howto]
 tags: [networking, ospf]
 image:
   path: /assets/img/ospf-unnumbered-fig1.svg

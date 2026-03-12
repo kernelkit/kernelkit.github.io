@@ -2,8 +2,8 @@
 title: Docker Containers
 author: troglobit
 date: 2024-03-08 15:44:42 +0100
-categories: [showcase]
-tags: [container, containers, docker, podman]
+categories: [howto]
+tags: [containers, docker, podman]
 image:
   path: /assets/img/docker.webp
   alt: Docker whale

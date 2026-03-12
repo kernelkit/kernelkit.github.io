@@ -2,8 +2,8 @@
 title: Advanced Container Networking
 author: troglobit
 date: 2024-03-11 14:11:50 +0100
-categories: [showcase]
-tags: [container, containers, docker, podman]
+categories: [howto]
+tags: [containers, docker, podman]
 image:
   path: /assets/img/docker.webp
   alt: Docker whale

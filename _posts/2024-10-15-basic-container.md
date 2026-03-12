@@ -3,8 +3,8 @@ title: Gentle Container Introduction
 author: troglobit
 date: 2024-10-15 07:00:00 +0100
 last_modified_at: 2026-02-27 12:00:00 +0100
-categories: [showcase]
-tags: [container, containers, networking, docker, podman]
+categories: [howto]
+tags: [containers, networking, docker, podman]
 image:
   path: /assets/img/docker.webp
   alt: Docker whale

@@ -3,8 +3,8 @@ title: Firewall Container
 author: troglobit
 date: 2024-03-12 08:08:41 +0100
 last_modified_at: 2026-02-27 12:00:00 +0100
-categories: [showcase]
-tags: [container, containers, networking, firewall, docker, podman]
+categories: [howto]
+tags: [containers, networking, firewall, docker, podman]
 image:
   path: /assets/img/docker.webp
   alt: Docker whale

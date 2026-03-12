@@ -4,7 +4,7 @@ description: "Built on YANG, Built to Last"
 author: troglobit
 date: 2026-03-11 12:25:00 +0100
 categories: [architecture]
-tags: [design, architecture, yang, netconf, buildroot, sysrepo]
+tags: [design, yang, netconf, buildroot, sysrepo]
 image:
   path: /assets/img/architecture-overview.svg
   alt: Infix architecture overview showing the management stack
