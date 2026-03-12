@@ -16,8 +16,8 @@ network setup and maintenance in [Infix][1].
 > The topology in this post was built and tested in [GNS3][3], using
 > the Infix appliance from the [GNS3 Marketplace][4].  If you want to
 > follow along without any physical hardware, that is the quickest way
-> to get started — see the [virtual environments][5] documentation for
-> more details.
+> to get started — see our [Infix in GNS3][5] post for a step-by-step
+> setup guide.
 {: .prompt-tip }
 
 ## Introduction
@@ -409,4 +409,4 @@ Done!
 [2]: https://github.com/kernelkit/infix/tree/main/doc/cli
 [3]: https://gns3.com/infix
 [4]: https://gns3.com/marketplace/appliances/infix
-[5]: https://www.kernelkit.org/infix/latest/virtual/
+[5]: /posts/infix-in-gns3/

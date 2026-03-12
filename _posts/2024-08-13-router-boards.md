@@ -281,7 +281,7 @@ run on any Linux PC with Qemu installed ([instructions][10]).
 [8]: https://doc-en.rvspace.org/VisionFive2/Landing_Page/VisionFive_2/introduction.html
 [9]: https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R2S
 [0]: https://www.qemu.org/
-[10]: https://kernelkit.org/infix/latest/virtual/
+[10]: /posts/getting-started/
 [11]: https://www.friendlyelec.com/index.php?route=product/product&product_id=284
 [12]: https://www.friendlyelec.com/index.php?route=product/product&product_id=287&search=r5s&description=true&category_id=0&sub_category=true
 [13]: https://www.friendlyelec.com/index.php?route=product/product&product_id=289

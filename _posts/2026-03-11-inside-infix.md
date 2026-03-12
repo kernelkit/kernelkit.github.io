@@ -44,7 +44,7 @@ boards and compact dual-port routers like the NanoPi R2S, through
 general-purpose ARM and RISC-V end devices such as the NXP i.MX8MP EVK
 and StarFive VisionFive2, all the way up to enterprise switch platforms
 like the Microchip SparX-5i.  It also runs on x86_64, making it easy to
-spin up instances in Qemu or GNS3 for development and testing without
+spin up instances in [Qemu][6] or [GNS3][5] for development and testing without
 any dedicated hardware.  The same OS, the same tooling, the same
 management interfaces throughout.
 
@@ -204,7 +204,7 @@ device under test (DUT), verify the resulting operational state via
 RESTCONF, and reset it to a known-good baseline — all without touching
 the filesystem directly and without any CLI scraping.
 
-The test suite, *Infamy*, runs against both virtual topologies in Qemu
+The test suite, *Infamy*, runs against both virtual topologies in [Qemu][6]
 and real physical hardware using identical test cases.  Virtual
 topologies make it cheap to catch regressions early in development;
 physical runs ensure that hardware-specific paths — DSA offloads, WiFi,
@@ -239,3 +239,5 @@ feature in detail.  Questions and feedback are always welcome in the
 [2]: https://discord.gg/6bHJWQNVxN
 [3]: /posts/router-boards/
 [4]: https://www.kernelkit.org/infix/
+[5]: /posts/infix-in-gns3/
+[6]: /posts/getting-started/

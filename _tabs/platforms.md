@@ -50,12 +50,12 @@ boot sequence and testing:
 [^1]: The [Qemu][2] x86_64 support is primarily intended for development
     and testing, but can also be used for evaluation and demo purposes
     using the [Infix appliance][11] in [GNS3][3]. For more information,
-    see: [Infix in Virtual Environments][4].
+    see: [Infix in GNS3][4].
 
 [1]: https://github.com/kernelkit/infix/tree/main/board
 [2]: https://www.qemu.org/
 [3]: https://www.gns3.com/
-[4]: https://github.com/kernelkit/infix/blob/main/doc/virtual.md
+[4]: /posts/infix-in-gns3/
 [5]: https://www.marvell.com/content/dam/marvell/en/public-collateral/embedded-processors/marvell-infrastructure-processors-octeon-tx2-cn913x-product-brief.pdf
 [6]: https://doc-en.rvspace.org/VisionFive2/Landing_Page/VisionFive_2/introduction.html
 [7]: https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R2S

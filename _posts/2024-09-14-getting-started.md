@@ -15,8 +15,8 @@ recommend [Debian][] based systems, like [Ubuntu][] and [Linux Mint][].
 >
 > Infix is available in the [GNS3 Marketplace][GNS3] — install the
 > appliance and you can drag, drop, and cable up entire networks without
-> touching the command line.  See the [virtual environments][virt]
-> documentation to get started.
+> touching the command line.  See our [Infix in GNS3][gns3post] post to
+> get started.
 {: .prompt-tip }
 
 ### Installing Qemu
@@ -89,9 +89,14 @@ $ ./qemu/run.sh
 > stuck with that single interface from before.
 {: .prompt-info }
 
+For more advanced Qemu options — networking bridges, shared folders, and
+multi-node setups — see the [virtual environments][virt] section of the
+full documentation.
+
 [sudo]:       https://troglobit.com/2016/12/11/a-life-without-sudo/
 [Debian]:     https://www.debian.org/
 [Ubuntu]:     https://ubuntu.com/
 [Linux Mint]: https://linuxmint.com/
 [GNS3]:       https://gns3.com/marketplace/appliances/infix
+[gns3post]:   /posts/infix-in-gns3/
 [virt]:       https://www.kernelkit.org/infix/latest/virtual/
