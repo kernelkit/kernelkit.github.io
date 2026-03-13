@@ -78,7 +78,7 @@ With 2 GB DDR4 RAM, dual-band WiFi 6 (802.11ax) across two radios, and
 support for up to 16 virtual APs per radio, it is a natural fit as a
 managed WiFi AP router or wireless repeater.
 
-![Banana Pi BPi-R3 Mini](/assets/img/bpi-r3-mini.jpg){: width="300" .right}
+![Banana Pi BPi-R3 Mini](/assets/img/bpi-r3-mini.jpg){: width="250" .right}
 
 Infix supports all hardware features:
 
