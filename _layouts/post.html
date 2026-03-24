@@ -12,7 +12,7 @@ script_includes:
 
 {% include lang.html %}
 
-<article class="px-1">
+<article class="px-1" data-toc="{{ page.toc }}">
   <header>
     <h1 data-toc-skip>{{ page.title }}</h1>
     {% if page.description %}
