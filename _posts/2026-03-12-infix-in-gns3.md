@@ -11,14 +11,14 @@ image:
   show_in_post: false
 ---
 
-[GNS3][] is a graphical network simulator that lets you build, cable up,
-and run virtual network topologies on your desktop.  It is widely used
-for learning, lab work, and testing interoperability between different
-vendors — and Infix is available directly from the [GNS3 Marketplace][mktroot],
-making it easy to add to any project.
+[GNS3][] is a graphical network simulator that lets you build, cable up, and
+run virtual network topologies on your desktop.  It is widely used for
+learning, lab work, and testing interoperability between different vendors —
+and Infix is available directly from the [GNS3 Marketplace][mkt], making it
+easy to add to any project.
 
-This post walks you through getting Infix running in GNS3, from
-installation to your first working topology.
+This post walks you through getting Infix running in GNS3, from installation
+to your first working topology.
 
 > The examples here use the **x86_64** Infix build.  GNS3 runs its
 > device emulation via Qemu, which requires a Linux host — see the
@@ -153,7 +153,6 @@ physical hardware.  A few posts to continue with:
 
 
 [GNS3]:       https://gns3.com/
-[mktroot]:    https://gns3.com/marketplace/
 [mkt]:        https://gns3.com/marketplace/appliances/infix
 [ppa]:        https://docs.gns3.com/docs/getting-started/installation/linux/
 [mktguide]:   https://docs.gns3.com/docs/using-gns3/beginners/install-from-marketplace/
