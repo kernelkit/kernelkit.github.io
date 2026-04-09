@@ -3,6 +3,7 @@ title: "Inside Infix"
 description: "Built on YANG, Built to Last"
 author: troglobit
 date: 2026-03-11 12:25:00 +0100
+last_modified_at: 2026-04-09 12:25:00 +0100
 categories: [architecture]
 tags: [design, yang, netconf, buildroot, sysrepo]
 image:
@@ -23,60 +24,65 @@ attempt to answer them.  Let's dive in!
 
 Let's start by zooming out and identify the major components:
 
- - *sysrepo:* the engine which all other major components connect to,
+ - [sysrepo][7]: the engine which all other major components connect to,
    funnels all actions to callbacks in *confd*
- - *netopeer2:* provides the NETCONF interface (XML over SSH) for
+ - [netopeer2][8]: provides the [NETCONF][16] interface (XML over SSH) for
    external management
- - *rousette:* provides the RESTCONF interface (JSON over HTTPS) for
+ - [rousette][9]: provides the [RESTCONF][17] interface (JSON over HTTPS) for
    external management, this is also where the upcoming WebUI will
    connect to, meaning the same WebUI can be used to manage all Infix
    devices on the LAN
- - *klish:* provides the built-in Command Line Interface (CLI)
- - *confd:* gets callbacks for all changes from *sysrepo* which is
+ - [klish][10]: provides the built-in Command Line Interface (CLI)
+ - confd: gets callbacks for all changes from *sysrepo* which is
    translated into C-library API calls, configuration file changes in
-   `/etc`, and network interface setup calls to `iproute2`
+   `/etc`, and network interface setup calls to [iproute2][11] — note:
+   this is *not* the well-known Tail-F/Cisco product of the same name,
+   but an Infix-native daemon maintained in the project tree
 
 ![](/assets/img/architecture-overview.svg)
 _**Figure 1:** Infix Architecture Overview_
 
 Infix runs on a [broad range of hardware][3] — from Raspberry Pi home lab
 boards and compact dual-port routers like the NanoPi R2S, through
-general-purpose ARM and RISC-V end devices such as the NXP i.MX8MP EVK
-and StarFive VisionFive2, all the way up to enterprise switch platforms
-like the Microchip SparX-5i.  It also runs on x86_64, making it easy to
-spin up instances in [Qemu][6] or [GNS3][5] for development and testing without
-any dedicated hardware.  The same OS, the same tooling, the same
-management interfaces throughout.
+general-purpose ARM and RISC-V end devices such as the NXP i.MX8MP EVK and
+StarFive VisionFive2, all the way up to enterprise switch platforms like the
+Microchip SparX-5i.  It also runs on x86_64, making it easy to spin up
+instances in [Qemu][6] or [GNS3][5] for development and testing without any
+dedicated hardware.  The same OS, the same tooling, the same management
+interfaces throughout.
 
-From a bottom-up perspective, one of the critical design choices for
-switch platforms is to rely on Linux *switchdev* for switch silicon
-abstraction.  It is what makes it possible to configure actual hardware
-switch cores using the common Linux bridge.  Underneath switchdev sits
-DSA (Distributed Switch Architecture), a kernel sub-layer that models
-the individual ports and internal links of a switch chip and translates
-bridge operations into hardware-specific commands.  All operations on the
-bridge are thus "offloaded" to the DSA driver, e.g., adding an interface
-to a bridge enables hardware switching on that port, and adding a VLAN
-enables VLAN filtering in the switch silicon.  On platforms without a
-switch core, the same bridge model applies in software — the management
-interface is identical regardless of whether forwarding happens in
-silicon or in the kernel.
+From a bottom-up perspective, one of the critical design choices for switch
+platforms is to rely on Linux [*switchdev*][15] for switch silicon
+abstraction.  It is what makes it possible to configure actual hardware switch
+cores using the common Linux bridge.  Underneath switchdev sits [DSA][20]
+(Distributed Switch Architecture), a kernel sub-layer that models the
+individual ports and internal links of a switch chip and translates bridge
+operations into hardware-specific commands.  All operations on the bridge are
+thus "offloaded" to the DSA driver, e.g., adding an interface to a bridge
+enables hardware switching on that port, and adding a VLAN enables VLAN
+filtering in the switch silicon.  On platforms without a switch core, the same
+bridge model applies in software — the management interface is identical
+regardless of whether forwarding happens in silicon or in the kernel.
 
-Unlike many other Linux-based network operating systems, Infix is not a
-flavor of OpenWRT.  Instead it is built on top of the developer-friendly
-[Buildroot][0], tracking its long-term support (LTS) releases.
-Buildroot's LTS cadence is one release every two years (in February),
-each supported for three years, with quarterly stable releases in
-between.  This provides a solid base and forms the majority of all Open
-Source packages.  A few of those are locally upgraded by the Infix team,
-e.g., sysrepo and netopeer2, and another few are tailor made for Infix,
-e.g., `confd`.
+Unlike many other embedded Linux operating systems, Infix is not a flavor of
+[OpenWRT][23].  Instead it is built on top of the developer-friendly [Buildroot][0],
+tracking its long-term support (LTS) releases.  Their LTS cadence is one
+release every two years (in February), each supported for three years, with
+quarterly stable releases in between — so `2025.02` → `2027.02` → `2029.02`
+are LTS, while `2026.02` is a regular quarterly stable release.  The
+three-year support window means consecutive LTS releases overlap by one year,
+ensuring a smooth transition.  This provides a solid base and forms
+the majority of all Open Source packages.  A few of those are locally upgraded
+by the Infix team — for all such load-bearing upstream projects a fork is
+maintained in the [kernelkit GitHub organisation][14] to backport fixes and
+carry Infix-specific patches where needed, e.g., sysrepo and netopeer2 — and
+another few are tailor-made for Infix, e.g., `confd`.
 
 ### YANG
 
 The real hero, however, is YANG.
 
-YANG (RFC 6020/7950) is a data modeling language designed specifically
+YANG ([RFC 6020][12]/[7950][13]) is a data modeling language designed specifically
 for network devices.  At its core, YANG lets you formally describe what
 configuration and state a device has — what knobs exist, what values
 they accept, how they relate to each other — in a machine-readable way.
@@ -90,7 +96,7 @@ is no separate CLI grammar to maintain, no divergence between what the
 web interface can do and what NETCONF can do.  When a new feature is
 added to YANG, it appears everywhere at once.
 
-Infix follows industry-standard IETF models wherever they exist.  So
+Infix follows industry-standard [IETF][24] models wherever they exist.  So
 `ietf-interfaces`, `ietf-routing`, `ietf-ip`, and friends describe
 interfaces, routes, and addresses — the same models you would find on
 any standards-compliant device.  Where no standard model exists, Infix
@@ -181,7 +187,7 @@ them away without touching the live system.
 
 ### Immutable by Design
 
-Infix runs from a read-only *SquashFS* root filesystem.  There is
+Infix runs from a read-only [*SquashFS*][25] root filesystem.  There is
 nothing to corrupt, no package manager to leave the system in a
 half-upgraded state, and no way for a bad configuration to break the OS
 itself.  Configuration lives separately in a writable partition, and the
@@ -205,10 +211,15 @@ RESTCONF, and reset it to a known-good baseline — all without touching
 the filesystem directly and without any CLI scraping.
 
 The test suite, *Infamy*, runs against both virtual topologies in [Qemu][6]
-and real physical hardware using identical test cases.  Virtual
-topologies make it cheap to catch regressions early in development;
-physical runs ensure that hardware-specific paths — DSA offloads, WiFi,
-switch silicon — are exercised regularly.
+and real physical hardware using identical test cases.  The virtual side is
+handled by [qeneth][18], Tobias Waldekranz's tool for wiring QEMU instances
+together over UDP sockets from a [Graphviz][21] topology description, while test
+execution is driven by [9pm][19], Richard Alpe's TAP runner that runs any
+executable producing [Test Anything Protocol][22] output and organises them into
+hierarchical suites with clean result reporting.  Virtual topologies make it
+cheap to catch regressions early in development; physical runs ensure that
+hardware-specific paths — DSA offloads, WiFi, switch silicon — are exercised
+regularly.
 
 This level of automation means Infix is not constrained to a fixed
 monthly release cadence.  When a fix or feature is ready and passes the
@@ -241,3 +252,22 @@ feature in detail.  Questions and feedback are always welcome in the
 [4]: https://www.kernelkit.org/infix/
 [5]: /posts/infix-in-gns3/
 [6]: /posts/getting-started/
+[7]: https://www.sysrepo.org/
+[8]: https://github.com/CESNET/netopeer2
+[9]: https://github.com/CESNET/rousette
+[10]: https://github.com/kernelkit/klish
+[11]: https://wiki.linuxfoundation.org/networking/iproute2
+[12]: https://www.rfc-editor.org/rfc/rfc6020
+[13]: https://www.rfc-editor.org/rfc/rfc7950
+[14]: https://github.com/kernelkit
+[15]: https://docs.kernel.org/networking/switchdev.html
+[16]: https://www.rfc-editor.org/rfc/rfc6241
+[17]: https://www.rfc-editor.org/rfc/rfc8040
+[18]: https://github.com/wkz/qeneth
+[19]: https://github.com/rical/9pm
+[20]: https://docs.kernel.org/networking/dsa/dsa.html
+[21]: https://graphviz.org/
+[22]: https://testanything.org/
+[23]: https://openwrt.org/
+[24]: https://www.ietf.org/
+[25]: https://docs.kernel.org/filesystems/squashfs.html
