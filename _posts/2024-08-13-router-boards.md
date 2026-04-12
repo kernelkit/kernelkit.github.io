@@ -2,7 +2,7 @@
 title:  Infix Compatible Boards
 author: troglobit
 date:   2024-08-13 10:06:42 +0100
-last_modified_at: 2026-03-08 10:00:00 +0100
+last_modified_at: 2026-04-12 10:00:00 +0100
 categories: [showcase]
 tags: [boards]
 pin: true
@@ -24,6 +24,7 @@ been known to work, but have not been updated or tested continuously.
 |-----------------------------------------------------|----------|-----------|----------------------------|
 | [Banana Pi BPi-R3](#banana-pi-bpi-r3)               | Aarch64  | v25.09    |                            |
 | [Banana Pi BPi-R3 Mini](#banana-pi-bpi-r3-mini)     | Aarch64  | v26.02    |                            |
+| [Banana Pi BPi-R4](#banana-pi-bpi-r4)               | Aarch64  | v26.04    |                            |
 | [Banana Pi BPi-R64](#banana-pi-bpi-r64)             | Aarch64  | v26.03    |                            |
 | [FriendlyELEC NanoPi R2S](#friendlyelec-nanopi-r2s) | Aarch64  | v24.02    | Fully supported in v24.08  |
 | [Marvell CN9130 CRB](#marvell-cn9130-crb)           | Aarch64  | v23.06    |                            |
@@ -92,6 +93,40 @@ Infix supports all hardware features:
 Support for the BPi-R3 Mini was added in Infix v26.02.
 
  - <https://www.amazon.se/dp/B0CL9FBMWG>
+
+### Banana Pi BPi-R4
+
+The [BPi-R4][31] is the successor to the BPi-R3, built around the MediaTek
+MT7988A (Filogic 880) — a significant step up from its predecessor.  The CPU
+moves from in-order Cortex-A53 cores to out-of-order Cortex-A73 cores at 1.8
+GHz, with 4 GB DDR4 RAM.  The two SFP+ uplinks run USXGMII natively at up to
+10 Gbps, and unlike the BPi-R3 there is no on-board WiFi — that is provided
+by an optional MediaTek MT7996E PCIe module with tri-band WiFi 7 (802.11be,
+2.4/5/6 GHz).
+
+![](/assets/img/bpi-r4-poe.jpg){: #fig-bpi-r4}
+_**Figure**: Banana Pi BPi-R4P with optional PoE daughterboard fitted._
+
+The board comes in three variants: the standard **BPI-R4** with two SFP+
+cages, the **BPI-R4-2g5** which replaces one SFP+ cage with a 2.5 GbE RJ45
+WAN port using the MT7988A's internal 2.5G PHY, and the **BPI-R4P** which
+adds an optional PoE daughterboard on that same port so the board can act
+as a PD device.
+
+Infix supports all hardware features:
+
+ - routing between interfaces
+ - built-in 4-port 1 GbE switch with switchdev offload
+ - 2× 10 Gbps SFP+ uplinks (standard R4), or 1× SFP+ + 1× 2.5 GbE RJ45 (R4-2g5/R4P)
+ - optional PoE input on 2.5 GbE port (R4P)
+ - optional tri-band WiFi 7 (802.11be) via MT7996E PCIe module
+ - USB 3.0 port, 8 GB eMMC, microSD, and M.2 Key-M (NVMe) storage
+ - PWM-controlled fan and system LEDs
+ - factory reset button
+
+Support for the BPi-R4 was added in Infix v26.04.
+
+ - <https://www.aliexpress.com/w/wholesale-banana-pi-bpi-r4.html>
 
 ### Banana Pi BPi-R64
 
@@ -302,3 +337,4 @@ run on any Linux PC with Qemu installed ([instructions][10]).
 [28]: https://www.raspberrypi.com/products/raspberry-pi-2-model-b/
 [29]: https://docs.banana-pi.org/en/BPI-R64/BananaPi_BPI-R64
 [30]: /posts/banana-pi-r64/
+[31]: https://docs.banana-pi.org/en/BPI-R4/BananaPi_BPI-R4
