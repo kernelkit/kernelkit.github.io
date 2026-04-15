@@ -201,7 +201,7 @@ font-family: Tahoma, Verdana, Arial, sans-serif; }
 installed and is working.</p>
 
 <p>For online documentation and support please refer to the
-<a href="https://kernelkit.org/">Infix Homepage</a>.<br/>
+<a href="https://www.kernelkit.org/">Infix Homepage</a>.<br/>
 
 Commercial support and customer adaptations are available from
 <a href="https://wires.se">Wires</a>.</p>
@@ -233,8 +233,8 @@ admin@infix:/> copy running-config startup-config
 
 Take care! 🧡
 
-[0]: https://kernelkit.org/infix/latest/networking/
+[0]: https://www.kernelkit.org/infix/latest/networking/
 [1]: https://podman.io
 [2]: https://www.docker.com/resources/what-container/
-[3]: https://kernelkit.org/infix/latest/cli/text-editor/
-[4]: https://kernelkit.org/
+[3]: https://www.kernelkit.org/infix/latest/cli/text-editor/
+[4]: https://www.kernelkit.org/

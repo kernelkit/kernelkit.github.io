@@ -104,5 +104,5 @@ For more details about the Infix architecture, visit the [Infix documentation][2
 or explore the [source code on GitHub][3].
 
 [1]: https://buildroot.org/
-[2]: https://kernelkit.org/infix/
+[2]: https://www.kernelkit.org/infix/
 [3]: https://github.com/kernelkit/infix/

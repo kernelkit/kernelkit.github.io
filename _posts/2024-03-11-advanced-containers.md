@@ -20,7 +20,7 @@ both VETH pairs and bridges with LLDP forwarding.
 See the [first post][1] for a background and networking basics.
 
 > This post assumes knowledge and familiarity with the [Infix
-> Operating System](https://kernelkit.org/).  Ensure you have
+> Operating System](https://www.kernelkit.org/).  Ensure you have
 > either a network connection or console access to your Infix system and
 > can log in to it using SSH.  Recommended reading includes the
 > [networking documentation][0].
@@ -264,10 +264,10 @@ Take care! 🧡
 	reserved link-local multicast groups, in the 01:80:C2:00:00:0X
 	range.  The Infix bridge supports forwarding select protocols.
 
-[0]: https://kernelkit.org/infix/latest/networking/
+[0]: https://www.kernelkit.org/infix/latest/networking/
 [1]: /posts/containers/
 [2]: https://github.com/kernelkit/curiOS/
 [3]: https://buildroot.org/
 [4]: https://github.com/kernelkit/curiOS/pkgs/container/curios/185490653?tag=24.02.0
 [5]: https://github.com/kernelkit/curiOS/releases/tag/v24.02.0
-[6]: https://kernelkit.org/infix/latest/container/#networking-and-containers
+[6]: https://www.kernelkit.org/infix/latest/container/#networking-and-containers

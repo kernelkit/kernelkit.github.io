@@ -100,4 +100,4 @@ admin@infix:/> copy running-config startup-config
 > documentation][0].
 {: .prompt-info }
 
-[0]: https://kernelkit.org/infix/latest/networking/
+[0]: https://www.kernelkit.org/infix/latest/networking/

@@ -36,5 +36,5 @@ Read [Mattias' article][ml] for the full story, then grab a [BPi-R3][ali],
 [bpi]:   /posts/banana-pi-r3/
 [zbf]:   /posts/zone-based-firewall/
 [flash]: /posts/flashing-sdcard/
-[docs]:  https://kernelkit.org/infix/latest/
+[docs]:  https://www.kernelkit.org/infix/latest/
 [ali]:   https://www.aliexpress.com/item/1005005827004033.html

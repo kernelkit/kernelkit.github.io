@@ -273,11 +273,11 @@ Take care! 🧡
     firewall with filtering of incoming traffic.  For more information, see
     the excellent [Wikipedia article][3] on the topic.
 
-[0]: https://kernelkit.org/infix/latest/networking/
+[0]: https://www.kernelkit.org/infix/latest/networking/
 [1]: /posts/containers/
 [2]: https://github.com/kernelkit/curiOS/
 [3]: https://en.wikipedia.org/wiki/Network_address_translation
-[4]: https://kernelkit.org/infix/latest/cli/text-editor/
+[4]: https://www.kernelkit.org/infix/latest/cli/text-editor/
 [5]: https://wiki.nftables.org/wiki-nftables/index.php/Main_Page
 [6]: /posts/zone-based-firewall/
-[7]: https://kernelkit.org/
+[7]: https://www.kernelkit.org/

@@ -123,5 +123,5 @@ specific IP networks for forwarding traffic.
 For detailed configuration examples, including DMZ setups and port forwarding,
 see the [firewall documentation][1].
 
-[1]: https://kernelkit.org/infix/latest/firewall/
+[1]: https://www.kernelkit.org/infix/latest/firewall/
 [2]: https://firewalld.org
