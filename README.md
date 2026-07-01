@@ -28,10 +28,12 @@ Verified to work on Linux Mint 21.3, based on Ubuntu 22.04 LTS:
 
 ## Running
 
-With everyting installed, starting the previewer is as simple as:
+With everything installed, start the previewer with `bundle exec`, which
+pins Jekyll and all plugins to the versions in `Gemfile.lock` (the same
+versions GitHub Pages builds with):
 
 ```bash
-$ jekyll serve
+$ bundle exec jekyll serve
 Configuration file: /home/jocke/src/kernelkit.github.io/_config.yml
             Source: /home/jocke/src/kernelkit.github.io
        Destination: /home/jocke/src/kernelkit.github.io/_site
@@ -42,6 +44,9 @@ Configuration file: /home/jocke/src/kernelkit.github.io/_config.yml
     Server address: http://127.0.0.1:4000/
   Server running... press ctrl-c to stop.
 ```
+
+Then open <http://127.0.0.1:4000/>.  Add `-l` for live-reload and `-w`
+to watch for changes: `bundle exec jekyll serve -lw`.
 
 ## Updating
 
@@ -90,14 +95,17 @@ jacky:
         pin: false
         ---
 
+    The `author` must match a nick in `_data/authors.yml` (see
+    [Identity](#identity) above) — add yourself there first if needed.
+
  3. [Add content ...](https://chirpy.cotes.page/posts/write-a-new-post/)
  4. Use relevant tags and categories, check first!
  5. Preview
 
-        jekyll serve -lw
+        bundle exec jekyll serve -lw
 
 > **Tip:** for work in progress, use the top-level directory `_drafts/`
-> and add the `-D` option to `jekyll serve` to preview your post.
+> and add the `-D` option to `bundle exec jekyll serve` to preview your post.
 
 [0]: https://jekyllrb.com/
 [1]: https://chirpy.cotes.page/
