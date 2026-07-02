@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 630" font-family="Helvetica,Arial,sans-serif">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b1d33"/>
+      <stop offset="0.65" stop-color="#12314f"/>
+      <stop offset="1" stop-color="#1a4468"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.45" r="0.6">
+      <stop offset="0" stop-color="#2e6da4" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#2e6da4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cov" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#4fc3f7" stop-opacity="0.28"/>
+      <stop offset="0.8" stop-color="#4fc3f7" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#4fc3f7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pole" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b0bec5"/>
+      <stop offset="1" stop-color="#546e7a"/>
+    </linearGradient>
+    <g id="ap">
+      <rect x="-14" y="-90" width="28" height="34" rx="8" fill="#eceff1" stroke="#90a4ae" stroke-width="2"/>
+      <circle cx="0" cy="-73" r="5" fill="#4fc3f7"/>
+      <rect x="-4" y="-56" width="8" height="56" fill="url(#pole)" rx="3"/>
+    </g>
+    <g id="waves" stroke="#4fc3f7" fill="none" stroke-linecap="round">
+      <path d="M -22,-96 A 30 30 0 0 1 22,-96" stroke-width="4" opacity="0.9"/>
+      <path d="M -34,-108 A 48 48 0 0 1 34,-108" stroke-width="4" opacity="0.55"/>
+      <path d="M -46,-120 A 66 66 0 0 1 46,-120" stroke-width="4" opacity="0.3"/>
+    </g>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="630" fill="url(#sky)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- stars -->
+  <g fill="#cfe8ff">
+    <circle cx="120" cy="80" r="2" opacity="0.7"/>
+    <circle cx="300" cy="50" r="1.5" opacity="0.5"/>
+    <circle cx="520" cy="95" r="2" opacity="0.6"/>
+    <circle cx="760" cy="40" r="1.5" opacity="0.5"/>
+    <circle cx="950" cy="90" r="2" opacity="0.7"/>
+    <circle cx="1100" cy="55" r="1.5" opacity="0.5"/>
+    <circle cx="640" cy="30" r="1.5" opacity="0.4"/>
+    <circle cx="70" cy="180" r="1.5" opacity="0.4"/>
+    <circle cx="1140" cy="170" r="1.5" opacity="0.4"/>
+  </g>
+
+  <!-- ground -->
+  <path d="M 0,480 Q 300,440 600,470 T 1200,455 L 1200,630 L 0,630 Z" fill="#0e2740"/>
+  <path d="M 0,500 Q 350,465 700,492 T 1200,480 L 1200,630 L 0,630 Z" fill="#0a1e33"/>
+
+  <!-- coverage cells -->
+  <ellipse cx="240" cy="470" rx="260" ry="150" fill="url(#cov)"/>
+  <ellipse cx="600" cy="480" rx="260" ry="150" fill="url(#cov)"/>
+  <ellipse cx="960" cy="465" rx="260" ry="150" fill="url(#cov)"/>
+
+  <!-- mesh links between AP heads -->
+  <g stroke="#ffb74d" stroke-width="3.5" stroke-dasharray="2 10" fill="none" stroke-linecap="round" opacity="0.9">
+    <path d="M 262,368 Q 420,300 578,378"/>
+    <path d="M 622,378 Q 780,296 938,363"/>
+  </g>
+
+  <!-- access points -->
+  <g transform="translate(240,460)"><use xlink:href="#ap" href="#ap"/><use xlink:href="#waves" href="#waves"/></g>
+  <g transform="translate(600,470)"><use xlink:href="#ap" href="#ap"/><use xlink:href="#waves" href="#waves"/></g>
+  <g transform="translate(960,455)"><use xlink:href="#ap" href="#ap"/><use xlink:href="#waves" href="#waves"/></g>
+
+  <!-- wired uplink on first AP -->
+  <path d="M 240,460 L 240,505 L 60,505" stroke="#80cbc4" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <circle cx="60" cy="505" r="7" fill="#80cbc4"/>
+
+  <!-- roaming phone: ghost, trail, current -->
+  <g opacity="0.35">
+    <rect x="330" y="490" width="34" height="60" rx="8" fill="#eceff1" stroke="#90a4ae" stroke-width="2"/>
+    <rect x="337" y="500" width="20" height="34" rx="2" fill="#4fc3f7"/>
+  </g>
+  <path d="M 380,512 Q 520,555 660,516" stroke="#ce93d8" stroke-width="3.5" stroke-dasharray="1 9"
+        fill="none" stroke-linecap="round" marker-end="none"/>
+  <g>
+    <rect x="672" y="486" width="38" height="66" rx="9" fill="#eceff1" stroke="#90a4ae" stroke-width="2.5"/>
+    <rect x="680" y="497" width="22" height="38" rx="2" fill="#4fc3f7"/>
+    <circle cx="691" cy="544" r="3.5" fill="#90a4ae"/>
+  </g>
+  <!-- handoff spark above the phone -->
+  <g stroke="#ce93d8" fill="none" stroke-width="3" stroke-linecap="round">
+    <path d="M 676,472 A 22 22 0 0 1 708,472"/>
+    <path d="M 668,460 A 34 34 0 0 1 716,460"/>
+  </g>
+
+  <!-- tagline -->
+  <text x="600" y="130" text-anchor="middle" fill="#eaf4fc" font-size="52" font-weight="bold">Seamless Wi-Fi</text>
+  <text x="600" y="178" text-anchor="middle" fill="#9ec7e8" font-size="26">802.11s mesh backhaul &#183; 802.11r/k/v fast roaming</text>
+</svg>

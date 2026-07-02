@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Rendered from wifi-mesh-roaming-topology.drawio; edit the .drawio and
+     re-export (File / Export as / SVG) rather than editing this file. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 640" font-family="Helvetica,Arial,sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333333"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="640" fill="#ffffff"/>
+
+  <!-- 5 GHz mesh backhaul band -->
+  <rect x="250" y="40" width="740" height="90" rx="10" fill="#dae8fc" fill-opacity="0.5"
+        stroke="#6c8ebf" stroke-dasharray="8 4"/>
+  <text x="620" y="62" text-anchor="middle" font-size="13" font-weight="bold" fill="#31506e">5 GHz mesh backhaul (802.11s, mesh-id: backhaul, WPA3-SAE)</text>
+
+  <!-- 2.4 GHz client access band -->
+  <rect x="250" y="440" width="740" height="150" rx="10" fill="#d5e8d4" fill-opacity="0.5"
+        stroke="#82b366" stroke-dasharray="8 4"/>
+  <text x="620" y="462" text-anchor="middle" font-size="13" font-weight="bold" fill="#3d5c3d">2.4 GHz client access (SSID campus, one mobility domain, 802.11r/k/v)</text>
+
+  <!-- mesh links: radio0 up to the mesh band -->
+  <line x1="360" y1="224" x2="361" y2="130" stroke="#6c8ebf" stroke-width="2" stroke-dasharray="6 4"/>
+  <line x1="620" y1="224" x2="620" y2="130" stroke="#6c8ebf" stroke-width="2" stroke-dasharray="6 4"/>
+  <line x1="880" y1="224" x2="879" y2="130" stroke="#6c8ebf" stroke-width="2" stroke-dasharray="6 4"/>
+
+  <!-- access links: radio1 down to the client band -->
+  <line x1="360" y1="336" x2="361" y2="440" stroke="#82b366" stroke-width="2" stroke-dasharray="6 4"/>
+  <line x1="620" y1="336" x2="620" y2="440" stroke="#82b366" stroke-width="2" stroke-dasharray="6 4"/>
+  <line x1="880" y1="336" x2="879" y2="440" stroke="#82b366" stroke-width="2" stroke-dasharray="6 4"/>
+
+  <!-- wired LAN -->
+  <ellipse cx="115" cy="285" rx="80" ry="45" fill="#f5f5f5" stroke="#666666"/>
+  <text x="115" y="290" text-anchor="middle" font-size="12" fill="#000000">wired LAN</text>
+
+  <!-- wired uplink to gw1 br0 -->
+  <line x1="195" y1="285" x2="260" y2="280" stroke="#666666" stroke-width="2"/>
+  <text x="227" y="272" text-anchor="middle" font-size="12" fill="#000000">eth0</text>
+
+  <!-- gateways -->
+  <g id="gw1">
+    <rect x="250" y="190" width="220" height="160" fill="#f5f5f5" stroke="#666666"/>
+    <line x1="250" y1="216" x2="470" y2="216" stroke="#666666"/>
+    <text x="360" y="208" text-anchor="middle" font-size="13" font-weight="bold" fill="#000000">gw1</text>
+    <rect x="260" y="224" width="200" height="32" fill="#dae8fc" stroke="#6c8ebf"/>
+    <text x="360" y="244" text-anchor="middle" font-size="12" fill="#000000">radio0: mesh, 5 GHz ch 36</text>
+    <rect x="260" y="264" width="200" height="32" fill="#ffffff" stroke="#999999"/>
+    <text x="360" y="284" text-anchor="middle" font-size="12" fill="#000000">br0 (bridge)</text>
+    <rect x="260" y="304" width="200" height="32" fill="#d5e8d4" stroke="#82b366"/>
+    <text x="360" y="324" text-anchor="middle" font-size="12" fill="#000000">radio1: AP, 2.4 GHz ch 1</text>
+  </g>
+
+  <g id="gw2">
+    <rect x="510" y="190" width="220" height="160" fill="#f5f5f5" stroke="#666666"/>
+    <line x1="510" y1="216" x2="730" y2="216" stroke="#666666"/>
+    <text x="620" y="208" text-anchor="middle" font-size="13" font-weight="bold" fill="#000000">gw2</text>
+    <rect x="520" y="224" width="200" height="32" fill="#dae8fc" stroke="#6c8ebf"/>
+    <text x="620" y="244" text-anchor="middle" font-size="12" fill="#000000">radio0: mesh, 5 GHz ch 36</text>
+    <rect x="520" y="264" width="200" height="32" fill="#ffffff" stroke="#999999"/>
+    <text x="620" y="284" text-anchor="middle" font-size="12" fill="#000000">br0 (bridge)</text>
+    <rect x="520" y="304" width="200" height="32" fill="#d5e8d4" stroke="#82b366"/>
+    <text x="620" y="324" text-anchor="middle" font-size="12" fill="#000000">radio1: AP, 2.4 GHz ch 1</text>
+  </g>
+
+  <g id="gw3">
+    <rect x="770" y="190" width="220" height="160" fill="#f5f5f5" stroke="#666666"/>
+    <line x1="770" y1="216" x2="990" y2="216" stroke="#666666"/>
+    <text x="880" y="208" text-anchor="middle" font-size="13" font-weight="bold" fill="#000000">gw3</text>
+    <rect x="780" y="224" width="200" height="32" fill="#dae8fc" stroke="#6c8ebf"/>
+    <text x="880" y="244" text-anchor="middle" font-size="12" fill="#000000">radio0: mesh, 5 GHz ch 36</text>
+    <rect x="780" y="264" width="200" height="32" fill="#ffffff" stroke="#999999"/>
+    <text x="880" y="284" text-anchor="middle" font-size="12" fill="#000000">br0 (bridge)</text>
+    <rect x="780" y="304" width="200" height="32" fill="#d5e8d4" stroke="#82b366"/>
+    <text x="880" y="324" text-anchor="middle" font-size="12" fill="#000000">radio1: AP, 2.4 GHz ch 1</text>
+  </g>
+
+  <!-- roaming client -->
+  <rect x="300" y="505" width="130" height="45" fill="#ffffff" stroke="#666666"/>
+  <text x="365" y="532" text-anchor="middle" font-size="12" fill="#000000">client</text>
+
+  <rect x="800" y="505" width="130" height="45" fill="none" stroke="#666666" stroke-dasharray="6 4"/>
+  <text x="865" y="532" text-anchor="middle" font-size="12" fill="#666666">client (after roam)</text>
+
+  <line x1="430" y1="527" x2="796" y2="527" stroke="#333333" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+  <text x="615" y="518" text-anchor="middle" font-size="12" fill="#333333">802.11r fast handoff (&lt; 50 ms)</text>
+</svg>
