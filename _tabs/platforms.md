@@ -29,7 +29,7 @@ test system and being part of default builds.
 - [Banana Pi BPi-R3 Mini][13] (ARM64)
 - [Banana Pi BPi-R4][20] (ARM64)
 - [Banana Pi BPi-R64][19] (ARM64)
-- [FriendlyELEC NanoPi R2S][7] (ARM64)
+- [FriendlyELEC NanoPi R2S][7], [R2S Plus][21] (ARM64)
 - [Microchip SAMA7G54-EK][14] (ARM)
 - [NXP i.MX8MP EVK][15] (ARM64)
 - Raspberry Pi [4B][10], [3B][16], [CM4][17] (ARM64)
@@ -73,3 +73,4 @@ boot sequence and testing:
 [15]: https://www.nxp.com/design/design-center/development-boards-and-designs/i-mx-evaluation-and-development-boards/evaluation-kit-for-the-i-mx-8m-plus-applications-processor:8MPLUSLPD4-EVK
 [19]: https://docs.banana-pi.org/en/BPI-R64/BananaPi_BPI-R64
 [20]: https://docs.banana-pi.org/en/BPI-R4/BananaPi_BPI-R4
+[21]: https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R2S_Plus
