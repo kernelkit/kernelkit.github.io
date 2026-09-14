@@ -2,7 +2,7 @@
 title:  OSPF Unnumbered Interfaces
 author: vatn
 date:   2024-01-30 17:06:42 +0200
-last_modified_at: 2026-03-11 12:25:00 +0100
+last_modified_at: 2026-09-14 12:00:00 +0100
 categories: [howto]
 tags: [networking, ospf]
 image:
@@ -154,31 +154,33 @@ admin@R1:/config/> leave
 admin@R1:/>
 ```
 
-Status of IP address assignment can be viewed using `show interfaces` command.
+Status of IP address assignment can be viewed using the `show interface` command.
 
 ```console
-admin@R1:/> show interfaces 
-INTERFACE       PROTOCOL   STATE       DATA                                     
-eth0            ethernet   UP          0c:ec:d1:04:00:00                        
-                ipv4                   10.1.1.1/32 (static)
-                ipv6                   fe80::eec:d1ff:fe04:0/64 (link-layer)
-eth1            ethernet   DOWN        0c:ec:d1:04:00:01                        
-eth2            ethernet   DOWN        0c:ec:d1:04:00:02                        
-eth3            ethernet   DOWN        0c:ec:d1:04:00:03                        
-eth4            ethernet   DOWN        0c:ec:d1:04:00:04                        
-eth5            ethernet   DOWN        0c:ec:d1:04:00:05                        
-eth6            ethernet   DOWN        0c:ec:d1:04:00:06                        
-eth7            ethernet   DOWN        0c:ec:d1:04:00:07                        
-eth8            ethernet   DOWN        0c:ec:d1:04:00:08                        
-eth9            ethernet   DOWN        0c:ec:d1:04:00:09                        
-lo              ethernet   UP          00:00:00:00:00:00                        
-                ipv4                   127.0.0.1/8 (static)
-                ipv4                   10.1.1.1/32 (static)
-                ipv6                   ::1/128 (other)
+admin@R1:/> show interface
+⚑ INTERFACE       PROTOCOL      STATE       DATA
+  lo              loopback      UP
+                  ipv4                      127.0.0.1/8 (static)
+                  ipv4                      10.1.1.1/32 (static)
+                  ipv6                      ::1/128 (static)
+⇅ eth0            ethernet      UP          0c:ec:d1:04:00:00
+                  ipv4                      10.1.1.1/32 (static)
+                  ipv6                      fe80::eec:d1ff:fe04:0/64 (link-layer)
+  eth1            ethernet      DOWN        0c:ec:d1:04:00:01
+  eth2            ethernet      DOWN        0c:ec:d1:04:00:02
+  eth3            ethernet      DOWN        0c:ec:d1:04:00:03
+  eth4            ethernet      DOWN        0c:ec:d1:04:00:04
+  eth5            ethernet      DOWN        0c:ec:d1:04:00:05
+  eth6            ethernet      DOWN        0c:ec:d1:04:00:06
+  eth7            ethernet      DOWN        0c:ec:d1:04:00:07
+  eth8            ethernet      DOWN        0c:ec:d1:04:00:08
+  eth9            ethernet      DOWN        0c:ec:d1:04:00:09
 admin@R1:/>
 ```
 
- 
+The `⇅` marker in the first column flags interfaces with IP
+forwarding enabled, here `eth0`.
+
 ### OSPF configuration
 
 OSPF configuration takes place under the *routing,
@@ -236,7 +238,7 @@ with address 10.1.1.2 ([Figure 2](#fig2)), routing information will be
 exchanged using OSPF.
 
 ```console
-admin@R1:/> show ospf routes 
+admin@R1:/> show ip ospf route
 ============ OSPF network routing table ============
 N    10.1.1.1/32           [0] area: 0.0.0.0
                            directly attached to lo
@@ -309,7 +311,7 @@ routers in [Figure 1](#fig1).  OSPF is able to establish routes to all
 routers. Here is the result at R1.
 
 ```console
-admin@R1:/> show ospf routes 
+admin@R1:/> show ip ospf route
 ============ OSPF network routing table ============
 N    10.1.1.1/32           [0] area: 0.0.0.0
                            directly attached to lo
@@ -363,7 +365,7 @@ If corresponding setup is done on R6, OSPF would now establish the
 following routing table
 
 ```console
-admin@R1:/> show ospf routes 
+admin@R1:/> show ip ospf route
 ============ OSPF network routing table ============
 N    10.0.1.0/24           [10] area: 0.0.0.0
                            directly attached to eth2
