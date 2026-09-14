@@ -2,6 +2,7 @@
 title: Seamless Wi-Fi with Mesh Backhaul and Roaming
 author: mattiaswal
 date: 2026-07-02 08:00:00 +0200
+last_modified_at: 2026-09-14 12:00:00 +0100
 categories: [howto]
 tags: [wifi, mesh, roaming, networking]
 image:
@@ -171,9 +172,7 @@ joins too, which is what gives the other nodes a path to the rest of the
 LAN.
 
 ```console
-admin@gw1:/config/> edit interface br0
-admin@gw1:/config/interface/br0/> set type bridge
-admin@gw1:/config/interface/br0/> end
+admin@gw1:/config/> set interface br0
 admin@gw1:/config/> set interface wifi0 bridge-port bridge br0
 admin@gw1:/config/> set interface wifi1 bridge-port bridge br0
 admin@gw1:/config/> set interface eth0 bridge-port bridge br0
