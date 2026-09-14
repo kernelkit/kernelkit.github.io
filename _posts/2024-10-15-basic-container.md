@@ -2,7 +2,7 @@
 title: Gentle Container Introduction
 author: troglobit
 date: 2024-10-15 07:00:00 +0100
-last_modified_at: 2026-02-27 12:00:00 +0100
+last_modified_at: 2026-09-14 12:00:00 +0100
 categories: [howto]
 tags: [containers, networking, docker, podman]
 image:
@@ -98,10 +98,10 @@ forwarding on both ends of the VETH pair:
 ```console
 admin@infix:/> configure
 admin@infix:/config/> edit interface veth0a
-admin@infix:/config/interface/veth0a/> set ipv4 forwarding true
+admin@infix:/config/interface/veth0a/> set ipv4 forwarding
 admin@infix:/config/interface/veth0a/> end
 admin@infix:/config/> edit interface veth0b
-admin@infix:/config/interface/veth0b/> set ipv4 forwarding true
+admin@infix:/config/interface/veth0b/> set ipv4 forwarding
 admin@infix:/config/interface/veth0b/> leave
 ```
 
@@ -148,9 +148,9 @@ admin@infix:/config/firewall/> leave
 We should now have a running container.
 
 ```console
-admin@infix:/> show container 
-CONTAINER ID  IMAGE                            COMMAND     CREATED       STATUS        PORTS       NAMES
-1cd99db1f518  ghcr.io/kernelkit/curios:latest              16 hours ago  Up 6 seconds              system
+admin@infix:/> show container
+NAME    STATUS        NETWORK  MEMORY (KiB)  CPU%
+system  Up 6 seconds  veth0b           3960  0.00
 ```
 
 We can enter the container using:

@@ -2,7 +2,7 @@
 title: From Embedded App to Container
 author: troglobit
 date: 2025-11-20 10:00:00 +0100
-last_modified_at: 2026-01-23 11:00:00 +0100
+last_modified_at: 2026-09-14 12:00:00 +0100
 categories: [howto]
 tags: [containers, docker, podman, embedded, migration]
 image:
@@ -314,14 +314,15 @@ Check the status:
 
 ```console
 admin@infix:/> show container
-CONTAINER ID  IMAGE                               COMMAND     CREATED        STATUS        PORTS  NAMES
-a1b2c3d4e5f6  localhost/temp-monitor:v1.0                     5 seconds ago  Up 4 seconds         temp-monitor
+NAME          STATUS        NETWORK  MEMORY (KiB)  CPU%
+temp-monitor  Up 4 seconds  -                8104  0.03
 ```
 
-View the logs:
+View the logs.  All containers share the system container log, so
+the output is interleaved if you run more than one:
 
 ```console
-admin@infix:/> container log temp-monitor
+admin@infix:/> show container log
 Temperature monitor starting...
 Logging to: /data/temperature.log
 Interval: 60s
@@ -365,7 +366,7 @@ For applications that need full network access:
 ```console
 admin@infix:/> configure
 admin@infix:/config/> edit container temp-monitor
-admin@infix:/config/container/temp-monitor/> set network host true
+admin@infix:/config/container/temp-monitor/> set network host
 admin@infix:/config/container/temp-monitor/> leave
 ```
 
@@ -426,7 +427,7 @@ application. Here's how container concepts map to systemd:
 | `Restart=always` | `restart-policy always` | Default behavior |
 | Environment file | `env` settings | Set key-value pairs in config |
 | `ExecStartPre=` | Not needed | Handle in Containerfile |
-| Logs in journald | Container logs | Use `container log NAME` |
+| Logs in journald | Container logs | Use `show container log` |
 
 To make your container start automatically at boot (default):
 
@@ -631,7 +632,7 @@ admin@infix:/> copy running-config startup-config
 
 ```console
 admin@infix:/> show log
-admin@infix:/> container log temp-monitor
+admin@infix:/> show container log
 ```
 
 **Check container status:**

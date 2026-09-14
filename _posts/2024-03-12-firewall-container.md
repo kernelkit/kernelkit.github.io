@@ -2,7 +2,7 @@
 title: Firewall Container
 author: troglobit
 date: 2024-03-12 08:08:41 +0100
-last_modified_at: 2026-02-27 12:00:00 +0100
+last_modified_at: 2026-09-14 12:00:00 +0100
 categories: [howto]
 tags: [containers, networking, firewall, docker, podman]
 image:
@@ -85,7 +85,7 @@ with the container, and *privileged* mode.
 
 ```console
 admin@infix:/> configure
-admin@infix:/config> edit container nftables
+admin@infix:/config/> edit container nftables
 admin@infix:/config/container/nftables/> set image docker://ghcr.io/kernelkit/curios-nftables:24.02.0
 admin@infix:/config/container/nftables/> set network host
 admin@infix:/config/container/nftables/> set privileged true
@@ -111,9 +111,9 @@ upgrading, the container image.
 We should now have a running container.
 
 ```console
-admin@infix:/> show container 
-CONTAINER ID  IMAGE                                      COMMAND               CREATED         STATUS         PORTS       NAMES
-aae7178c00f8  ghcr.io/kernelkit/curios-nftables:24.02.0  /usr/sbin/nft-hel...  56 seconds ago  Up 56 seconds              nftables
+admin@infix:/> show container
+NAME      STATUS         NETWORK  MEMORY (KiB)  CPU%
+nftables  Up 56 seconds  host             2048  0.00
 ```
 
 This particular container cannot be connected to, like in the previous

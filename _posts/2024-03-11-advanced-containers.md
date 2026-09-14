@@ -2,6 +2,7 @@
 title: Advanced Container Networking
 author: troglobit
 date: 2024-03-11 14:11:50 +0100
+last_modified_at: 2026-09-14 12:00:00 +0100
 categories: [howto]
 tags: [containers, docker, podman]
 image:
@@ -142,38 +143,40 @@ admin@infix:/config/interface/veth1a/> leave
 You can verify the setup with the following CLI command.
 
 ```console
-admin@infix:/> show interfaces 
-INTERFACE       PROTOCOL   STATE       DATA
-lo              ethernet   UP          00:00:00:00:00:00
-                ipv4                   127.0.0.1/8 (static)
-                ipv6                   ::1/128 (static)
-br0             bridge
-│               ipv4                   10.0.1.1/24 (static)
-├ eth1          bridge     FORWARDING
-├ eth2          bridge     FORWARDING
-├ eth3          bridge     FORWARDING
-└ veth0b        bridge     FORWARDING
-br1             bridge
-│               ipv4                   192.168.1.1/24 (static)
-├ eth4          bridge     FORWARDING
-├ eth5          bridge     FORWARDING
-├ eth6          bridge     FORWARDING
-└ veth1b        bridge     FORWARDING
-eth0            ethernet   UP          02:00:00:00:00:00
-                ipv4                   169.254.1.3/16 (random)
-                ipv6                   fe80::ff:fe00:0/64 (link-layer)
-eth7            ethernet   UP          02:00:00:00:00:07
-                ipv6                   fe80::ff:fe00:7/64 (link-layer)
-eth8            ethernet   UP          02:00:00:00:00:08
-                ipv6                   fe80::ff:fe00:8/64 (link-layer)
-eth9            ethernet   UP          02:00:00:00:00:09
-                ipv6                   fe80::ff:fe00:9/64 (link-layer)
-veth0a          ethernet
-                ipv4                   10.0.1.2/24 (static)
-veth0b          ethernet   UP          42:c0:a2:f1:41:fa
-veth1a          ethernet
-                ipv4                   192.168.1.2/24 (static)
-veth1b          ethernet   UP          da:d5:e8:0d:0b:55
+admin@infix:/> show interface
+⚑ INTERFACE       PROTOCOL      STATE       DATA
+  lo              loopback      UP
+                  ipv4                      127.0.0.1/8 (static)
+                  ipv6                      ::1/128 (static)
+  br0             bridge
+  │               ethernet                  02:00:00:00:00:01
+  │               ipv4                      10.0.1.1/24 (static)
+  ├ eth1          bridge        FORWARDING
+  ├ eth2          bridge        FORWARDING
+  ├ eth3          bridge        FORWARDING
+  └ veth0b        bridge        FORWARDING
+  br1             bridge
+  │               ethernet                  02:00:00:00:00:04
+  │               ipv4                      192.168.1.1/24 (static)
+  ├ eth4          bridge        FORWARDING
+  ├ eth5          bridge        FORWARDING
+  ├ eth6          bridge        FORWARDING
+  └ veth1b        bridge        FORWARDING
+  eth0            ethernet      UP          02:00:00:00:00:00
+                  ipv4                      169.254.1.3/16 (random)
+                  ipv6                      fe80::ff:fe00:0/64 (link-layer)
+  eth7            ethernet      UP          02:00:00:00:00:07
+                  ipv6                      fe80::ff:fe00:7/64 (link-layer)
+  eth8            ethernet      UP          02:00:00:00:00:08
+                  ipv6                      fe80::ff:fe00:8/64 (link-layer)
+  eth9            ethernet      UP          02:00:00:00:00:09
+                  ipv6                      fe80::ff:fe00:9/64 (link-layer)
+  veth0a          veth          UP          1a:77:3b:9c:22:e1
+                  ipv4                      10.0.1.2/24 (static)
+  veth0b          veth          UP          42:c0:a2:f1:41:fa
+  veth1a          veth          UP          8e:41:d0:5b:6a:c7
+                  ipv4                      192.168.1.2/24 (static)
+  veth1b          veth          UP          da:d5:e8:0d:0b:55
 ```
 
 Finally, the container configuration.  We start by marking the access
@@ -184,7 +187,7 @@ to them from the container.
 admin@infix:/> configure
 admin@infix:/config/> set interface veth0a container-network
 admin@infix:/config/> set interface veth1a container-network
-admin@infix:/config> edit container system
+admin@infix:/config/> edit container system
 admin@infix:/config/container/system/> set image docker://ghcr.io/kernelkit/curios:24.02.0
 admin@infix:/config/container/system/> set hostname sys101
 admin@infix:/config/container/system/> edit network
@@ -205,8 +208,8 @@ inspect the results:
 
 ```console
 admin@infix:/> show container
-CONTAINER ID  IMAGE                             COMMAND     CREATED         STATUS         PORTS       NAMES
-ccb2338b9f33  ghcr.io/kernelkit/curios:24.02.0              11 seconds ago  Up 10 seconds              system
+NAME    STATUS         NETWORK   MEMORY (KiB)  CPU%
+system  Up 10 seconds  br0, br1          3820  0.00
 admin@infix:/> container shell system
 root@sys101:/# ifconfig
 lo        Link encap:Local Loopback

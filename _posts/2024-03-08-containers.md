@@ -2,6 +2,7 @@
 title: Docker Containers
 author: troglobit
 date: 2024-03-08 15:44:42 +0100
+last_modified_at: 2026-09-14 12:00:00 +0100
 categories: [howto]
 tags: [containers, docker, podman]
 image:
@@ -69,9 +70,9 @@ Here's how you create a container bridge:
 
 ```console
 admin@infix:/> configure
-admin@infix:/config> edit interface docker0
-admin@infix:/config/interface/docker0> set container-network
-admin@infix:/config/interface/docker0> leave
+admin@infix:/config/> edit interface docker0
+admin@infix:/config/interface/docker0/> set container-network
+admin@infix:/config/interface/docker0/> leave
 ```
 
 ## Web Server Container
@@ -85,7 +86,7 @@ the Alpine Linux image.
 
 ```console
 admin@infix:/> configure
-admin@infix:/config> edit container web
+admin@infix:/config/> edit container web
 admin@infix:/config/container/web/> set image docker://nginx:alpine
 admin@infix:/config/container/web/> set volume cache target /var/cache
 admin@infix:/config/container/web/> edit network
@@ -109,8 +110,8 @@ or just poll the status command:
 
 ```console
 admin@infix:/> show container
-CONTAINER ID  IMAGE                           COMMAND               CREATED         STATUS         PORTS               NAMES
-c60a6deeea4e  docker.io/library/nginx:alpine  nginx -g daemon o...  2 minutes ago   Up 2 minutes   0.0.0.0:8080->80/tcp  web
+NAME  STATUS        NETWORK  MEMORY (KiB)  CPU%
+web   Up 2 minutes  docker0          6142  0.01
 ```
 
 You should now be able to access the web server on port 8080 of the
