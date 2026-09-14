@@ -4,6 +4,11 @@ author: troglobit
 date: 2025-11-06 09:00:00 +0100
 categories: [architecture]
 tags: [immutable, embedded, linux, security, buildroot, containers]
+last_modified_at: 2026-09-14 12:00:00 +0100
+image:
+  path: /assets/img/immutable-layout.svg
+  alt: Infix GPT partition layout with A/B read-only root slots beside cfg and var
+  show_in_post: false
 ---
 
 We've talked before about how Infix OS focuses on being friendly, secure,
@@ -49,6 +54,12 @@ Infix maintains a clear separation between three types of data:
 /cfg        Configuration data
 /var        Variable data (logs, containers, etc.)
 ```
+
+![](/assets/img/immutable-layout.svg){: #fig1 width="700" }
+_**Figure 1**: On disk the three live in separate GPT partitions.  The
+root filesystem is doubled, so an upgrade writes the standby slot and
+only then flips the boot order &#8212; which is what makes it atomic, and
+rollback cheap._
 
 This separation ensures that:
 

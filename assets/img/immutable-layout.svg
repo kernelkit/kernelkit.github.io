@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="255" viewBox="0 0 800 255"
+     style="color-scheme: light dark;" font-family="Inconsolata, 'DejaVu Sans Mono', monospace">
+  <rect x="0" y="0" width="800" height="255" fill="#ffffff"/>
+  <rect x="0.5" y="0.5" width="799" height="254" fill="none" stroke="#bdbdbd" stroke-width="1"/>
+
+  <text x="60" y="44" font-size="16" font-weight="bold" fill="#111">Infix on-disk layout</text>
+  <text x="60" y="64" font-size="13" fill="#555">GPT partitions, sizes not to scale &#8212; * marks optional</text>
+
+  <!-- ============ partition bar ============ -->
+  <rect x="60" y="100" width="55" height="80" fill="#dfe6e9" stroke="#7f8c8d" stroke-width="1.5"/>
+  <text x="87" y="134" font-size="13" font-weight="bold" text-anchor="middle" fill="#111">boot*</text>
+  <text x="87" y="152" font-size="11" text-anchor="middle" fill="#444">GRUB /</text>
+  <text x="87" y="166" font-size="11" text-anchor="middle" fill="#444">U-Boot</text>
+
+  <rect x="115" y="100" width="70" height="80" fill="#dfe6e9" stroke="#7f8c8d" stroke-width="1.5"/>
+  <text x="150" y="134" font-size="13" font-weight="bold" text-anchor="middle" fill="#111">aux</text>
+  <text x="150" y="152" font-size="11" text-anchor="middle" fill="#444">ext4</text>
+  <text x="150" y="166" font-size="11" text-anchor="middle" fill="#444">boot env</text>
+
+  <rect x="185" y="100" width="180" height="80" fill="#4a8f8f" stroke="#0d2626" stroke-width="1.5"/>
+  <text x="275" y="132" font-size="14" font-weight="bold" text-anchor="middle" fill="#ffffff">primary</text>
+  <text x="275" y="152" font-size="12" text-anchor="middle" fill="#eaf5f5">squashfs &#8594; /</text>
+  <rect x="240" y="160" width="70" height="17" rx="8" fill="#2eb82e" stroke="#0d2626" stroke-width="1"/>
+  <text x="275" y="173" font-size="11" text-anchor="middle" fill="#ffffff">active</text>
+
+  <rect x="365" y="100" width="180" height="80" fill="#2b5c5b" stroke="#0d2626" stroke-width="1.5"/>
+  <text x="455" y="132" font-size="14" font-weight="bold" text-anchor="middle" fill="#ffffff">secondary</text>
+  <text x="455" y="152" font-size="12" text-anchor="middle" fill="#cfe0e0">squashfs &#8594; /</text>
+  <rect x="417" y="160" width="76" height="17" rx="8" fill="#7f8c8d" stroke="#0d2626" stroke-width="1"/>
+  <text x="455" y="173" font-size="11" text-anchor="middle" fill="#ffffff">standby</text>
+
+  <rect x="545" y="100" width="95" height="80" fill="#fff7d6" stroke="#d6b656" stroke-width="1.5"/>
+  <text x="592" y="134" font-size="13" font-weight="bold" text-anchor="middle" fill="#111">cfg</text>
+  <text x="592" y="152" font-size="11" text-anchor="middle" fill="#444">ext4</text>
+  <text x="592" y="166" font-size="11" text-anchor="middle" fill="#444">&#8594; /cfg</text>
+
+  <rect x="640" y="100" width="100" height="80" fill="#fff7d6" stroke="#d6b656" stroke-width="1.5"/>
+  <text x="690" y="134" font-size="13" font-weight="bold" text-anchor="middle" fill="#111">var*</text>
+  <text x="690" y="152" font-size="11" text-anchor="middle" fill="#444">ext4</text>
+  <text x="690" y="166" font-size="11" text-anchor="middle" fill="#444">&#8594; /var</text>
+
+  <!-- ============ brackets ============ -->
+  <path d="M 185 190 L 185 198 L 545 198 L 545 190" fill="none" stroke="#0d2626" stroke-width="1.5"/>
+  <text x="365" y="216" font-size="13" text-anchor="middle" fill="#111">read-only root, replaced wholesale</text>
+  <text x="365" y="232" font-size="13" text-anchor="middle" fill="#111">upgrade writes the standby slot, then flips boot order</text>
+
+  <path d="M 545 190 L 545 198 L 740 198 L 740 190" fill="none" stroke="#d6a020" stroke-width="1.5"/>
+  <text x="642" y="216" font-size="13" text-anchor="middle" fill="#8a6d1a">writable &#8212; survives</text>
+  <text x="642" y="232" font-size="13" text-anchor="middle" fill="#8a6d1a">upgrade and rollback</text>
+</svg>
