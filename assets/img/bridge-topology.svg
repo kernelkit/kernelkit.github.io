@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="260" viewBox="0 0 800 260"
+     style="color-scheme: light dark;" font-family="Inconsolata, 'DejaVu Sans Mono', monospace">
+  <defs>
+    <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+      <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#e3e3e3" stroke-width="1"/>
+    </pattern>
+    <marker id="wharrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffffff"/>
+    </marker>
+  </defs>
+
+  <!-- GNS3 canvas -->
+  <rect x="0" y="0" width="800" height="260" fill="#ffffff"/>
+  <rect x="0" y="0" width="800" height="260" fill="url(#grid)"/>
+  <rect x="0.5" y="0.5" width="799" height="259" fill="none" stroke="#bdbdbd" stroke-width="1"/>
+
+  <g transform="translate(0,-34)">
+    <!-- ================= links ================= -->
+    <line x1="168" y1="152" x2="332" y2="152" stroke="#000000" stroke-width="2"/>
+    <line x1="498" y1="152" x2="652" y2="152" stroke="#000000" stroke-width="2"/>
+
+    <!-- link status markers (green = up) -->
+    <rect x="176" y="146" width="11" height="11" fill="#2eb82e" stroke="#000" stroke-width="1"/>
+    <rect x="313" y="146" width="11" height="11" fill="#2eb82e" stroke="#000" stroke-width="1"/>
+    <rect x="505" y="146" width="11" height="11" fill="#2eb82e" stroke="#000" stroke-width="1"/>
+    <rect x="633" y="146" width="11" height="11" fill="#2eb82e" stroke="#000" stroke-width="1"/>
+
+    <text x="324" y="139" font-size="13" text-anchor="end" fill="#111">eth0</text>
+    <text x="505" y="139" font-size="13" fill="#111">eth1</text>
+
+    <!-- ================= cloud: office LAN ================= -->
+    <path d="M 62 150
+             a 26 26 0 0 1 6 -44
+             a 30 30 0 0 1 52 -18
+             a 24 24 0 0 1 36 26
+             a 22 22 0 0 1 -8 36 z"
+          fill="#ffffff" stroke="#000000" stroke-width="2" stroke-linejoin="round"/>
+    <text x="110" y="128" font-size="14" text-anchor="middle" fill="#111">LAN</text>
+    <text x="110" y="178" font-size="15" font-weight="bold" text-anchor="middle" fill="#111">Office network</text>
+    <text x="110" y="196" font-size="13" text-anchor="middle" fill="#555">DHCP server</text>
+
+    <!-- ================= Infix switch ================= -->
+    <path d="M 470 130 L 500 105 L 500 140 L 470 165 z" fill="#2b5c5b" stroke="#0d2626" stroke-width="1.5" stroke-linejoin="round"/>
+    <rect x="330" y="130" width="140" height="35" fill="#37706f" stroke="#0d2626" stroke-width="1.5"/>
+    <path d="M 330 130 L 360 105 L 500 105 L 470 130 z" fill="#4a8f8f" stroke="#0d2626" stroke-width="1.5" stroke-linejoin="round"/>
+    <g stroke="#ffffff" stroke-width="3" stroke-linecap="butt" marker-end="url(#wharrow)">
+      <line x1="365" y1="112.5" x2="406" y2="112.5"/>
+      <line x1="428" y1="112.5" x2="469" y2="112.5"/>
+      <line x1="465" y1="122.5" x2="424" y2="122.5"/>
+      <line x1="402" y1="122.5" x2="361" y2="122.5"/>
+    </g>
+    <text x="400" y="186" font-size="15" font-weight="bold" text-anchor="middle" fill="#111">Infix</text>
+
+    <!-- bridge callout -->
+    <line x1="345" y1="165" x2="345" y2="200" stroke="#d6b656" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <rect x="294" y="200" width="212" height="46" rx="6" fill="#fff7d6" stroke="#d6b656" stroke-width="1.5"/>
+    <text x="400" y="218" font-size="13" text-anchor="middle" fill="#111">br0 &#8212; VLAN transparent bridge</text>
+    <text x="400" y="236" font-size="13" text-anchor="middle" fill="#111">192.168.1.161/24 (dhcp)</text>
+
+    <!-- ================= PC ================= -->
+    <rect x="655" y="108" width="90" height="62" rx="5" fill="#3a4a5a" stroke="#0d2626" stroke-width="1.5"/>
+    <rect x="663" y="116" width="74" height="46" rx="2" fill="#6aa9d8" stroke="#20384d" stroke-width="1"/>
+    <text x="700" y="145" font-size="13" text-anchor="middle" fill="#ffffff">VPCS</text>
+    <rect x="690" y="170" width="20" height="10" fill="#3a4a5a" stroke="#0d2626" stroke-width="1.5"/>
+    <rect x="670" y="180" width="60" height="7" rx="3" fill="#3a4a5a" stroke="#0d2626" stroke-width="1.5"/>
+    <text x="700" y="206" font-size="15" font-weight="bold" text-anchor="middle" fill="#111">PC1</text>
+  </g>
+</svg>
