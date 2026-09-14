@@ -2,8 +2,13 @@
 title: "PTP Time Synchronization"
 author: troglobit
 date: 2026-04-07 10:00:00 +0200
+last_modified_at: 2026-09-14 12:00:00 +0100
 categories: [examples]
 tags: [ptp, ieee1588, gptp, timing, cli, marvell]
+image:
+  path: /assets/img/ptp-topology.svg
+  alt: A grandmaster and a time-receiver synchronised over PTP on eth0
+  show_in_post: false
 ---
 
 The Precision Time Protocol (PTP, IEEE 1588) synchronizes clocks across a
@@ -67,8 +72,14 @@ to verify before committing to a setup.
 
 ### Ordinary Clock — Time-Receiver
 
-The simplest setup: one device tracks time from another.  Configure the
-**time-receiver** first.
+The simplest setup: one device tracks time from another.
+
+![](/assets/img/ptp-topology.svg){: #fig1 width="700" }
+_**Figure 1**: Two ordinary clocks, back to back on `eth0`.  The
+grandmaster wins the election on `priority1`, the receiver is pinned
+with `time-receiver-only`._
+
+Configure the **time-receiver** first.
 
 ```console
 admin@receiver:/> configure
@@ -114,6 +125,7 @@ PTP Instance 0                          Ordinary Clock · domain 0
   Clock class             : cc-time-receiver-only
   GM clock class          : cc-primary-sync
   Time source             : internal-oscillator
+  Mode                    : time-receiver only
   PTP timescale           : yes
   UTC offset              : 37 s
   Time traceable          : yes

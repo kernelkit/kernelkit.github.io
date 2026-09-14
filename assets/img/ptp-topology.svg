@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="240" viewBox="0 0 800 240"
+     style="color-scheme: light dark;" font-family="Inconsolata, 'DejaVu Sans Mono', monospace">
+  <defs>
+    <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+      <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#e3e3e3" stroke-width="1"/>
+    </pattern>
+    <marker id="wharrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffffff"/>
+    </marker>
+    <marker id="syncarrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f6f3f"/>
+    </marker>
+    <g id="infixnode">
+      <path d="M 470 130 L 500 105 L 500 140 L 470 165 z" fill="#2b5c5b" stroke="#0d2626" stroke-width="1.5" stroke-linejoin="round"/>
+      <rect x="330" y="130" width="140" height="35" fill="#37706f" stroke="#0d2626" stroke-width="1.5"/>
+      <path d="M 330 130 L 360 105 L 500 105 L 470 130 z" fill="#4a8f8f" stroke="#0d2626" stroke-width="1.5" stroke-linejoin="round"/>
+      <g stroke="#ffffff" stroke-width="3" stroke-linecap="butt" marker-end="url(#wharrow)">
+        <line x1="365" y1="112.5" x2="406" y2="112.5"/>
+        <line x1="428" y1="112.5" x2="469" y2="112.5"/>
+        <line x1="465" y1="122.5" x2="424" y2="122.5"/>
+        <line x1="402" y1="122.5" x2="361" y2="122.5"/>
+      </g>
+    </g>
+  </defs>
+
+  <!-- GNS3 canvas -->
+  <rect x="0" y="0" width="800" height="240" fill="#ffffff"/>
+  <rect x="0" y="0" width="800" height="240" fill="url(#grid)"/>
+  <rect x="0.5" y="0.5" width="799" height="239" fill="none" stroke="#bdbdbd" stroke-width="1"/>
+
+  <g transform="translate(0,-58)">
+    <!-- link eth0 <-> eth0 -->
+    <line x1="275" y1="152" x2="515" y2="152" stroke="#000000" stroke-width="2"/>
+    <rect x="283" y="146" width="11" height="11" fill="#2eb82e" stroke="#000" stroke-width="1"/>
+    <rect x="496" y="146" width="11" height="11" fill="#2eb82e" stroke="#000" stroke-width="1"/>
+    <text x="294" y="139" font-size="13" fill="#111">eth0</text>
+    <text x="496" y="139" font-size="13" text-anchor="end" fill="#111">eth0</text>
+
+    <!-- nodes -->
+    <use href="#infixnode" transform="translate(-215,0)"/>
+    <use href="#infixnode" transform="translate(185,0)"/>
+
+    <!-- reference clock glyph on the grandmaster -->
+    <g transform="translate(98,147)">
+      <circle cx="0" cy="0" r="13" fill="#ffffff" stroke="#0d2626" stroke-width="1.5"/>
+      <line x1="0" y1="0" x2="0" y2="-8" stroke="#0d2626" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="0" y1="0" x2="6" y2="3" stroke="#0d2626" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <!-- sync direction -->
+    <line x1="300" y1="190" x2="490" y2="190" stroke="#1f6f3f" stroke-width="2"
+          stroke-dasharray="6 4" marker-end="url(#syncarrow)"/>
+    <text x="395" y="183" font-size="13" text-anchor="middle" fill="#1f6f3f">PTP · domain 0</text>
+
+    <!-- node names -->
+    <text x="200" y="190" font-size="15" font-weight="bold" text-anchor="middle" fill="#111">grandmaster</text>
+    <text x="600" y="190" font-size="15" font-weight="bold" text-anchor="middle" fill="#111">receiver</text>
+
+    <!-- callouts -->
+    <rect x="86" y="204" width="228" height="46" rx="6" fill="#fff7d6" stroke="#d6b656" stroke-width="1.5"/>
+    <text x="200" y="222" font-size="13" text-anchor="middle" fill="#111">priority1 1</text>
+    <text x="200" y="240" font-size="13" text-anchor="middle" fill="#111">port 1: time-transmitter</text>
+
+    <rect x="486" y="204" width="228" height="46" rx="6" fill="#fff7d6" stroke="#d6b656" stroke-width="1.5"/>
+    <text x="600" y="222" font-size="13" text-anchor="middle" fill="#111">time-receiver-only</text>
+    <text x="600" y="240" font-size="13" text-anchor="middle" fill="#111">port 1: time-receiver</text>
+  </g>
+</svg>
