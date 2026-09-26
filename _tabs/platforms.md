@@ -17,6 +17,7 @@ Fully supported in default builds, verified continuously in regression test
 system, images included in releases:
 
 - [Marvell CN9130][5] CRB (ARM64)
+- [Novarq Tactical-1000][22] (ARM64)
 - [GNS3][3]/Qemu[^1] (ARM64, x86_64)
 
 ### Tier 2
@@ -40,6 +41,7 @@ test system and being part of default builds.
 Worked at one point but needs more attention to bring on par with the Infix
 boot sequence and testing:
 
+- [Microchip LAN969x][23] EV23X71A (ARM64)
 - [Microchip SparX-5i][8] PCB135 (ARM64)
 - [Marvell EspressoBIN][9] (ARM64)
 - [StarFive VisionFive2][6] (RISC-V)
@@ -74,3 +76,5 @@ boot sequence and testing:
 [19]: https://docs.banana-pi.org/en/BPI-R64/BananaPi_BPI-R64
 [20]: https://docs.banana-pi.org/en/BPI-R4/BananaPi_BPI-R4
 [21]: https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R2S_Plus
+[22]: https://novarq.com/pages/tactical-1000
+[23]: https://www.microchip.com/en-us/development-tool/ev23x71a
