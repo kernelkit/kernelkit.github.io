@@ -2,7 +2,7 @@
 title:  Infix Compatible Boards
 author: troglobit
 date:   2024-08-13 10:06:42 +0100
-last_modified_at: 2026-04-12 10:00:00 +0100
+last_modified_at: 2026-09-26 10:00:00 +0200
 categories: [showcase]
 tags: [boards]
 pin: true
@@ -28,7 +28,9 @@ been known to work, but have not been updated or tested continuously.
 | [Banana Pi BPi-R64](#banana-pi-bpi-r64)             | Aarch64  | v26.03    |                            |
 | [FriendlyELEC NanoPi R2S](#friendlyelec-nanopi-r2s) | Aarch64  | v24.02    | Fully supported in v24.08  |
 | [Marvell CN9130 CRB](#marvell-cn9130-crb)           | Aarch64  | v23.06    |                            |
+| [Microchip EV23X71A](#microchip-ev23x71a-laguna)    | Aarch64  | v26.09    |                            |
 | [Microchip SAMA7G54-EK](#microchip-sama7g54-ek)     | Arm      | v26.02    |                            |
+| [Novarq Tactical-1000](#novarq-tactical-1000)       | Aarch64  | v26.09    |                            |
 | [NXP i.MX8MP EVK](#nxp-imx8mp-evk)                  | Aarch64  | v25.02    |                            |
 | [Raspberry Pi](#raspberry-pi) 4B, 3B, CM4           | Aarch64  | v25.05    | 3B and CM4 added in v25.10 |
 | [Raspberry Pi](#raspberry-pi) 2B                    | Arm      | v25.11    |                            |
@@ -205,12 +207,46 @@ Thanks to Linux switchdev, when Infix runs on this board, all bridging
 (switching) configuration, including VLANs, is fully offloaded to the
 switchcore.  Allowing full wirespeed switching between switch ports.
 
+### Microchip EV23X71A (Laguna)
+
+The [EV23X71A][32] is Microchip's evaluation board for the LAN969x (Laguna)
+family of TSN capable switches, a single Cortex-A53 at 1 GHz next to a
+switch core with 24 x 1 GbE copper ports, 4 x 10 GbE SFP+, and a separate
+1 GbE management port.  The board has 1 GiB DDR4, 4 GiB eMMC, and 2 MiB
+QSPI NOR flash.
+
+![](/assets/img/laguna-evb.png){: #fig-laguna}
+_**Figure**: Microchip EV23X71A, the Laguna EVB._
+
+It is the smaller sibling of the SparX-5i, handled by the same `sparx5`
+switchdev driver, so all bridging and VLAN configuration is offloaded to
+the switch core.  Infix brings its own boot chain for this board, Trusted
+Firmware and U-Boot, booting from the eMMC with the usual A/B slots.
+
+Supported:
+
+ - switch core and SerDes, all ports, with switchdev offload
+ - eMMC, I²C (including the SFP mux), SPI, and USB host
+ - watchdog, temperature sensor, status and SFP LEDs
+
+TSN queueing and HSR/PRP offload are not yet supported.  For more details,
+see the [Laguna announcement][33].
+
 ### Microchip SAMA7G54-EK
 
 The [SAMA7G54-EK][23] is the evaluation kit for Microchip's SAMA7G54
 SoC, an Arm Cortex-A7 processor.
 
 Support for the SAMA7G54-EK was added in Infix v26.02.
+
+### Novarq Tactical-1000
+
+The [Tactical-1000][34] is a cut-down version of the Laguna EVB in a box:
+the same 24 + 4 + 1 port layout on a LAN9696TSN, with 2 GiB DDR4 and
+eMMC.  Netboot only for now, installing to eMMC is on the way.
+
+![](/assets/img/novarq-tactical-1000.webp){: #fig-tactical}
+_**Figure**: Novarq Tactical-1000.  Photo: Novarq._
 
 ### NXP i.MX8MP EVK
 
@@ -338,3 +374,6 @@ run on any Linux PC with Qemu installed ([instructions][10]).
 [29]: https://docs.banana-pi.org/en/BPI-R64/BananaPi_BPI-R64
 [30]: /posts/banana-pi-r64/
 [31]: https://docs.banana-pi.org/en/BPI-R4/BananaPi_BPI-R4
+[32]: https://www.microchip.com/en-us/development-tool/ev23x71a
+[33]: /posts/microchip-laguna/
+[34]: https://novarq.com/pages/tactical-1000
