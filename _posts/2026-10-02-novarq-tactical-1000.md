@@ -51,9 +51,8 @@ From there on the unit upgrades like any other Infix system.
 
 ### Tier 1
 
-The Tactical-1000 is part of the default `aarch64` build, so every
-release and every `latest` build carries it, and it is being added to
-our regression test system.
+The Tactical-1000 is part of the default `aarch64` build since v26.09,
+and it is currently being added to our regression test system.
 
 ![](/assets/img/tactical-1000-unpacked.png){: #fig2}
 _**Figure 2**: Just unpacked, next to a couple of tiny BPi-R3 routers.  Photo: J. Wiberg._
