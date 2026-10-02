@@ -2,7 +2,7 @@
 title:  Infix Compatible Boards
 author: troglobit
 date:   2024-08-13 10:06:42 +0100
-last_modified_at: 2026-09-26 10:00:00 +0200
+last_modified_at: 2026-10-02 10:00:00 +0200
 categories: [showcase]
 tags: [boards]
 pin: true
@@ -241,9 +241,11 @@ Support for the SAMA7G54-EK was added in Infix v26.02.
 
 ### Novarq Tactical-1000
 
-The [Tactical-1000][34] is a cut-down version of the Laguna EVB in a box:
-the same 24 + 4 + 1 port layout on a LAN9696TSN, with 2 GiB DDR4 and
-eMMC.  Netboot only for now, installing to eMMC is on the way.
+The [Tactical-1000][34] is a 29-port switch built on the Laguna reference
+design: the same 24 + 4 + 1 port layout on a LAN9696TSN, with 2 GiB DDR4
+and 16 GB eMMC.  Infix installs to the eMMC and boots from it with the
+usual A/B slots, and the board is Tier 1, so every release carries it.
+For more details, see the [Tactical-1000 announcement][35].
 
 ![](/assets/img/novarq-tactical-1000.webp){: #fig-tactical}
 _**Figure**: Novarq Tactical-1000.  Photo: Novarq._
@@ -377,3 +379,4 @@ run on any Linux PC with Qemu installed ([instructions][10]).
 [32]: https://www.microchip.com/en-us/development-tool/ev23x71a
 [33]: /posts/microchip-laguna/
 [34]: https://novarq.com/pages/tactical-1000
+[35]: /posts/novarq-tactical-1000/
