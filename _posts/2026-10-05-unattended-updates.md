@@ -5,7 +5,7 @@ date: 2026-10-05 13:00:00 +0200
 categories: [howto]
 tags: [upgrade, immutable, automation, rauc]
 image:
-  path: /assets/img/immutable-layout.svg
+  path: /assets/img/unattended-updates-social.png
   alt: Infix A/B partition layout, the foundation for unattended updates
   show_in_post: false
 ---
