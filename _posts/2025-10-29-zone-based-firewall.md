@@ -96,7 +96,7 @@ prevents accidentally leaving an interface unprotected.
 
 To set a zone as the default:
 
-<pre class="cli"><code>admin@router:/config/firewall/&gt; <b>set zone wan default true</b></code></pre>
+<pre class="cli"><code>admin@router:/config/firewall/&gt; <b>set default wan</b></code></pre>
 
 ### Beyond the Basics
 
