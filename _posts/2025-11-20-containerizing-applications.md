@@ -427,7 +427,7 @@ For small config files, store content directly in Infix configuration:
 admin@infix:/config/&gt; <b>edit container temp-monitor</b>
 admin@infix:/config/container/temp-monitor/&gt; <b>edit mount settings</b>
 admin@infix:/config/container/temp-monitor/mount/settings/&gt; <b>set target /etc/temp-monitor.conf</b>
-admin@infix:/config/container/temp-monitor/mount/settings/&gt; <b>text-editor content</b></code></pre>
+admin@infix:/config/container/temp-monitor/mount/settings/&gt; <b>edit content</b></code></pre>
 
 An editor opens where you can paste your configuration:
 

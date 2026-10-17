@@ -80,13 +80,13 @@ secrets on all three nodes.
 <pre class="cli"><code>admin@gw1:/&gt; <b>configure</b>
 admin@gw1:/config/&gt; <b>edit keystore symmetric-key mesh-secret</b>
 admin@gw1:/config/keystore/.../mesh-secret/&gt; <b>set key-format passphrase-key-format</b>
-admin@gw1:/config/keystore/.../mesh-secret/&gt; <b>change cleartext-symmetric-key</b>
+admin@gw1:/config/keystore/.../mesh-secret/&gt; <b>edit cleartext-symmetric-key</b>
 Passphrase: ************
 Retype passphrase: ************
 admin@gw1:/config/keystore/.../mesh-secret/&gt; <b>end</b>
 admin@gw1:/config/&gt; <b>edit keystore symmetric-key wifi-secret</b>
 admin@gw1:/config/keystore/.../wifi-secret/&gt; <b>set key-format passphrase-key-format</b>
-admin@gw1:/config/keystore/.../wifi-secret/&gt; <b>change cleartext-symmetric-key</b>
+admin@gw1:/config/keystore/.../wifi-secret/&gt; <b>edit cleartext-symmetric-key</b>
 Passphrase: ************
 Retype passphrase: ************
 admin@gw1:/config/keystore/.../wifi-secret/&gt; <b>leave</b></code></pre>

@@ -157,14 +157,15 @@ same container image to bundle an `index.html` file:
 admin@infix:/config/&gt; <b>edit container web</b>
 admin@infix:/config/container/web/&gt; <b>edit mount index.html</b>
 admin@infix:/config/container/web/mount/index.html/&gt; <b>set target /usr/share/nginx/html/index.html</b>
-admin@infix:/config/container/web/mount/index.html/&gt; <b>text-editor content</b></code></pre>
+admin@infix:/config/container/web/mount/index.html/&gt; <b>edit content</b></code></pre>
 
 The `content` setting is an alternative to `source` for file mounts
 which allows providing the contents through the device's configuration.
 
-> The `text-editor` command can be changed to use other editors in the
-> `system` configuration context, by default it starts a Micro Emacs
-> clone, Mg.  See the [documentation][3] for more information.
+> The `edit` command opens binary settings like `content` in a text editor, by
+> default a Micro Emacs clone, Mg.  Other editors can be selected in the
+> `system` configuration context.  See the [documentation][3] for more
+> information.
 {: .prompt-tip }
 
 Paste in this:
@@ -217,5 +218,5 @@ Take care! 🧡
 [0]: https://www.kernelkit.org/infix/latest/networking/
 [1]: https://podman.io
 [2]: https://www.docker.com/resources/what-container/
-[3]: https://www.kernelkit.org/infix/latest/cli/text-editor/
+[3]: https://www.kernelkit.org/infix/latest/cli/edit/
 [4]: https://www.kernelkit.org/

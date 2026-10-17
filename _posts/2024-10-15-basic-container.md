@@ -181,7 +181,7 @@ Take care! 🧡
 [1]: /posts/containers/
 [2]: https://github.com/kernelkit/curiOS/
 [3]: https://en.wikipedia.org/wiki/Network_address_translation
-[4]: https://www.kernelkit.org/infix/latest/cli/text-editor/
+[4]: https://www.kernelkit.org/infix/latest/cli/edit/
 [5]: https://wiki.nftables.org/wiki-nftables/index.php/Main_Page
 [6]: /posts/getting-started/
 [7]: https://github.com/kernelkit/infix/releases/tag/latest

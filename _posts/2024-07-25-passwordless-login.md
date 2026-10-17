@@ -10,17 +10,16 @@ In this post we explore how to use the CLI to change a user's password
 and set up SSH keys for authentication.
 
 User management is available in the system authentication configuration
-context and there is a dedicated `change` command available to simplify
-the process:
+context, where the `edit` command simplifies the process:
 
 <pre class="cli"><code>admin@example:/&gt; <b>configure</b>
 admin@example:/config/&gt; <b>edit system authentication user admin</b>
-admin@example:/config/system/authentication/user/admin/&gt; <b>change password</b>
+admin@example:/config/system/authentication/user/admin/&gt; <b>edit password</b>
 New password: 
 Retype password: 
 admin@example:/config/system/authentication/user/admin/&gt; <b>leave</b></code></pre>
 
-The `change password` command starts an interactive dialogue that asks
+The `edit password` command starts an interactive dialogue that asks
 for the new password, with a confirmation, and then salts and encrypts
 the password with the default crypt algorithm.  Either sha512crypt or
 yescrypt depending on the Infix build.
@@ -58,8 +57,8 @@ key-data AAAAB3NzaC1yc2EAAAADAQABAAABgQC8iBL42yeMBioFay7lty1C4ZDTHcHyo739gc91rTT
 admin@example:/config/system/authentication/user/admin/authorized-key/jacky@host/&gt; <b>leave</b></code></pre>
 
 > The `ssh-keygen` program used to create the public/private key-pair
-> base64 encodes the public key data, so there is no need to use the
-> text-editor command with `authorized-key`, set does the job.
+> base64 encodes the public key data, so there is no need to open the
+> text editor with `edit key-data`, set does the job.
 {: .prompt-info }
 
 

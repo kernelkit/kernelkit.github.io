@@ -88,15 +88,15 @@ admin@infix:/config/container/nftables/&gt; <b>set network host</b>
 admin@infix:/config/container/nftables/&gt; <b>set privileged true</b>
 admin@infix:/config/container/nftables/&gt; <b>edit mount nftables.conf</b>
 admin@infix:/config/container/nftables/mount/nftables.conf/&gt; <b>set target /etc/nftables.conf</b>
-admin@infix:/config/container/nftables/mount/nftables.conf/&gt; <b>text-editor content</b>
+admin@infix:/config/container/nftables/mount/nftables.conf/&gt; <b>edit content</b>
 ... interactive editor starts up where you can paste your rules ...
 admin@infix:/config/container/nftables/mount/nftables.conf/&gt; <b>leave</b></code></pre>
 
-Notice the command `text-editor content`, it opens up an interactive
+Notice the command `edit content`, it opens up an interactive
 [text editor][4] where you can paste in the contents of the file
 `/etc/nftables.conf` that will be mounted in the container.
 
-When exiting the `text-editor`, the file contents are base64 encoded and
+When exiting the text editor, the file contents are base64 encoded and
 stored it in the configuration.  Saving this to `startup-config` ensures
 that the firewall configuration is retained even when reconfiguring, or
 upgrading, the container image.
@@ -267,7 +267,7 @@ Take care! 🧡
 [1]: /posts/containers/
 [2]: https://github.com/kernelkit/curiOS/
 [3]: https://en.wikipedia.org/wiki/Network_address_translation
-[4]: https://www.kernelkit.org/infix/latest/cli/text-editor/
+[4]: https://www.kernelkit.org/infix/latest/cli/edit/
 [5]: https://wiki.nftables.org/wiki-nftables/index.php/Main_Page
 [6]: /posts/zone-based-firewall/
 [7]: https://www.kernelkit.org/
