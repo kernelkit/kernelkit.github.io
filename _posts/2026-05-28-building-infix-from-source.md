@@ -87,21 +87,17 @@ with the default credentials, user/pass: `admin` / `admin`.  You land in
 a plain shell — this is intentional, it is meant for scripting and
 advanced debugging:
 
-```
-Run the command 'cli' for interactive OAM
+<pre class="cli"><code>Run the command 'cli' for interactive OAM
 
-admin@infix-c0-ff-ee:~$
-```
+admin@infix-c0-ff-ee:~$</code></pre>
 
 Type `cli` to enter the Infix command line interface:
 
-```
-admin@infix-c0-ff-ee:~$ cli
+<pre class="cli"><code>admin@infix-c0-ff-ee:~$ <b>cli</b>
 
 See the 'help' command for an introduction to the system
 
-admin@infix-c0-ff-ee:/>
-```
+admin@infix-c0-ff-ee:/&gt;</code></pre>
 
 To shut the VM down again, you can `poweroff` from inside Infix, or use
 the Qemu escape from the terminal: press **Ctrl-a** then **x**.
@@ -111,26 +107,22 @@ the Qemu escape from the terminal: press **Ctrl-a** then **x**.
 You are now in the *admin-exec* context.  Tap `?` or `Tab` on an empty
 line to see what is available, and use `show` to inspect the system:
 
-```
-admin@infix-c0-ff-ee:/> show interface
+<pre class="cli"><code>admin@infix-c0-ff-ee:/&gt; <b>show interface</b>
 ...
-admin@infix-c0-ff-ee:/> show ip brief
+admin@infix-c0-ff-ee:/&gt; <b>show ip brief</b>
 ...
-admin@infix-c0-ff-ee:/> show running-config
-...
-```
+admin@infix-c0-ff-ee:/&gt; <b>show running-config</b>
+...</code></pre>
 
 To change something, enter the *configure* context with `configure`.
 Changes are staged in a scratch copy and only applied when you type
 `leave` (or thrown away with `abort`):
 
-```
-admin@infix-c0-ff-ee:/> configure
-admin@infix-c0-ff-ee:/config/> edit system
-admin@infix-c0-ff-ee:/config/system/> set hostname lab-switch
-admin@infix-c0-ff-ee:/config/system/> leave
-admin@lab-switch:/>
-```
+<pre class="cli"><code>admin@infix-c0-ff-ee:/&gt; <b>configure</b>
+admin@infix-c0-ff-ee:/config/&gt; <b>edit system</b>
+admin@infix-c0-ff-ee:/config/system/&gt; <b>set hostname lab-switch</b>
+admin@infix-c0-ff-ee:/config/system/&gt; <b>leave</b>
+admin@lab-switch:/&gt;</code></pre>
 
 For a proper tour of the CLI, see the [CLI Introduction][cli] in the
 documentation.
@@ -171,29 +163,23 @@ wired to `virbr0`.
 
 **4. Enable the DHCP client** on `eth0` from the CLI:
 
-```
-admin@lab-switch:/> configure
-admin@lab-switch:/config/> edit interface eth0
-admin@lab-switch:/config/interface/eth0/> set ipv4 dhcp
-admin@lab-switch:/config/interface/eth0/> leave
-```
+<pre class="cli"><code>admin@lab-switch:/&gt; <b>configure</b>
+admin@lab-switch:/config/&gt; <b>edit interface eth0</b>
+admin@lab-switch:/config/interface/eth0/&gt; <b>set ipv4 dhcp</b>
+admin@lab-switch:/config/interface/eth0/&gt; <b>leave</b></code></pre>
 
 **5. Check the result.**  Within a second or two libvirt's DHCP server
 hands out a lease (typically on the `192.168.122.0/24` network), which
 you can confirm in the CLI with:
 
-```
-admin@lab-switch:/> show interface
-...
-```
+<pre class="cli"><code>admin@lab-switch:/&gt; <b>show interface</b>
+...</code></pre>
 
 **6. Reach the outside.**  With an address and a default route in place,
 ping a public host:
 
-```
-admin@lab-switch:/> ping 1.1.1.1
-...
-```
+<pre class="cli"><code>admin@lab-switch:/&gt; <b>ping 1.1.1.1</b>
+...</code></pre>
 
 That round trip goes from Infix, across `virbr0`, through your host's NAT,
 and out to the internet — a virtual switch behaving exactly like the real

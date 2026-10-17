@@ -38,19 +38,15 @@ The factory configuration already follows the Infix releases on GitHub
 and comes with two [schedules][schedule], `nightly` and `weekly`, both
 at 03:00.  So all it takes is pointing the feature at one of them:
 
-```
-admin@example:/> configure system
-admin@example:/config/system/> set software unattended-update schedule weekly
-admin@example:/config/system/> leave
-```
+<pre class="cli"><code>admin@example:/&gt; <b>configure system</b>
+admin@example:/config/system/&gt; <b>set software unattended-update schedule weekly</b>
+admin@example:/config/system/&gt; <b>leave</b></code></pre>
 
 By default the unit installs the new release and then waits for you to
 reboot it.  To have it reboot right away instead, so the whole update
 happens inside the window:
 
-```
-admin@example:/config/system/> set software unattended-update reboot immediate
-```
+<pre class="cli"><code>admin@example:/config/system/&gt; <b>set software unattended-update reboot immediate</b></code></pre>
 
 Until automatic fallback is in place, save that for units you can
 easily reach if a release does not boot.
@@ -76,16 +72,14 @@ later.
 `show software` tells you which schedule drives what, and how the last
 check and install went:
 
-```
-admin@example:/> show software
+<pre class="cli"><code>admin@example:/&gt; <b>show software</b>
 ...
 Software updates
   Source       : https://github.com/kernelkit/infix/releases.atom
   Check        : nightly (daily at 03:00)
   Unattended   : weekly (sunday at 03:00), reboot manual
   Last check   : 2026-09-30T03:00:12Z, latest v26.08.1, up to date
-  Last install : 2026-09-28T03:02:41Z, installed v26.08.1, reboot pending
-```
+  Last install : 2026-09-28T03:02:41Z, installed v26.08.1, reboot pending</code></pre>
 
 The details end up in `/var/log/messages`, and the same status is in
 the operational datastore for anything that polls over NETCONF or

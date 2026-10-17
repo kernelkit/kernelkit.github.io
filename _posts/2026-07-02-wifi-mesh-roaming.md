@@ -77,21 +77,19 @@ Every node needs two keystore entries: one passphrase for the mesh (all
 mesh links use WPA3-SAE) and one for the client AP.  Use the same two
 secrets on all three nodes.
 
-```console
-admin@gw1:/> configure
-admin@gw1:/config/> edit keystore symmetric-key mesh-secret
-admin@gw1:/config/keystore/.../mesh-secret/> set key-format passphrase-key-format
-admin@gw1:/config/keystore/.../mesh-secret/> change cleartext-symmetric-key
+<pre class="cli"><code>admin@gw1:/&gt; <b>configure</b>
+admin@gw1:/config/&gt; <b>edit keystore symmetric-key mesh-secret</b>
+admin@gw1:/config/keystore/.../mesh-secret/&gt; <b>set key-format passphrase-key-format</b>
+admin@gw1:/config/keystore/.../mesh-secret/&gt; <b>change cleartext-symmetric-key</b>
 Passphrase: ************
 Retype passphrase: ************
-admin@gw1:/config/keystore/.../mesh-secret/> end
-admin@gw1:/config/> edit keystore symmetric-key wifi-secret
-admin@gw1:/config/keystore/.../wifi-secret/> set key-format passphrase-key-format
-admin@gw1:/config/keystore/.../wifi-secret/> change cleartext-symmetric-key
+admin@gw1:/config/keystore/.../mesh-secret/&gt; <b>end</b>
+admin@gw1:/config/&gt; <b>edit keystore symmetric-key wifi-secret</b>
+admin@gw1:/config/keystore/.../wifi-secret/&gt; <b>set key-format passphrase-key-format</b>
+admin@gw1:/config/keystore/.../wifi-secret/&gt; <b>change cleartext-symmetric-key</b>
 Passphrase: ************
 Retype passphrase: ************
-admin@gw1:/config/keystore/.../wifi-secret/> leave
-```
+admin@gw1:/config/keystore/.../wifi-secret/&gt; <b>leave</b></code></pre>
 
 ### 2. The radios
 
@@ -99,19 +97,17 @@ radio0 carries the mesh, so it needs a band, a channel, and a real country
 code.  The mesh refuses to start without them.  radio1 carries the AP on
 2.4 GHz.
 
-```console
-admin@gw1:/> configure
-admin@gw1:/config/> edit hardware component radio0 wifi-radio
-admin@gw1:/config/hardware/component/radio0/wifi-radio/> set country-code SE
-admin@gw1:/config/hardware/component/radio0/wifi-radio/> set band 5GHz
-admin@gw1:/config/hardware/component/radio0/wifi-radio/> set channel 36
-admin@gw1:/config/hardware/component/radio0/wifi-radio/> end
-admin@gw1:/config/> edit hardware component radio1 wifi-radio
-admin@gw1:/config/hardware/component/radio1/wifi-radio/> set country-code SE
-admin@gw1:/config/hardware/component/radio1/wifi-radio/> set band 2.4GHz
-admin@gw1:/config/hardware/component/radio1/wifi-radio/> set channel 1
-admin@gw1:/config/hardware/component/radio1/wifi-radio/> leave
-```
+<pre class="cli"><code>admin@gw1:/&gt; <b>configure</b>
+admin@gw1:/config/&gt; <b>edit hardware component radio0 wifi-radio</b>
+admin@gw1:/config/hardware/component/radio0/wifi-radio/&gt; <b>set country-code SE</b>
+admin@gw1:/config/hardware/component/radio0/wifi-radio/&gt; <b>set band 5GHz</b>
+admin@gw1:/config/hardware/component/radio0/wifi-radio/&gt; <b>set channel 36</b>
+admin@gw1:/config/hardware/component/radio0/wifi-radio/&gt; <b>end</b>
+admin@gw1:/config/&gt; <b>edit hardware component radio1 wifi-radio</b>
+admin@gw1:/config/hardware/component/radio1/wifi-radio/&gt; <b>set country-code SE</b>
+admin@gw1:/config/hardware/component/radio1/wifi-radio/&gt; <b>set band 2.4GHz</b>
+admin@gw1:/config/hardware/component/radio1/wifi-radio/&gt; <b>set channel 1</b>
+admin@gw1:/config/hardware/component/radio1/wifi-radio/&gt; <b>leave</b></code></pre>
 
 All three nodes use the same mesh channel (36), since mesh peers must meet
 on one channel, and the same AP channel (1), so a roaming client does not
@@ -124,13 +120,11 @@ mesh equivalent of an SSID: every node that should join uses the same one.
 Leaving `forwarding` at its default (`true`) is what lets the mesh be
 bridged.
 
-```console
-admin@gw1:/config/> edit interface wifi0
-admin@gw1:/config/interface/wifi0/> set wifi radio radio0
-admin@gw1:/config/interface/wifi0/> set wifi mesh-point mesh-id backhaul
-admin@gw1:/config/interface/wifi0/> set wifi mesh-point security secret mesh-secret
-admin@gw1:/config/interface/wifi0/> leave
-```
+<pre class="cli"><code>admin@gw1:/config/&gt; <b>edit interface wifi0</b>
+admin@gw1:/config/interface/wifi0/&gt; <b>set wifi radio radio0</b>
+admin@gw1:/config/interface/wifi0/&gt; <b>set wifi mesh-point mesh-id backhaul</b>
+admin@gw1:/config/interface/wifi0/&gt; <b>set wifi mesh-point security secret mesh-secret</b>
+admin@gw1:/config/interface/wifi0/&gt; <b>leave</b></code></pre>
 
 ### 4. The access point, with roaming
 
@@ -142,18 +136,16 @@ three APs are one roaming network rather than three unrelated ones.
 Using `mobility-domain hash` derives the domain from the SSID, so the three
 APs land on the same domain without anyone copying a hex value around.
 
-```console
-admin@gw1:/config/> edit interface wifi1
-admin@gw1:/config/interface/wifi1/> set wifi radio radio1
-admin@gw1:/config/interface/wifi1/> set wifi access-point ssid campus
-admin@gw1:/config/interface/wifi1/> set wifi access-point security mode wpa2-wpa3-personal
-admin@gw1:/config/interface/wifi1/> set wifi access-point security secret wifi-secret
-admin@gw1:/config/interface/wifi1/> set wifi access-point roaming dot11r
-admin@gw1:/config/interface/wifi1/> set wifi access-point roaming dot11r mobility-domain hash
-admin@gw1:/config/interface/wifi1/> set wifi access-point roaming dot11k
-admin@gw1:/config/interface/wifi1/> set wifi access-point roaming dot11v
-admin@gw1:/config/interface/wifi1/> leave
-```
+<pre class="cli"><code>admin@gw1:/config/&gt; <b>edit interface wifi1</b>
+admin@gw1:/config/interface/wifi1/&gt; <b>set wifi radio radio1</b>
+admin@gw1:/config/interface/wifi1/&gt; <b>set wifi access-point ssid campus</b>
+admin@gw1:/config/interface/wifi1/&gt; <b>set wifi access-point security mode wpa2-wpa3-personal</b>
+admin@gw1:/config/interface/wifi1/&gt; <b>set wifi access-point security secret wifi-secret</b>
+admin@gw1:/config/interface/wifi1/&gt; <b>set wifi access-point roaming dot11r</b>
+admin@gw1:/config/interface/wifi1/&gt; <b>set wifi access-point roaming dot11r mobility-domain hash</b>
+admin@gw1:/config/interface/wifi1/&gt; <b>set wifi access-point roaming dot11k</b>
+admin@gw1:/config/interface/wifi1/&gt; <b>set wifi access-point roaming dot11v</b>
+admin@gw1:/config/interface/wifi1/&gt; <b>leave</b></code></pre>
 
 The three roaming features do different jobs:
 
@@ -171,13 +163,11 @@ The three roaming features do different jobs:
 joins too, which is what gives the other nodes a path to the rest of the
 LAN.
 
-```console
-admin@gw1:/config/> set interface br0
-admin@gw1:/config/> set interface wifi0 bridge-port bridge br0
-admin@gw1:/config/> set interface wifi1 bridge-port bridge br0
-admin@gw1:/config/> set interface eth0 bridge-port bridge br0
-admin@gw1:/config/> leave
-```
+<pre class="cli"><code>admin@gw1:/config/&gt; <b>set interface br0</b>
+admin@gw1:/config/&gt; <b>set interface wifi0 bridge-port bridge br0</b>
+admin@gw1:/config/&gt; <b>set interface wifi1 bridge-port bridge br0</b>
+admin@gw1:/config/&gt; <b>set interface eth0 bridge-port bridge br0</b>
+admin@gw1:/config/&gt; <b>leave</b></code></pre>
 
 gw2 and gw3 are identical except they have no wired uplink, so drop the
 `eth0` line.  Their br0 carries only `wifi0` (mesh) and `wifi1` (AP), and
@@ -187,24 +177,20 @@ they reach the LAN over the mesh.
 
 **Did the mesh form?**  Each node should list the other two as peers:
 
-```console
-admin@gw1:/> show interface wifi0
+<pre class="cli"><code>admin@gw1:/&gt; <b>show interface wifi0</b>
 ...
 mode               : mesh-point
 mesh id            : backhaul
-peers              : 2
-```
+peers              : 2</code></pre>
 
 **Is a client associated, and where?**  The AP lists the clients on it.  As
 a client roams, it disappears from one node's list and shows up on another:
 
-```console
-admin@gw2:/> show interface wifi1
+<pre class="cli"><code>admin@gw2:/&gt; <b>show interface wifi1</b>
 ...
 mode               : access-point
 ssid               : campus
-stations           : 1
-```
+stations           : 1</code></pre>
 
 **Does traffic actually cross the mesh?**  Attach a client to gw3's AP (the
 node with no wire) and reach something on the wired LAN behind gw1.  If

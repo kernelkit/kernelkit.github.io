@@ -64,37 +64,33 @@ container.  We start with the networking, we want a single port as our
 WAN port, connected to the Internet, all the other ports are bridged
 in a LAN configuration.
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit interface eth0
-admin@infix:/config/interface/eth0/> set ipv4 dhcp
-admin@infix:/config/interface/eth0/> end
-admin@infix:/config/> edit interface br0
-admin@infix:/config/interface/br0/> set ipv4 address 192.168.0.1 prefix-length 24
-admin@infix:/config/interface/br0/> end
-admin@infix:/config/> set interface eth1 bridge-port bridge br0
-admin@infix:/config/> set interface eth2 bridge-port bridge br0
-admin@infix:/config/> set interface eth3 bridge-port bridge br0
-admin@infix:/config/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit interface eth0</b>
+admin@infix:/config/interface/eth0/&gt; <b>set ipv4 dhcp</b>
+admin@infix:/config/interface/eth0/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>edit interface br0</b>
+admin@infix:/config/interface/br0/&gt; <b>set ipv4 address 192.168.0.1 prefix-length 24</b>
+admin@infix:/config/interface/br0/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>set interface eth1 bridge-port bridge br0</b>
+admin@infix:/config/&gt; <b>set interface eth2 bridge-port bridge br0</b>
+admin@infix:/config/&gt; <b>set interface eth3 bridge-port bridge br0</b>
+admin@infix:/config/&gt; <b>leave</b></code></pre>
 
 Time for the container configuration.  This time we don't need to mark
 any interfaces as `container-network`.  The key configuration settings
 are `set network host`, which tells Infix to share its network namespace
 with the container, and *privileged* mode.
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit container nftables
-admin@infix:/config/container/nftables/> set image docker://ghcr.io/kernelkit/curios-nftables:24.02.0
-admin@infix:/config/container/nftables/> set network host
-admin@infix:/config/container/nftables/> set privileged true
-admin@infix:/config/container/nftables/> edit mount nftables.conf
-admin@infix:/config/container/nftables/mount/nftables.conf/> set target /etc/nftables.conf
-admin@infix:/config/container/nftables/mount/nftables.conf/> text-editor content
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit container nftables</b>
+admin@infix:/config/container/nftables/&gt; <b>set image docker://ghcr.io/kernelkit/curios-nftables:24.02.0</b>
+admin@infix:/config/container/nftables/&gt; <b>set network host</b>
+admin@infix:/config/container/nftables/&gt; <b>set privileged true</b>
+admin@infix:/config/container/nftables/&gt; <b>edit mount nftables.conf</b>
+admin@infix:/config/container/nftables/mount/nftables.conf/&gt; <b>set target /etc/nftables.conf</b>
+admin@infix:/config/container/nftables/mount/nftables.conf/&gt; <b>text-editor content</b>
 ... interactive editor starts up where you can paste your rules ...
-admin@infix:/config/container/nftables/mount/nftables.conf/> leave
-```
+admin@infix:/config/container/nftables/mount/nftables.conf/&gt; <b>leave</b></code></pre>
 
 Notice the command `text-editor content`, it opens up an interactive
 [text editor][4] where you can paste in the contents of the file
@@ -110,20 +106,17 @@ upgrading, the container image.
 
 We should now have a running container.
 
-```console
-admin@infix:/> show container
-NAME      STATUS         NETWORK  MEMORY (KiB)  CPU%
-nftables  Up 56 seconds  host             2048  0.00
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>show container</b>
+<span class="header">NAME      STATUS         NETWORK  MEMORY (KiB)  CPU%</span>
+nftables  Up 56 seconds  host             2048  0.00</code></pre>
 
 This particular container cannot be connected to, like in the previous
 post, because it is only a plain application container with no embedded
 shell included.  But we can exit to our host's shell and inspect the
 kernel netfilter rules:
 
-```console
-admin@infix:/> exit
-admin@infix:~$ sudo nft list ruleset
+<pre class="cli"><code>admin@infix:/&gt; <b>exit</b>
+admin@infix:~$ <b>sudo nft list ruleset</b>
 table ip filter {
 	chain wan {
 		icmp type echo-request limit rate 5/second accept
@@ -155,8 +148,7 @@ table ip nat {
 		type nat hook postrouting priority srcnat; policy accept;
 		ip saddr 192.168.0.0/24 oif "eth0" masquerade
 	}
-}
-```
+}</code></pre>
 
 > Here we run the `nft` program shipped with Infix.  It is of course
 > possible to run the `nft` binary from the container, albeit not as
@@ -256,9 +248,7 @@ table ip nat {
 That concludes the third post about containers in Infix.  As usual,
 remember to
 
-```console
-admin@infix:/> copy running-config startup-config
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>copy running-config startup-config</b></code></pre>
 
 Take care! 🧡
 

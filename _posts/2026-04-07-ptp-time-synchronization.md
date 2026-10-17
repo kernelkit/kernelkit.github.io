@@ -29,8 +29,7 @@ where OS scheduling adds jitter in the hundreds of microseconds.
 Before we start, from the UNIX shell, verify that your interface supports
 hardware timestamps:
 
-```console
-admin@example:~$ sudo ethtool -T eth0
+<pre class="cli"><code>admin@example:~$ <b>sudo ethtool -T eth0</b>
 Time stamping parameters for eth0:
 Capabilities:
         hardware-transmit     (SOF_TIMESTAMPING_TX_HARDWARE)
@@ -41,8 +40,7 @@ Capabilities:
 PTP Hardware Clock: 0
 Hardware Transmit Timestamp Modes:
         off                   (HWTSTAMP_TX_OFF)
-        on                    (HWTSTAMP_TX_ON)
-```
+        on                    (HWTSTAMP_TX_ON)</code></pre>
 
 You want `hardware-transmit` and `hardware-receive` in the output.  If you
 only see the `software-*` variants, PTP will still run and the state machines
@@ -81,31 +79,27 @@ with `time-receiver-only`._
 
 Configure the **time-receiver** first.
 
-```console
-admin@receiver:/> configure
-admin@receiver:/config/> edit ptp instance 0
-admin@receiver:/config/ptp/instance/0/> set default-ds domain-number 0
-admin@receiver:/config/ptp/instance/0/> set default-ds time-receiver-only true
-admin@receiver:/config/ptp/instance/0/> edit port 1
-admin@receiver:/config/ptp/…/0/port/1/> set underlying-interface eth0
-admin@receiver:/config/ptp/…/0/port/1/> leave
-```
+<pre class="cli"><code>admin@receiver:/&gt; <b>configure</b>
+admin@receiver:/config/&gt; <b>edit ptp instance 0</b>
+admin@receiver:/config/ptp/instance/0/&gt; <b>set default-ds domain-number 0</b>
+admin@receiver:/config/ptp/instance/0/&gt; <b>set default-ds time-receiver-only true</b>
+admin@receiver:/config/ptp/instance/0/&gt; <b>edit port 1</b>
+admin@receiver:/config/ptp/…/0/port/1/&gt; <b>set underlying-interface eth0</b>
+admin@receiver:/config/ptp/…/0/port/1/&gt; <b>leave</b></code></pre>
 
 ### Ordinary Clock — Grandmaster
 
 On the **grandmaster** side, lower `priority1` values win the clock election.
 Setting it to `1` ensures this device always wins when reachable.
 
-```console
-admin@grandmaster:/> configure
-admin@grandmaster:/config/> edit ptp instance 0
-admin@grandmaster:/config/ptp/instance/0/> set default-ds domain-number 0
-admin@grandmaster:/config/ptp/instance/0/> set default-ds priority1 1
-admin@grandmaster:/config/ptp/instance/0/> set default-ds priority2 1
-admin@grandmaster:/config/ptp/instance/0/> edit port 1
-admin@grandmaster:/config/ptp/…/0/port/1/> set underlying-interface eth0
-admin@grandmaster:/config/ptp/…/0/port/1/> leave
-```
+<pre class="cli"><code>admin@grandmaster:/&gt; <b>configure</b>
+admin@grandmaster:/config/&gt; <b>edit ptp instance 0</b>
+admin@grandmaster:/config/ptp/instance/0/&gt; <b>set default-ds domain-number 0</b>
+admin@grandmaster:/config/ptp/instance/0/&gt; <b>set default-ds priority1 1</b>
+admin@grandmaster:/config/ptp/instance/0/&gt; <b>set default-ds priority2 1</b>
+admin@grandmaster:/config/ptp/instance/0/&gt; <b>edit port 1</b>
+admin@grandmaster:/config/ptp/…/0/port/1/&gt; <b>set underlying-interface eth0</b>
+admin@grandmaster:/config/ptp/…/0/port/1/&gt; <b>leave</b></code></pre>
 
 Connect `eth0` on both boards with a direct cable or through a PTP-transparent
 switch, then give it a few seconds to converge.
@@ -114,8 +108,7 @@ switch, then give it a few seconds to converge.
 
 On the time-receiver, `show ptp` displays the live offset and path delay:
 
-```console
-admin@receiver:/> show ptp
+<pre class="cli"><code>admin@receiver:/&gt; <b>show ptp</b>
 PTP Instance 0                          Ordinary Clock · domain 0
 ────────────────────────────────────────────────────────────────────
   Clock identity          : AA-BB-CC-FF-FE-11-22-33
@@ -142,8 +135,7 @@ PORT  INTERFACE          STATE                DELAY  LINK DELAY (ns)
 ────────────────────────────────────────────────────────────────────
 Message Statistics  (▼ rx  ▲ tx)
 PORT  INTERFACE             SYNC ▼  SYNC ▲  ANN ▼  ANN ▲  PD ▼  PD ▲
-   1  eth0                      42       0     15      0     0     0
-```
+   1  eth0                      42       0     15      0     0     0</code></pre>
 
 Port state is colour-coded in the live output — green for `time-transmitter`
 and `time-receiver`, yellow for transient states, red for faults.
@@ -159,15 +151,13 @@ For TSN networks, swap the profile on both devices to `ieee802-dot1as`.  The
 profile sets Layer 2 transport and P2P delay measurement implicitly, so no
 per-port configuration is needed.  Time-receiver side:
 
-```console
-admin@receiver:/config/> edit ptp instance 0
-admin@receiver:/config/ptp/instance/0/> set default-ds profile ieee802-dot1as
-admin@receiver:/config/ptp/instance/0/> set default-ds domain-number 0
-admin@receiver:/config/ptp/instance/0/> set default-ds time-receiver-only true
-admin@receiver:/config/ptp/instance/0/> edit port 1
-admin@receiver:/config/ptp/…/0/port/1/> set underlying-interface eth0
-admin@receiver:/config/ptp/…/0/port/1/> leave
-```
+<pre class="cli"><code>admin@receiver:/config/&gt; <b>edit ptp instance 0</b>
+admin@receiver:/config/ptp/instance/0/&gt; <b>set default-ds profile ieee802-dot1as</b>
+admin@receiver:/config/ptp/instance/0/&gt; <b>set default-ds domain-number 0</b>
+admin@receiver:/config/ptp/instance/0/&gt; <b>set default-ds time-receiver-only true</b>
+admin@receiver:/config/ptp/instance/0/&gt; <b>edit port 1</b>
+admin@receiver:/config/ptp/…/0/port/1/&gt; <b>set underlying-interface eth0</b>
+admin@receiver:/config/ptp/…/0/port/1/&gt; <b>leave</b></code></pre>
 
 Set `profile ieee802-dot1as` with `priority1 1` on the grandmaster side the
 same way as the IEEE 1588 example above.
@@ -176,9 +166,7 @@ same way as the IEEE 1588 example above.
 
 Remember to save your changes for next boot:
 
-```console
-admin@example:/> copy running-config startup-config
-```
+<pre class="cli"><code>admin@example:/&gt; <b>copy running-config startup-config</b></code></pre>
 
 > For boundary clocks, transparent clocks, multiple simultaneous instances,
 > port interval tuning, and monitoring with Wireshark, see the

@@ -33,13 +33,11 @@ post is the first in a series that aims to show this.
 All configuration and administration of networking and containers is
 done through the CLI:
 
-```console
-admin@infix:~$ cli
+<pre class="cli"><code>admin@infix:~$ <b>cli</b>
 
 See the 'help' command for an introduction to the system
 
-admin@infix:/>
-```
+admin@infix:/&gt;</code></pre>
 
 Notice the slight change in the prompt.  Return to the Bash shell using
 the `exit` command, or Ctrl-D, from the "admin-exec" top level of the
@@ -68,12 +66,10 @@ to the container as a regular interface.
 
 Here's how you create a container bridge:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit interface docker0
-admin@infix:/config/interface/docker0/> set container-network
-admin@infix:/config/interface/docker0/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit interface docker0</b>
+admin@infix:/config/interface/docker0/&gt; <b>set container-network</b>
+admin@infix:/config/interface/docker0/&gt; <b>leave</b></code></pre>
 
 ## Web Server Container
 
@@ -84,16 +80,14 @@ be using [docker://nginx:alpine](https://hub.docker.com/_/nginx).  It's
 a relatively small container with the Nginx web server built on top of
 the Alpine Linux image.
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit container web
-admin@infix:/config/container/web/> set image docker://nginx:alpine
-admin@infix:/config/container/web/> set volume cache target /var/cache
-admin@infix:/config/container/web/> edit network
-admin@infix:/config/container/web/network/> set interface docker0
-admin@infix:/config/container/web/network/> set publish 8080:80
-admin@infix:/config/container/web/network/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit container web</b>
+admin@infix:/config/container/web/&gt; <b>set image docker://nginx:alpine</b>
+admin@infix:/config/container/web/&gt; <b>set volume cache target /var/cache</b>
+admin@infix:/config/container/web/&gt; <b>edit network</b>
+admin@infix:/config/container/web/network/&gt; <b>set interface docker0</b>
+admin@infix:/config/container/web/network/&gt; <b>set publish 8080:80</b>
+admin@infix:/config/container/web/network/&gt; <b>leave</b></code></pre>
 
 > Infix does not create a writable layer by default, so you need to
 > explicitly add *volumes* for directories your container needs.
@@ -102,17 +96,13 @@ admin@infix:/config/container/web/network/> leave
 Issuing the command `leave` queues a job to download the image and
 create a container in the background.  To see the progress:
 
-```console
-admin@infix:/> show log container
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>show log container</b></code></pre>
 
 or just poll the status command:
 
-```console
-admin@infix:/> show container
-NAME  STATUS        NETWORK  MEMORY (KiB)  CPU%
-web   Up 2 minutes  docker0          6142  0.01
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>show container</b>
+<span class="header">NAME  STATUS        NETWORK  MEMORY (KiB)  CPU%</span>
+web   Up 2 minutes  docker0          6142  0.01</code></pre>
 
 You should now be able to access the web server on port 8080 of the
 host's IP address.
@@ -136,26 +126,22 @@ with UNIX systems.
 
 Here's how to add a volume to your container:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit container web
-admin@infix:/config/container/web/> edit volume content
-admin@infix:/config/container/web/volume/content/> set target /usr/share/nginx/html
-admin@infix:/config/container/web/volume/content/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit container web</b>
+admin@infix:/config/container/web/&gt; <b>edit volume content</b>
+admin@infix:/config/container/web/volume/content/&gt; <b>set target /usr/share/nginx/html</b>
+admin@infix:/config/container/web/volume/content/&gt; <b>leave</b></code></pre>
 
 Named volumes have the downside of being opaque to the host, so the
 easiest is to upload the content using `scp` or editing it directly
 in the container:
 
-```console
-admin@infix:/> container shell web
+<pre class="cli"><code>admin@infix:/&gt; <b>container shell web</b>
 d95ce9f7674d:/# vi /usr/share/nginx/html/
 50x.html    index.html
 d95ce9f7674d:/# vi /usr/share/nginx/html/index.html
-... edit, save & exit from vi ...
-d95ce9f7674d:/#
-```
+... edit, save &amp; exit from vi ...
+d95ce9f7674d:/#</code></pre>
 
 ## Container Content in Device Configuration
 
@@ -167,13 +153,11 @@ This feature is perfectly suited for container applications that need a
 specific site setup.  For example a configuration file.  Here we use the
 same container image to bundle an `index.html` file:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit container web
-admin@infix:/config/container/web/> edit mount index.html
-admin@infix:/config/container/web/mount/index.html/> set target /usr/share/nginx/html/index.html
-admin@infix:/config/container/web/mount/index.html/> text-editor content
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit container web</b>
+admin@infix:/config/container/web/&gt; <b>edit mount index.html</b>
+admin@infix:/config/container/web/mount/index.html/&gt; <b>set target /usr/share/nginx/html/index.html</b>
+admin@infix:/config/container/web/mount/index.html/&gt; <b>text-editor content</b></code></pre>
 
 The `content` setting is an alternative to `source` for file mounts
 which allows providing the contents through the device's configuration.
@@ -217,9 +201,7 @@ hold down Ctrl while tapping the X and C keys).
 
 Leave configuration context to activate your changes:
 
-```console
-admin@infix:/config/container/web/mount/index.html/> leave
-```
+<pre class="cli"><code>admin@infix:/config/container/web/mount/index.html/&gt; <b>leave</b></code></pre>
 
 Reload your browser to see the change.
 
@@ -228,9 +210,7 @@ Reload your browser to see the change.
 That's the end of the first post about containers in Infix.  Remember to
 save your changes for next boot:
 
-```console
-admin@infix:/> copy running-config startup-config
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>copy running-config startup-config</b></code></pre>
 
 Take care! 🧡
 

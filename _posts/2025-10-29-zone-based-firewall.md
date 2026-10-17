@@ -41,33 +41,27 @@ Let's set up a basic home router with two zones: a trusted LAN and an
 untrusted WAN.  We'll start by creating the zones and assigning interfaces
 to them.
 
-```console
-admin@router:/> configure
-admin@router:/config/> edit firewall
-admin@router:/config/firewall/> set zone lan action accept
-admin@router:/config/firewall/> set zone lan interface eth0
-admin@router:/config/firewall/> set zone wan action drop
-admin@router:/config/firewall/> set zone wan interface eth1
-```
+<pre class="cli"><code>admin@router:/&gt; <b>configure</b>
+admin@router:/config/&gt; <b>edit firewall</b>
+admin@router:/config/firewall/&gt; <b>set zone lan action accept</b>
+admin@router:/config/firewall/&gt; <b>set zone lan interface eth0</b>
+admin@router:/config/firewall/&gt; <b>set zone wan action drop</b>
+admin@router:/config/firewall/&gt; <b>set zone wan interface eth1</b></code></pre>
 
 At this point, the LAN zone allows all traffic to the host, while the WAN
 zone drops everything by default. However, we need to allow certain services
 from the WAN side, like DHCPv6 for address assignment:
 
-```console
-admin@router:/config/firewall/> set zone wan service dhcpv6-client
-```
+<pre class="cli"><code>admin@router:/config/firewall/&gt; <b>set zone wan service dhcpv6-client</b></code></pre>
 
 Now we need a policy to allow LAN devices to access the Internet through
 the WAN interface.  Policies control traffic flow between zones:
 
-```console
-admin@router:/config/firewall/> set policy lan-wan ingress lan
-admin@router:/config/firewall/> set policy lan-wan egress wan
-admin@router:/config/firewall/> set policy lan-wan action accept
-admin@router:/config/firewall/> set policy lan-wan masquerade true
-admin@router:/config/firewall/> leave
-```
+<pre class="cli"><code>admin@router:/config/firewall/&gt; <b>set policy lan-wan ingress lan</b>
+admin@router:/config/firewall/&gt; <b>set policy lan-wan egress wan</b>
+admin@router:/config/firewall/&gt; <b>set policy lan-wan action accept</b>
+admin@router:/config/firewall/&gt; <b>set policy lan-wan masquerade true</b>
+admin@router:/config/firewall/&gt; <b>leave</b></code></pre>
 
 The `masquerade` option enables source NAT, replacing the source IP address
 of LAN clients with the router's WAN address.
@@ -102,9 +96,7 @@ prevents accidentally leaving an interface unprotected.
 
 To set a zone as the default:
 
-```console
-admin@router:/config/firewall/> set zone wan default true
-```
+<pre class="cli"><code>admin@router:/config/firewall/&gt; <b>set zone wan default true</b></code></pre>
 
 ### Beyond the Basics
 

@@ -20,9 +20,8 @@ ports, named `eth0` and `eth1`.
 _**Figure 1**: `eth0` faces the office LAN, `eth1` a PC.  Both become
 ports of `br0`, which picks up a management address over DHCP._
 
-```console
-admin@example:/> show interface
-⚑ INTERFACE       PROTOCOL      STATE       DATA
+<pre class="cli"><code>admin@example:/&gt; <b>show interface</b>
+<span class="header">⚑ INTERFACE       PROTOCOL      STATE       DATA                                 </span>
   lo              loopback      UP
                   ipv4                      127.0.0.1/8 (static)
                   ipv6                      ::1/128 (static)
@@ -31,8 +30,7 @@ admin@example:/> show interface
                   ipv6                      fe80::2c0:ffff:feee:1/64 (link-layer)
   eth1            1000baseT     UP          duplex: full
                   ethernet                  00:c0:ff:ee:00:02
-                  ipv6                      fe80::2c0:ffff:feee:2/64 (link-layer)
-```
+                  ipv6                      fe80::2c0:ffff:feee:2/64 (link-layer)</code></pre>
 
 Each interface is listed as a stack of protocol rows.  For a port with
 link, the top row names the IEEE PMD type and the negotiated duplex,
@@ -41,12 +39,10 @@ with the MAC address on the `ethernet` row below it.
 Creating a bridge and setting our interfaces as bridge ports is a
 straight forward operation.
 
-```console
-admin@example:/> configure
-admin@example:/config/> set interface br0
-admin@example:/config/> set interface eth0 bridge-port bridge br0
-admin@example:/config/> set interface eth1 bridge-port bridge br0
-```
+<pre class="cli"><code>admin@example:/&gt; <b>configure</b>
+admin@example:/config/&gt; <b>set interface br0</b>
+admin@example:/config/&gt; <b>set interface eth0 bridge-port bridge br0</b>
+admin@example:/config/&gt; <b>set interface eth1 bridge-port bridge br0</b></code></pre>
 
 > Because it does not make much sense to have IP addresses on bridge
 > ports, Infix takes care to disable IPv6 SLAAC on them automatically
@@ -57,8 +53,7 @@ We can use the `diff` command to inspect the changes.  Notice how the
 system has automatically set the bridge interface type for us.  This
 is a feature of the CLI and not available over NETCONF or RESTCONF.
 
-```diff
-admin@example:/config/> diff
+<pre class="cli"><code>admin@example:/config/&gt; <b>diff</b>
 interfaces {
 +  interface br0 {
 +    type bridge;
@@ -73,24 +68,20 @@ interfaces {
 +      bridge br0;
 +    }
   }
-}
-```
+}</code></pre>
 
 Now we enable a DHCP client on `br0` and activate the changes.
 
-```console
-admin@example:/config/> edit interface br0
-admin@example:/config/interface/br0/> set ipv4 dhcp
-admin@example:/config/interface/br0/> leave
-admin@example:/>
-```
+<pre class="cli"><code>admin@example:/config/&gt; <b>edit interface br0</b>
+admin@example:/config/interface/br0/&gt; <b>set ipv4 dhcp</b>
+admin@example:/config/interface/br0/&gt; <b>leave</b>
+admin@example:/&gt;</code></pre>
 
 Back in admin-exec mode we inspect the changes and notice the bridge has
 already got a DHCP lease from the server.
 
-```console
-admin@example:/> show interface
-⚑ INTERFACE       PROTOCOL      STATE       DATA
+<pre class="cli"><code>admin@example:/&gt; <b>show interface</b>
+<span class="header">⚑ INTERFACE       PROTOCOL      STATE       DATA                                 </span>
   lo              loopback      UP
                   ipv4                      127.0.0.1/8 (static)
                   ipv6                      ::1/128 (static)
@@ -101,17 +92,14 @@ admin@example:/> show interface
   ├ eth0          bridge        FORWARDING
   └ eth1          bridge        FORWARDING
 
-admin@example:/>
-```
+admin@example:/&gt;</code></pre>
 
 The ports are now listed beneath `br0`, each in the `FORWARDING` state,
 and the addresses have moved from the ports to the bridge.
 
 Remember to save your changes for next boot:
 
-```console
-admin@example:/> copy running-config startup-config
-```
+<pre class="cli"><code>admin@example:/&gt; <b>copy running-config startup-config</b></code></pre>
 
 > For more information about networking in Infix, see the [official
 > documentation][0].

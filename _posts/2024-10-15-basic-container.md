@@ -54,37 +54,33 @@ container.
 Notice the *DHCP client* on interface `e1`, it is required since we need
 Internet access to download the container image below.
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit interface e1
-admin@infix:/config/interface/e1/> set ipv4 dhcp
-admin@infix:/config/interface/e1/> end
-admin@infix:/config/> edit interface veth0a
-admin@infix:/config/interface/veth0a/> set veth peer veth0b
-admin@infix:/config/interface/veth0a/> set ipv4 address 192.168.0.1 prefix-length 30
-admin@infix:/config/interface/veth0a/> end
-admin@infix:/config/> edit interface veth0b
-admin@infix:/config/interface/veth0b/> set ipv4 address 192.168.0.2 prefix-length 30
-admin@infix:/config/interface/veth0b/> set container-network
-admin@infix:/config/interface/veth0b/> set container-network route 0.0.0.0/0 gateway 192.168.0.1
-admin@infix:/config/interface/veth0b/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit interface e1</b>
+admin@infix:/config/interface/e1/&gt; <b>set ipv4 dhcp</b>
+admin@infix:/config/interface/e1/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>edit interface veth0a</b>
+admin@infix:/config/interface/veth0a/&gt; <b>set veth peer veth0b</b>
+admin@infix:/config/interface/veth0a/&gt; <b>set ipv4 address 192.168.0.1 prefix-length 30</b>
+admin@infix:/config/interface/veth0a/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>edit interface veth0b</b>
+admin@infix:/config/interface/veth0b/&gt; <b>set ipv4 address 192.168.0.2 prefix-length 30</b>
+admin@infix:/config/interface/veth0b/&gt; <b>set container-network</b>
+admin@infix:/config/interface/veth0b/&gt; <b>set container-network route 0.0.0.0/0 gateway 192.168.0.1</b>
+admin@infix:/config/interface/veth0b/&gt; <b>leave</b></code></pre>
 
 Time for the container configuration, as usual we employ [curiOS][2]
 containers.
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit container system
-admin@infix:/config/container/system/> set image docker://ghcr.io/kernelkit/curios:latest
-admin@infix:/config/container/system/> set hostname sys101
-admin@infix:/config/container/system/> set privileged true
-admin@infix:/config/container/system/> set network interface veth0b
-admin@infix:/config/container/system/> set network dns 192.168.0.1
-admin@infix:/config/container/system/> set volume etc target /etc
-admin@infix:/config/container/system/> set volume var target /var
-admin@infix:/config/container/system/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit container system</b>
+admin@infix:/config/container/system/&gt; <b>set image docker://ghcr.io/kernelkit/curios:latest</b>
+admin@infix:/config/container/system/&gt; <b>set hostname sys101</b>
+admin@infix:/config/container/system/&gt; <b>set privileged true</b>
+admin@infix:/config/container/system/&gt; <b>set network interface veth0b</b>
+admin@infix:/config/container/system/&gt; <b>set network dns 192.168.0.1</b>
+admin@infix:/config/container/system/&gt; <b>set volume etc target /etc</b>
+admin@infix:/config/container/system/&gt; <b>set volume var target /var</b>
+admin@infix:/config/container/system/&gt; <b>leave</b></code></pre>
 
 > We don't have to `leave` after each of the above sections, we could
 > just as easily kept going all through the new configuration.
@@ -95,47 +91,41 @@ admin@infix:/config/container/system/> leave
 To route traffic between the container and the WAN we first enable IP
 forwarding on both ends of the VETH pair:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit interface veth0a
-admin@infix:/config/interface/veth0a/> set ipv4 forwarding
-admin@infix:/config/interface/veth0a/> end
-admin@infix:/config/> edit interface veth0b
-admin@infix:/config/interface/veth0b/> set ipv4 forwarding
-admin@infix:/config/interface/veth0b/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit interface veth0a</b>
+admin@infix:/config/interface/veth0a/&gt; <b>set ipv4 forwarding</b>
+admin@infix:/config/interface/veth0a/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>edit interface veth0b</b>
+admin@infix:/config/interface/veth0b/&gt; <b>set ipv4 forwarding</b>
+admin@infix:/config/interface/veth0b/&gt; <b>leave</b></code></pre>
 
 Next, a [zone-based firewall][8] to protect the WAN port and let the
 container reach the Internet via masquerade (NAT).  The `containers`
 zone covers the VETH subnet and the policy routes traffic from there out
 through the `public` zone on `e1`:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit firewall
-admin@infix:/config/firewall/> set default public
-admin@infix:/config/firewall/> set zone public action reject
-admin@infix:/config/firewall/> set zone public interface e1
-admin@infix:/config/firewall/> set zone public service ssh
-admin@infix:/config/firewall/> set zone containers action accept
-admin@infix:/config/firewall/> set zone containers network 192.168.0.0/30
-admin@infix:/config/firewall/> set policy container-access ingress containers
-admin@infix:/config/firewall/> set policy container-access egress public
-admin@infix:/config/firewall/> set policy container-access action accept
-admin@infix:/config/firewall/> set policy container-access masquerade true
-admin@infix:/config/firewall/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit firewall</b>
+admin@infix:/config/firewall/&gt; <b>set default public</b>
+admin@infix:/config/firewall/&gt; <b>set zone public action reject</b>
+admin@infix:/config/firewall/&gt; <b>set zone public interface e1</b>
+admin@infix:/config/firewall/&gt; <b>set zone public service ssh</b>
+admin@infix:/config/firewall/&gt; <b>set zone containers action accept</b>
+admin@infix:/config/firewall/&gt; <b>set zone containers network 192.168.0.0/30</b>
+admin@infix:/config/firewall/&gt; <b>set policy container-access ingress containers</b>
+admin@infix:/config/firewall/&gt; <b>set policy container-access egress public</b>
+admin@infix:/config/firewall/&gt; <b>set policy container-access action accept</b>
+admin@infix:/config/firewall/&gt; <b>set policy container-access masquerade true</b>
+admin@infix:/config/firewall/&gt; <b>leave</b></code></pre>
 
 If the container runs a service you want reachable from the WAN, add a
 port-forward rule to the public zone.  Here we forward TCP port 8080 on
 the WAN to port 80 in the container:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit firewall
-admin@infix:/config/firewall/> set zone public port-forward 8080 proto tcp to addr 192.168.0.2 port 80
-admin@infix:/config/firewall/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit firewall</b>
+admin@infix:/config/firewall/&gt; <b>set zone public port-forward 8080 proto tcp to addr 192.168.0.2 port 80</b>
+admin@infix:/config/firewall/&gt; <b>leave</b></code></pre>
 
 > Port forwarding only works when the destination zone is defined using
 > `network`, not `interface`.  If the `containers` zone were set with
@@ -147,17 +137,14 @@ admin@infix:/config/firewall/> leave
 
 We should now have a running container.
 
-```console
-admin@infix:/> show container
-NAME    STATUS        NETWORK  MEMORY (KiB)  CPU%
-system  Up 6 seconds  veth0b           3960  0.00
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>show container</b>
+<span class="header">NAME    STATUS        NETWORK  MEMORY (KiB)  CPU%</span>
+system  Up 6 seconds  veth0b           3960  0.00</code></pre>
 
 We can enter the container using:
 
-```console
-admin@infix:/> container shell system
-root@sys101:/# ifconfig
+<pre class="cli"><code>admin@infix:/&gt; <b>container shell system</b>
+root@sys101:/# <b>ifconfig</b>
 lo        Link encap:Local Loopback
           inet addr:127.0.0.1  Mask:255.0.0.0
           inet6 addr: ::1/128 Scope:Host
@@ -176,18 +163,15 @@ eth0      Link encap:Ethernet  HWaddr D2:A3:70:0D:50:00
           collisions:0 txqueuelen:1000
           RX bytes:12867 (12.5 KiB)  TX bytes:3064 (2.9 KiB)
 
-root@sys101:~$ exit
-admin@infix:/>
-```
+root@sys101:~$ <b>exit</b>
+admin@infix:/&gt;</code></pre>
 
 ## Fin
 
 That concludes the fourth post about containers in Infix.  As usual,
 remember to
 
-```console
-admin@infix:/> copy running-config startup-config
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>copy running-config startup-config</b></code></pre>
 
 Take care! 🧡
 

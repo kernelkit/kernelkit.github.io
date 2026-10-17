@@ -89,22 +89,18 @@ To change it, login to the unit (console or SSH), and issue `cli`
 command to enter [Infix CLI][2].  Then change the hostname as shown
 below.
 
-```console
-admin@infix-04-00-00:~$ 
-admin@infix-04-00-00:~$ cli
-admin@infix-04-00-00:/> configure 
-admin@infix-04-00-00:/config/> set system hostname R1
-admin@infix-04-00-00:/config/>
-```
+<pre class="cli"><code>admin@infix-04-00-00:~$ 
+admin@infix-04-00-00:~$ <b>cli</b>
+admin@infix-04-00-00:/&gt; <b>configure </b>
+admin@infix-04-00-00:/config/&gt; <b>set system hostname R1</b>
+admin@infix-04-00-00:/config/&gt;</code></pre>
 
 Apply changes by leaving the configuration context with `leave`, then
 store changes to the startup configuration.
 
-```console
-admin@infix-04-00-00:/config/> leave
-admin@R1:/> copy running-config startup-config 
-admin@R1:/>
-```
+<pre class="cli"><code>admin@infix-04-00-00:/config/&gt; <b>leave</b>
+admin@R1:/&gt; <b>copy running-config startup-config </b>
+admin@R1:/&gt;</code></pre>
 
 > Remember to copy the running configuration to the startup
 > configuration to make the changes permanent. `copy running-config
@@ -116,18 +112,15 @@ Below we show how to set the address on R1 using the [Infix CLI][2].
 As the unit is intended to work as IPv4 router, ensure IP forwarding
 is enabled on the Ethernet interface(s).
 
-```console
-admin@R1:/> 
-admin@R1:/> configure
-admin@R1:/config/> set interface lo ipv4 address 10.1.1.1 prefix-length 32
-admin@R1:/config/> set interface eth0 ipv4 address 10.1.1.1 prefix-length 32
-admin@R1:/config/> set interface eth0 ipv4 forwarding
-```
+<pre class="cli"><code>admin@R1:/&gt; 
+admin@R1:/&gt; <b>configure</b>
+admin@R1:/config/&gt; <b>set interface lo ipv4 address 10.1.1.1 prefix-length 32</b>
+admin@R1:/config/&gt; <b>set interface eth0 ipv4 address 10.1.1.1 prefix-length 32</b>
+admin@R1:/config/&gt; <b>set interface eth0 ipv4 forwarding</b></code></pre>
 
 To view the changes done so far, use the `diff` command.
 
-```diff
-admin@R1:/config/> diff
+<pre class="cli"><code>admin@R1:/config/&gt; <b>diff</b>
 interfaces {
   interface eth0 {
 +    ipv4 {
@@ -144,21 +137,17 @@ interfaces {
 +      }
     }
   }
-}
-```
+}</code></pre>
 
 Then issue `leave` to activate the changes:
 
-```console
-admin@R1:/config/> leave
-admin@R1:/>
-```
+<pre class="cli"><code>admin@R1:/config/&gt; <b>leave</b>
+admin@R1:/&gt;</code></pre>
 
 Status of IP address assignment can be viewed using the `show interface` command.
 
-```console
-admin@R1:/> show interface
-⚑ INTERFACE       PROTOCOL      STATE       DATA
+<pre class="cli"><code>admin@R1:/&gt; <b>show interface</b>
+<span class="header">⚑ INTERFACE       PROTOCOL      STATE       DATA                                 </span>
   lo              loopback      UP
                   ipv4                      127.0.0.1/8 (static)
                   ipv4                      10.1.1.1/32 (static)
@@ -175,8 +164,7 @@ admin@R1:/> show interface
   eth7            ethernet      DOWN        0c:ec:d1:04:00:07
   eth8            ethernet      DOWN        0c:ec:d1:04:00:08
   eth9            ethernet      DOWN        0c:ec:d1:04:00:09
-admin@R1:/>
-```
+admin@R1:/&gt;</code></pre>
 
 The `⇅` marker in the first column flags interfaces with IP
 forwarding enabled, here `eth0`.
@@ -191,18 +179,15 @@ local significance only; here the instance is called
 are done within OSPF area context (here the backbone area 0.0.0.0 is
 used).
 
-```console
-admin@R1:/config/> edit routing control-plane-protocol ospfv2 name default
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> set ospf area 0.0.0.0 interface lo enabled
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> set ospf area 0.0.0.0 interface eth0 enabled
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> set ospf area 0.0.0.0 interface eth0 interface-type point-to-point 
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/>
-```
+<pre class="cli"><code>admin@R1:/config/&gt; <b>edit routing control-plane-protocol ospfv2 name default</b>
+admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/&gt; <b>set ospf area 0.0.0.0 interface lo enabled</b>
+admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/&gt; <b>set ospf area 0.0.0.0 interface eth0 enabled</b>
+admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/&gt; <b>set ospf area 0.0.0.0 interface eth0 interface-type point-to-point </b>
+admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/&gt;</code></pre>
 
 Changes can be shown with the `diff` command.
 
-```diff
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> diff
+<pre class="cli"><code>admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/&gt; <b>diff</b>
 +routing {
 +  control-plane-protocols {
 +    control-plane-protocol ospfv2 name default {
@@ -223,22 +208,18 @@ admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> diff
 +      }
 +    }
 +  }
-+}
-```
++}</code></pre>
 
 Then issue `leave` to activate the changes:
 
-```console
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> leave
-admin@R1:/>
-```
+<pre class="cli"><code>admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/&gt; <b>leave</b>
+admin@R1:/&gt;</code></pre>
 
 When the above configuration is done on R1, and correspondingly on R2
 with address 10.1.1.2 ([Figure 2](#fig2)), routing information will be
 exchanged using OSPF.
 
-```console
-admin@R1:/> show ip ospf route
+<pre class="cli"><code>admin@R1:/&gt; <b>show ip ospf route</b>
 ============ OSPF network routing table ============
 N    10.1.1.1/32           [0] area: 0.0.0.0
                            directly attached to lo
@@ -249,8 +230,7 @@ N    10.1.1.2/32           [10] area: 0.0.0.0
 
 ============ OSPF external routing table ===========
 
-admin@R1:/>
-```
+admin@R1:/&gt;</code></pre>
 
 ## Larger setup
 
@@ -265,24 +245,19 @@ config as eth0 got before).
 
 First setting IPv4 address and enable forwarding
 
-```console
-admin@R1:/> configure 
-admin@R1:/config/> set interface eth1 ipv4 address 10.1.1.1 prefix-length 32
-admin@R1:/config/> set interface eth1 ipv4 forwarding
-```
+<pre class="cli"><code>admin@R1:/&gt; <b>configure </b>
+admin@R1:/config/&gt; <b>set interface eth1 ipv4 address 10.1.1.1 prefix-length 32</b>
+admin@R1:/config/&gt; <b>set interface eth1 ipv4 forwarding</b></code></pre>
 
 Then OSPF configuration
 
-```console
-admin@R1:/config/> edit routing control-plane-protocol ospfv2 name default
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> set ospf area 0.0.0.0 interface eth1 enabled
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> set ospf area 0.0.0.0 interface eth1 interface-type point-to-point
-```
+<pre class="cli"><code>admin@R1:/config/&gt; <b>edit routing control-plane-protocol ospfv2 name default</b>
+admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/&gt; <b>set ospf area 0.0.0.0 interface eth1 enabled</b>
+admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/&gt; <b>set ospf area 0.0.0.0 interface eth1 interface-type point-to-point</b></code></pre>
 
 OSPF configuration can be inspected
 
-```console
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> show
+<pre class="cli"><code>admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/&gt; <b>show</b>
 ospf {
   areas {
     area 0.0.0.0 {
@@ -302,16 +277,14 @@ ospf {
     }
   }
 }
-admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/> leave
-admin@R1:/>
-```
+admin@R1:/config/routing/control-plane-protocol/ospfv2/name/default/&gt; <b>leave</b>
+admin@R1:/&gt;</code></pre>
 
 Corresponding IP and OSPF configuration are then applied to all
 routers in [Figure 1](#fig1).  OSPF is able to establish routes to all
 routers. Here is the result at R1.
 
-```console
-admin@R1:/> show ip ospf route
+<pre class="cli"><code>admin@R1:/&gt; <b>show ip ospf route</b>
 ============ OSPF network routing table ============
 N    10.1.1.1/32           [0] area: 0.0.0.0
                            directly attached to lo
@@ -332,8 +305,7 @@ N    10.1.1.6/32           [30] area: 0.0.0.0
 ============ OSPF external routing table ===========
 
 
-admin@R1:/>
-```
+admin@R1:/&gt;</code></pre>
 
 
 ## Adding host subnets
@@ -351,21 +323,18 @@ broadcast interface (not point-to-point), and as no neighbor OSPF
 router is expected on this LAN, eth2 can be configured as a passive
 OSPF interface.
 
-```console
-admin@R1:/> configure 
-admin@R1:/config/> set interface eth2 ipv4 address 10.0.1.1 prefix-length 24
-admin@R1:/config/> set interface eth2 ipv4 forwarding
-admin@R1:/config/> set routing control-plane-protocol ospfv2 name default ospf area 0.0.0.0 interface eth2 enabled
-admin@R1:/config/> set routing control-plane-protocol ospfv2 name default ospf area 0.0.0.0 interface eth2 passive
-admin@R1:/config/> leave
-admin@R1:/>
-```
+<pre class="cli"><code>admin@R1:/&gt; <b>configure </b>
+admin@R1:/config/&gt; <b>set interface eth2 ipv4 address 10.0.1.1 prefix-length 24</b>
+admin@R1:/config/&gt; <b>set interface eth2 ipv4 forwarding</b>
+admin@R1:/config/&gt; <b>set routing control-plane-protocol ospfv2 name default ospf area 0.0.0.0 interface eth2 enabled</b>
+admin@R1:/config/&gt; <b>set routing control-plane-protocol ospfv2 name default ospf area 0.0.0.0 interface eth2 passive</b>
+admin@R1:/config/&gt; <b>leave</b>
+admin@R1:/&gt;</code></pre>
 
 If corresponding setup is done on R6, OSPF would now establish the
 following routing table
 
-```console
-admin@R1:/> show ip ospf route
+<pre class="cli"><code>admin@R1:/&gt; <b>show ip ospf route</b>
 ============ OSPF network routing table ============
 N    10.0.1.0/24           [10] area: 0.0.0.0
                            directly attached to eth2
@@ -391,8 +360,7 @@ N    10.1.1.6/32           [30] area: 0.0.0.0
 ============ OSPF external routing table ===========
 
 
-admin@R1:/>
-```
+admin@R1:/&gt;</code></pre>
 
 Verify by letting PC1 ping PC2, where attached to R1 and R4
 respectivly, see [Figure 3](#fig3).

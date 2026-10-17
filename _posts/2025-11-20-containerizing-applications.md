@@ -265,24 +265,20 @@ $ scp temp-monitor-v1.0.tar.gz admin@infix-device:/var/tmp/
 For quick experiments, you can build directly on Infix. Exit the CLI to
 your login shell and prepare your application files in `/var/tmp/myapp/`:
 
-```console
-admin@infix:~$ mkdir -p /var/tmp/myapp
-admin@infix:~$ cd /var/tmp/myapp
-admin@infix:/var/tmp/myapp$ cat > temp-monitor.py
+<pre class="cli"><code>admin@infix:~$ <b>mkdir -p /var/tmp/myapp</b>
+admin@infix:~$ <b>cd /var/tmp/myapp</b>
+admin@infix:/var/tmp/myapp$ <b>cat &gt; temp-monitor.py</b>
 #!/usr/bin/env python3
 ... paste your script here ...
 ^D
-admin@infix:/var/tmp/myapp$ cat > Containerfile
+admin@infix:/var/tmp/myapp$ <b>cat &gt; Containerfile</b>
 FROM python:3.11-alpine
 ... paste containerfile here ...
-^D
-```
+^D</code></pre>
 
 Build the image:
 
-```console
-admin@infix:/var/tmp/myapp$ sudo docker build -t temp-monitor:latest .
-```
+<pre class="cli"><code>admin@infix:/var/tmp/myapp$ <b>sudo docker build -t temp-monitor:latest .</b></code></pre>
 
 > Building on the device consumes storage in `/var` and requires CPU
 > resources. For production, build on a development machine instead.
@@ -296,49 +292,39 @@ Now that you have a container image, let's configure Infix to run it.
 
 First, load the image (if you transferred an archive):
 
-```console
-admin@infix:/> container load /var/tmp/temp-monitor-v1.0.tar.gz name temp-monitor:v1.0
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>container load /var/tmp/temp-monitor-v1.0.tar.gz name temp-monitor:v1.0</b></code></pre>
 
 Or reference the OCI archive directly in your configuration:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit container temp-monitor
-admin@infix:/config/container/temp-monitor/> set image oci-archive:/var/tmp/temp-monitor-v1.0.tar.gz
-admin@infix:/config/container/temp-monitor/> set hostname temp-mon
-admin@infix:/config/container/temp-monitor/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit container temp-monitor</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>set image oci-archive:/var/tmp/temp-monitor-v1.0.tar.gz</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>set hostname temp-mon</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>leave</b></code></pre>
 
 Check the status:
 
-```console
-admin@infix:/> show container
-NAME          STATUS        NETWORK  MEMORY (KiB)  CPU%
-temp-monitor  Up 4 seconds  -                8104  0.03
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>show container</b>
+<span class="header">NAME          STATUS        NETWORK  MEMORY (KiB)  CPU%</span>
+temp-monitor  Up 4 seconds  -                8104  0.03</code></pre>
 
 View the logs.  All containers share the system container log, so
 the output is interleaved if you run more than one:
 
-```console
-admin@infix:/> show container log
+<pre class="cli"><code>admin@infix:/&gt; <b>show container log</b>
 Temperature monitor starting...
 Logging to: /data/temperature.log
 Interval: 60s
-2025-11-20T10:15:00: 42.5°C
-```
+2025-11-20T10:15:00: 42.5°C</code></pre>
 
 ### Adding Persistent Storage
 
 The container is running, but logs are lost when it restarts. Add a volume:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit container temp-monitor
-admin@infix:/config/container/temp-monitor/> set volume logs target /data
-admin@infix:/config/container/temp-monitor/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit container temp-monitor</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>set volume logs target /data</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>leave</b></code></pre>
 
 Now `/data` in the container is persistent and survives container upgrades.
 
@@ -346,14 +332,12 @@ Now `/data` in the container is persistent and survives container upgrades.
 
 Override the default logging interval:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit container temp-monitor
-admin@infix:/config/container/temp-monitor/> edit env INTERVAL
-admin@infix:/config/container/temp-monitor/env/INTERVAL/> set value 30
-admin@infix:/config/container/temp-monitor/env/INTERVAL/> end
-admin@infix:/config/container/temp-monitor/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit container temp-monitor</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>edit env INTERVAL</b>
+admin@infix:/config/container/temp-monitor/env/INTERVAL/&gt; <b>set value 30</b>
+admin@infix:/config/container/temp-monitor/env/INTERVAL/&gt; <b>end</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>leave</b></code></pre>
 
 ## Container Networking
 
@@ -363,12 +347,10 @@ Your application may need network access. Infix provides flexible options.
 
 For applications that need full network access:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit container temp-monitor
-admin@infix:/config/container/temp-monitor/> set network host
-admin@infix:/config/container/temp-monitor/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit container temp-monitor</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>set network host</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>leave</b></code></pre>
 
 The container shares the host's network namespace - all ports, interfaces,
 and routing are identical to the host.
@@ -377,40 +359,34 @@ and routing are identical to the host.
 
 For better isolation, use a container bridge:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit interface docker0
-admin@infix:/config/interface/docker0/> set container-network
-admin@infix:/config/interface/docker0/> end
-admin@infix:/config/> edit container temp-monitor
-admin@infix:/config/container/temp-monitor/> set network interface docker0
-admin@infix:/config/container/temp-monitor/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit interface docker0</b>
+admin@infix:/config/interface/docker0/&gt; <b>set container-network</b>
+admin@infix:/config/interface/docker0/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>edit container temp-monitor</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>set network interface docker0</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>leave</b></code></pre>
 
 If your application exposes an HTTP API on port 8080:
 
-```console
-admin@infix:/config/container/temp-monitor/> set network publish 8080:8080
-```
+<pre class="cli"><code>admin@infix:/config/container/temp-monitor/&gt; <b>set network publish 8080:8080</b></code></pre>
 
 ### Direct Interface Access
 
 Infix can give containers direct access to physical ports or VETH pairs:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit interface veth0
-admin@infix:/config/interface/veth0/> set veth peer veth0c
-admin@infix:/config/interface/veth0/> set ipv4 address 192.168.10.1 prefix-length 24
-admin@infix:/config/interface/veth0/> end
-admin@infix:/config/> edit interface veth0c
-admin@infix:/config/interface/veth0c/> set ipv4 address 192.168.10.2 prefix-length 24
-admin@infix:/config/interface/veth0c/> set container-network
-admin@infix:/config/interface/veth0c/> end
-admin@infix:/config/> edit container temp-monitor
-admin@infix:/config/container/temp-monitor/> set network interface veth0c
-admin@infix:/config/container/temp-monitor/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit interface veth0</b>
+admin@infix:/config/interface/veth0/&gt; <b>set veth peer veth0c</b>
+admin@infix:/config/interface/veth0/&gt; <b>set ipv4 address 192.168.10.1 prefix-length 24</b>
+admin@infix:/config/interface/veth0/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>edit interface veth0c</b>
+admin@infix:/config/interface/veth0c/&gt; <b>set ipv4 address 192.168.10.2 prefix-length 24</b>
+admin@infix:/config/interface/veth0c/&gt; <b>set container-network</b>
+admin@infix:/config/interface/veth0c/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>edit container temp-monitor</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>set network interface veth0c</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>leave</b></code></pre>
 
 This gives precise control over container networking and enables advanced
 setups like dedicated monitoring networks.
@@ -431,16 +407,12 @@ application. Here's how container concepts map to systemd:
 
 To make your container start automatically at boot (default):
 
-```console
-admin@infix:/config/container/temp-monitor/> show manual
-manual false;
-```
+<pre class="cli"><code>admin@infix:/config/container/temp-monitor/&gt; <b>show manual</b>
+manual false;</code></pre>
 
 To require manual start:
 
-```console
-admin@infix:/config/container/temp-monitor/> set manual true
-```
+<pre class="cli"><code>admin@infix:/config/container/temp-monitor/&gt; <b>set manual true</b></code></pre>
 
 ## Configuration Files
 
@@ -451,13 +423,11 @@ approaches:
 
 For small config files, store content directly in Infix configuration:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit container temp-monitor
-admin@infix:/config/container/temp-monitor/> edit mount settings
-admin@infix:/config/container/temp-monitor/mount/settings/> set target /etc/temp-monitor.conf
-admin@infix:/config/container/temp-monitor/mount/settings/> text-editor content
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit container temp-monitor</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>edit mount settings</b>
+admin@infix:/config/container/temp-monitor/mount/settings/&gt; <b>set target /etc/temp-monitor.conf</b>
+admin@infix:/config/container/temp-monitor/mount/settings/&gt; <b>text-editor content</b></code></pre>
 
 An editor opens where you can paste your configuration:
 
@@ -476,20 +446,16 @@ your Python application will now use these settings instead of the defaults.
 
 For larger files or collections, use a volume:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit container temp-monitor
-admin@infix:/config/container/temp-monitor/> set volume config target /etc/app
-admin@infix:/config/container/temp-monitor/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit container temp-monitor</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>set volume config target /etc/app</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>leave</b></code></pre>
 
 Then populate files from your login shell:
 
-```console
-admin@infix:~$ sudo -i
-root@infix:~# cd /var/lib/containers/storage/volumes/temp-monitor-config/_data
-root@infix:/var/lib/containers/storage/volumes/temp-monitor-config/_data# vi config.yaml
-```
+<pre class="cli"><code>admin@infix:~$ <b>sudo -i</b>
+root@infix:~# <b>cd /var/lib/containers/storage/volumes/temp-monitor-config/_data</b>
+root@infix:/var/lib/containers/storage/volumes/temp-monitor-config/_data# <b>vi config.yaml</b></code></pre>
 
 ## Upgrading Your Application
 
@@ -506,12 +472,10 @@ $ docker save -o temp-monitor-v1.1.tar.gz myapp/temp-monitor:v1.1
 
 Transfer and update configuration:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit container temp-monitor
-admin@infix:/config/container/temp-monitor/> set image oci-archive:/var/tmp/temp-monitor-v1.1.tar.gz
-admin@infix:/config/container/temp-monitor/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit container temp-monitor</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>set image oci-archive:/var/tmp/temp-monitor-v1.1.tar.gz</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>leave</b></code></pre>
 
 Infix automatically stops the old container and starts the new one.
 Your volumes remain intact.
@@ -520,9 +484,7 @@ Your volumes remain intact.
 
 For development with `:latest` tags:
 
-```console
-admin@infix:/> container upgrade temp-monitor
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>container upgrade temp-monitor</b></code></pre>
 
 This pulls the newest image and recreates the container.
 
@@ -541,9 +503,7 @@ $ docker push ghcr.io/username/temp-monitor:v1.0
 
 On Infix:
 
-```console
-admin@infix:/config/container/temp-monitor/> set image ghcr.io/username/temp-monitor:v1.0
-```
+<pre class="cli"><code>admin@infix:/config/container/temp-monitor/&gt; <b>set image ghcr.io/username/temp-monitor:v1.0</b></code></pre>
 
 ### Docker Hub
 
@@ -555,9 +515,7 @@ $ docker push username/temp-monitor:v1.0
 
 On Infix:
 
-```console
-admin@infix:/config/container/temp-monitor/> set image username/temp-monitor:v1.0
-```
+<pre class="cli"><code>admin@infix:/config/container/temp-monitor/&gt; <b>set image username/temp-monitor:v1.0</b></code></pre>
 
 Now deploying to new devices is as simple as adding the container
 configuration - no need to transfer archive files manually.
@@ -568,95 +526,79 @@ configuration - no need to transfer archive files manually.
 
 If your application needs GPIO, I2C, or other hardware:
 
-```console
-admin@infix:/config/container/temp-monitor/> edit mount gpio
-admin@infix:/config/container/temp-monitor/mount/gpio/> set source /sys/class/gpio
-admin@infix:/config/container/temp-monitor/mount/gpio/> set target /sys/class/gpio
-admin@infix:/config/container/temp-monitor/mount/gpio/> set read-only false
-admin@infix:/config/container/temp-monitor/mount/gpio/> end
-admin@infix:/config/container/temp-monitor/> edit capabilities
-admin@infix:/config/container/temp-monitor/capabilities/> set add sys_admin
-```
+<pre class="cli"><code>admin@infix:/config/container/temp-monitor/&gt; <b>edit mount gpio</b>
+admin@infix:/config/container/temp-monitor/mount/gpio/&gt; <b>set source /sys/class/gpio</b>
+admin@infix:/config/container/temp-monitor/mount/gpio/&gt; <b>set target /sys/class/gpio</b>
+admin@infix:/config/container/temp-monitor/mount/gpio/&gt; <b>set read-only false</b>
+admin@infix:/config/container/temp-monitor/mount/gpio/&gt; <b>end</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>edit capabilities</b>
+admin@infix:/config/container/temp-monitor/capabilities/&gt; <b>set add sys_admin</b></code></pre>
 
 For device access (e.g., `/dev/i2c-1`):
 
-```console
-admin@infix:/config/container/temp-monitor/> edit mount i2c
-admin@infix:/config/container/temp-monitor/mount/i2c/> set source /dev/i2c-1
-admin@infix:/config/container/temp-monitor/mount/i2c/> set target /dev/i2c-1
-admin@infix:/config/container/temp-monitor/mount/i2c/> set read-only false
-```
+<pre class="cli"><code>admin@infix:/config/container/temp-monitor/&gt; <b>edit mount i2c</b>
+admin@infix:/config/container/temp-monitor/mount/i2c/&gt; <b>set source /dev/i2c-1</b>
+admin@infix:/config/container/temp-monitor/mount/i2c/&gt; <b>set target /dev/i2c-1</b>
+admin@infix:/config/container/temp-monitor/mount/i2c/&gt; <b>set read-only false</b></code></pre>
 
 ### Running Multiple Instances
 
 Need to run multiple copies with different configurations?
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit container temp-monitor-1
-admin@infix:/config/container/temp-monitor-1/> set image temp-monitor:v1.0
-admin@infix:/config/container/temp-monitor-1/> edit env SENSOR
-admin@infix:/config/container/temp-monitor-1/env/SENSOR/> set value sensor1
-admin@infix:/config/container/temp-monitor-1/env/SENSOR/> end
-admin@infix:/config/container/temp-monitor-1/> end
-admin@infix:/config/> edit container temp-monitor-2
-admin@infix:/config/container/temp-monitor-2/> set image temp-monitor:v1.0
-admin@infix:/config/container/temp-monitor-2/> edit env SENSOR
-admin@infix:/config/container/temp-monitor-2/env/SENSOR/> set value sensor2
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit container temp-monitor-1</b>
+admin@infix:/config/container/temp-monitor-1/&gt; <b>set image temp-monitor:v1.0</b>
+admin@infix:/config/container/temp-monitor-1/&gt; <b>edit env SENSOR</b>
+admin@infix:/config/container/temp-monitor-1/env/SENSOR/&gt; <b>set value sensor1</b>
+admin@infix:/config/container/temp-monitor-1/env/SENSOR/&gt; <b>end</b>
+admin@infix:/config/container/temp-monitor-1/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>edit container temp-monitor-2</b>
+admin@infix:/config/container/temp-monitor-2/&gt; <b>set image temp-monitor:v1.0</b>
+admin@infix:/config/container/temp-monitor-2/&gt; <b>edit env SENSOR</b>
+admin@infix:/config/container/temp-monitor-2/env/SENSOR/&gt; <b>set value sensor2</b></code></pre>
 
 ## Complete Example Configuration
 
 Here's a complete working configuration for reference:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit interface docker0
-admin@infix:/config/interface/docker0/> set container-network
-admin@infix:/config/interface/docker0/> end
-admin@infix:/config/> edit container temp-monitor
-admin@infix:/config/container/temp-monitor/> set image oci-archive:/var/tmp/temp-monitor-v1.0.tar.gz
-admin@infix:/config/container/temp-monitor/> set hostname temp-mon
-admin@infix:/config/container/temp-monitor/> set network interface docker0
-admin@infix:/config/container/temp-monitor/> edit env INTERVAL
-admin@infix:/config/container/temp-monitor/env/INTERVAL/> set value 30
-admin@infix:/config/container/temp-monitor/env/INTERVAL/> end
-admin@infix:/config/container/temp-monitor/> set volume logs target /data
-admin@infix:/config/container/temp-monitor/> leave
-admin@infix:/> copy running-config startup-config
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit interface docker0</b>
+admin@infix:/config/interface/docker0/&gt; <b>set container-network</b>
+admin@infix:/config/interface/docker0/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>edit container temp-monitor</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>set image oci-archive:/var/tmp/temp-monitor-v1.0.tar.gz</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>set hostname temp-mon</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>set network interface docker0</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>edit env INTERVAL</b>
+admin@infix:/config/container/temp-monitor/env/INTERVAL/&gt; <b>set value 30</b>
+admin@infix:/config/container/temp-monitor/env/INTERVAL/&gt; <b>end</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>set volume logs target /data</b>
+admin@infix:/config/container/temp-monitor/&gt; <b>leave</b>
+admin@infix:/&gt; <b>copy running-config startup-config</b></code></pre>
 
 ## Troubleshooting
 
 **Container won't start:**
 
-```console
-admin@infix:/> show log
-admin@infix:/> show container log
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>show log</b>
+admin@infix:/&gt; <b>show container log</b></code></pre>
 
 **Check container status:**
 
-```console
-admin@infix:/> show container
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>show container</b></code></pre>
 
 **Inspect running container:**
 
 Exit the CLI and use the docker command to exec into the container:
 
-```console
-admin@infix:~$ sudo docker exec -it temp-monitor sh
-/ #
-```
+<pre class="cli"><code>admin@infix:~$ <b>sudo docker exec -it temp-monitor sh</b>
+/ #</code></pre>
 
 **Remove and recreate:**
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> delete container temp-monitor
-admin@infix:/config/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>delete container temp-monitor</b>
+admin@infix:/config/&gt; <b>leave</b></code></pre>
 
 Then recreate with the configuration above.
 
@@ -683,9 +625,7 @@ explore the [YANG model][3] for all available configuration options.
 
 Remember to save your configuration:
 
-```console
-admin@infix:/> copy running-config startup-config
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>copy running-config startup-config</b></code></pre>
 
 Take care!
 

@@ -72,45 +72,39 @@ from [GHCR][4] and as an [OCI tarball][5].
 
 Let's start by setting up the first bridge, `br0`:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit interface br0
-admin@infix:/config/interface/br0/> set bridge ieee-group-forward lldp
-admin@infix:/config/interface/br0/> end
-admin@infix:/config/> set interface eth1 bridge-port bridge br0
-admin@infix:/config/> set interface eth2 bridge-port bridge br0
-admin@infix:/config/> set interface eth3 bridge-port bridge br0
-admin@infix:/config/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit interface br0</b>
+admin@infix:/config/interface/br0/&gt; <b>set bridge ieee-group-forward lldp</b>
+admin@infix:/config/interface/br0/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>set interface eth1 bridge-port bridge br0</b>
+admin@infix:/config/&gt; <b>set interface eth2 bridge-port bridge br0</b>
+admin@infix:/config/&gt; <b>set interface eth3 bridge-port bridge br0</b>
+admin@infix:/config/&gt; <b>leave</b></code></pre>
 
 The second bridge is similar:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit interface br1
-admin@infix:/config/interface/br1/> end
-admin@infix:/config/> set interface eth4 bridge-port bridge br1
-admin@infix:/config/> set interface eth5 bridge-port bridge br1
-admin@infix:/config/> set interface eth6 bridge-port bridge br1
-admin@infix:/config/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit interface br1</b>
+admin@infix:/config/interface/br1/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>set interface eth4 bridge-port bridge br1</b>
+admin@infix:/config/&gt; <b>set interface eth5 bridge-port bridge br1</b>
+admin@infix:/config/&gt; <b>set interface eth6 bridge-port bridge br1</b>
+admin@infix:/config/&gt; <b>leave</b></code></pre>
 
 Now, for the container we need to add two VETH pairs and attach one end
 of each to each of the bridges.  We use the recommended nomenclature of
 Infix to skip configuration steps and save time:
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit interface veth0a
-admin@infix:/config/interface/veth0a/> set veth peer veth0b
-admin@infix:/config/interface/veth0a/> end
-admin@infix:/config/> edit interface veth1a
-admin@infix:/config/interface/veth1a/> set veth peer veth1b
-admin@infix:/config/interface/veth1a/> end
-admin@infix:/config/> set interface veth0b bridge-port bridge br0
-admin@infix:/config/> set interface veth1b bridge-port bridge br1
-admin@infix:/config/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit interface veth0a</b>
+admin@infix:/config/interface/veth0a/&gt; <b>set veth peer veth0b</b>
+admin@infix:/config/interface/veth0a/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>edit interface veth1a</b>
+admin@infix:/config/interface/veth1a/&gt; <b>set veth peer veth1b</b>
+admin@infix:/config/interface/veth1a/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>set interface veth0b bridge-port bridge br0</b>
+admin@infix:/config/&gt; <b>set interface veth1b bridge-port bridge br1</b>
+admin@infix:/config/&gt; <b>leave</b></code></pre>
 
 Initial network setup is now complete (no IP addresses yet) and end
 devices connected to ports in both bridges can now communicate with
@@ -124,27 +118,24 @@ Time for IP networking!
 > order things will work from the first try.
 {: .prompt-info }
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> edit interface br0
-admin@infix:/config/interface/br0/> set ipv4 address 10.0.1.1 prefix-length 24
-admin@infix:/config/interface/br0/> end
-admin@infix:/config/> edit interface br1
-admin@infix:/config/interface/br1/> set ipv4 address 192.168.1.1 prefix-length 24
-admin@infix:/config/interface/br1/> end
-admin@infix:/config/> edit interface veth0a 
-admin@infix:/config/interface/veth0a/> set ipv4 address 10.0.1.2 prefix-length 24
-admin@infix:/config/interface/veth0a/> end
-admin@infix:/config/> edit interface veth1a 
-admin@infix:/config/interface/veth1a/> set ipv4 address 192.168.1.2 prefix-length 24
-admin@infix:/config/interface/veth1a/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>edit interface br0</b>
+admin@infix:/config/interface/br0/&gt; <b>set ipv4 address 10.0.1.1 prefix-length 24</b>
+admin@infix:/config/interface/br0/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>edit interface br1</b>
+admin@infix:/config/interface/br1/&gt; <b>set ipv4 address 192.168.1.1 prefix-length 24</b>
+admin@infix:/config/interface/br1/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>edit interface veth0a </b>
+admin@infix:/config/interface/veth0a/&gt; <b>set ipv4 address 10.0.1.2 prefix-length 24</b>
+admin@infix:/config/interface/veth0a/&gt; <b>end</b>
+admin@infix:/config/&gt; <b>edit interface veth1a </b>
+admin@infix:/config/interface/veth1a/&gt; <b>set ipv4 address 192.168.1.2 prefix-length 24</b>
+admin@infix:/config/interface/veth1a/&gt; <b>leave</b></code></pre>
 
 You can verify the setup with the following CLI command.
 
-```console
-admin@infix:/> show interface
-⚑ INTERFACE       PROTOCOL      STATE       DATA
+<pre class="cli"><code>admin@infix:/&gt; <b>show interface</b>
+<span class="header">⚑ INTERFACE       PROTOCOL      STATE       DATA                           </span>
   lo              loopback      UP
                   ipv4                      127.0.0.1/8 (static)
                   ipv6                      ::1/128 (static)
@@ -176,25 +167,22 @@ admin@infix:/> show interface
   veth0b          veth          UP          42:c0:a2:f1:41:fa
   veth1a          veth          UP          8e:41:d0:5b:6a:c7
                   ipv4                      192.168.1.2/24 (static)
-  veth1b          veth          UP          da:d5:e8:0d:0b:55
-```
+  veth1b          veth          UP          da:d5:e8:0d:0b:55</code></pre>
 
 Finally, the container configuration.  We start by marking the access
 port ends of the VETH pairs as container networks, then we can refer
 to them from the container.
 
-```console
-admin@infix:/> configure
-admin@infix:/config/> set interface veth0a container-network
-admin@infix:/config/> set interface veth1a container-network
-admin@infix:/config/> edit container system
-admin@infix:/config/container/system/> set image docker://ghcr.io/kernelkit/curios:24.02.0
-admin@infix:/config/container/system/> set hostname sys101
-admin@infix:/config/container/system/> edit network
-admin@infix:/config/container/system/network/> set interface veth0a
-admin@infix:/config/container/system/network/> set interface veth1a
-admin@infix:/config/container/system/network/> leave
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>configure</b>
+admin@infix:/config/&gt; <b>set interface veth0a container-network</b>
+admin@infix:/config/&gt; <b>set interface veth1a container-network</b>
+admin@infix:/config/&gt; <b>edit container system</b>
+admin@infix:/config/container/system/&gt; <b>set image docker://ghcr.io/kernelkit/curios:24.02.0</b>
+admin@infix:/config/container/system/&gt; <b>set hostname sys101</b>
+admin@infix:/config/container/system/&gt; <b>edit network</b>
+admin@infix:/config/container/system/network/&gt; <b>set interface veth0a</b>
+admin@infix:/config/container/system/network/&gt; <b>set interface veth1a</b>
+admin@infix:/config/container/system/network/&gt; <b>leave</b></code></pre>
 
 > We don't have to `leave` after each of the above sections, we could
 > just as easily kept going all through the new configuration.
@@ -206,12 +194,11 @@ admin@infix:/config/container/system/network/> leave
 We should now have a running container that you can connect to and
 inspect the results:
 
-```console
-admin@infix:/> show container
-NAME    STATUS         NETWORK   MEMORY (KiB)  CPU%
+<pre class="cli"><code>admin@infix:/&gt; <b>show container</b>
+<span class="header">NAME    STATUS         NETWORK   MEMORY (KiB)  CPU%                     </span>
 system  Up 10 seconds  br0, br1          3820  0.00
-admin@infix:/> container shell system
-root@sys101:/# ifconfig
+admin@infix:/&gt; <b>container shell system</b>
+root@sys101:/# <b>ifconfig</b>
 lo        Link encap:Local Loopback
           inet addr:127.0.0.1  Mask:255.0.0.0
           inet6 addr: ::1/128 Scope:Host
@@ -239,9 +226,8 @@ eth1      Link encap:Ethernet  HWaddr E6:E8:40:2F:19:F0
           collisions:0 txqueuelen:1000 
           RX bytes:5845 (5.7 KiB)  TX bytes:3064 (2.9 KiB)
 
-root@sys101:~$ exit
-admin@infix:/> 
-```
+root@sys101:~$ <b>exit</b>
+admin@infix:/&gt; </code></pre>
 
 The two interfaces, `eth0` and `eth1`, correspond to the access end of
 the VETH pairs, `veth0a` and `veth1a`, respectively.  The order in which
@@ -255,9 +241,7 @@ inside the container.  This can of course be controlled from the
 That's the end of the second post about containers in Infix.  As usual,
 remember to
 
-```console
-admin@infix:/> copy running-config startup-config
-```
+<pre class="cli"><code>admin@infix:/&gt; <b>copy running-config startup-config</b></code></pre>
 
 Take care! 🧡
 

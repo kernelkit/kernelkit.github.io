@@ -11,9 +11,7 @@ the hostname of a device.  The default is a unique name composed from
 the built-in default name suffixed by the last three octets of the base
 MAC address.
 
-```console
-admin@infix-c0-ff-ee-:/>
-```
+<pre class="cli"><code>admin@infix-c0-ff-ee-:/&gt;</code></pre>
 
 In this example the built-in name is `infix` and the last three octets
 resemble my favorite morning drink.  The built-in name depends on the
@@ -21,13 +19,11 @@ Infix build and can be [tailored to your product][0].
 
 The hostname can be changed from the system configuration context:
 
-```console
-admin@infix-c0-ff-ee:/> configure
-admin@infix-c0-ff-ee:/config/> edit system
-admin@infix-c0-ff-ee:/config/system/> set hostname example
-admin@infix-c0-ff-ee:/config/system/> leave
-admin@example:/> 
-```
+<pre class="cli"><code>admin@infix-c0-ff-ee:/&gt; <b>configure</b>
+admin@infix-c0-ff-ee:/config/&gt; <b>edit system</b>
+admin@infix-c0-ff-ee:/config/system/&gt; <b>set hostname example</b>
+admin@infix-c0-ff-ee:/config/system/&gt; <b>leave</b>
+admin@example:/&gt; </code></pre>
 
 Notice how the hostname in the prompt does not change until the change
 is committed by issuing the leave command.

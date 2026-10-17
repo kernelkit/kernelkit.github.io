@@ -13,14 +13,12 @@ User management is available in the system authentication configuration
 context and there is a dedicated `change` command available to simplify
 the process:
 
-```console
-admin@example:/> configure
-admin@example:/config/> edit system authentication user admin
-admin@example:/config/system/authentication/user/admin/> change password
+<pre class="cli"><code>admin@example:/&gt; <b>configure</b>
+admin@example:/config/&gt; <b>edit system authentication user admin</b>
+admin@example:/config/system/authentication/user/admin/&gt; <b>change password</b>
 New password: 
 Retype password: 
-admin@example:/config/system/authentication/user/admin/> leave
-```
+admin@example:/config/system/authentication/user/admin/&gt; <b>leave</b></code></pre>
 
 The `change password` command starts an interactive dialogue that asks
 for the new password, with a confirmation, and then salts and encrypts
@@ -50,16 +48,14 @@ SSH key login enabled.  The following shows how to add a an authorized
 With SSH keys in place it is possible to disable password login, just
 remember to verify SSH login and network connectivity before doing so.
 
-```console
-admin@example:/config/> edit system authentication user admin
-admin@example:/config/system/authentication/user/admin/> edit authorized-key jacky@host
-admin@example:/config/system/authentication/user/admin/authorized-key/jacky@host/> set algorithm ssh-rsa
-admin@example:/config/system/authentication/user/admin/authorized-key/jacky@host/> set key-data AAAAB3NzaC1yc2EAAAADAQABAAABgQC8iBL42yeMBioFay7lty1C4ZDTHcHyo739gc91rTTH8SKvAE4g8Rr97KOz/8PFtOObBrE9G21K7d6UBuPqmd0RUF2CkXXN/eN2PBSHJ50YprRFt/z/304bsBYkDdflKlPDjuSmZ/+OMp4pTsq0R0eNFlX9wcwxEzooIb7VPEdvWE7AYoBRUdf41u3KBHuvjGd1M6QYJtbFLQMMTiVe5IUfyVSZ1RCxEyAB9fR9CBhtVheTVsY3iG0fZc9eCEo89ErDgtGUTJK4Hxt5yCNwI88YaVmkE85cNtw8YwubWQL3/tGZHfbbQ0fynfB4kWNloyRHFr7E1kDxuX5+pbv26EqRdcOVGucNn7hnGU6C1+ejLWdBD7vgsoilFrEaBWF41elJEPKDzpszEijQ9gTrrWeYOQ+x++lvmOdssDu4KvGmj2K/MQTL2jJYrMJ7GDzsUu3XikChRL7zNfS2jYYQLzovboUCgqfPUsVba9hqeX3U67GsJo+hy5MG9RSry4+ucHs=
-admin@example:/config/system/authentication/user/admin/authorized-key/jacky@host/> show
+<pre class="cli"><code>admin@example:/config/&gt; <b>edit system authentication user admin</b>
+admin@example:/config/system/authentication/user/admin/&gt; <b>edit authorized-key jacky@host</b>
+admin@example:/config/system/authentication/user/admin/authorized-key/jacky@host/&gt; <b>set algorithm ssh-rsa</b>
+admin@example:/config/system/authentication/user/admin/authorized-key/jacky@host/&gt; <b>set key-data AAAAB3NzaC1yc2EAAAADAQABAAABgQC8iBL42yeMBioFay7lty1C4ZDTHcHyo739gc91rTTH8SKvAE4g8Rr97KOz/8PFtOObBrE9G21K7d6UBuPqmd0RUF2CkXXN/eN2PBSHJ50YprRFt/z/304bsBYkDdflKlPDjuSmZ/+OMp4pTsq0R0eNFlX9wcwxEzooIb7VPEdvWE7AYoBRUdf41u3KBHuvjGd1M6QYJtbFLQMMTiVe5IUfyVSZ1RCxEyAB9fR9CBhtVheTVsY3iG0fZc9eCEo89ErDgtGUTJK4Hxt5yCNwI88YaVmkE85cNtw8YwubWQL3/tGZHfbbQ0fynfB4kWNloyRHFr7E1kDxuX5+pbv26EqRdcOVGucNn7hnGU6C1+ejLWdBD7vgsoilFrEaBWF41elJEPKDzpszEijQ9gTrrWeYOQ+x++lvmOdssDu4KvGmj2K/MQTL2jJYrMJ7GDzsUu3XikChRL7zNfS2jYYQLzovboUCgqfPUsVba9hqeX3U67GsJo+hy5MG9RSry4+ucHs=</b>
+admin@example:/config/system/authentication/user/admin/authorized-key/jacky@host/&gt; <b>show</b>
 algorithm ssh-rsa;
 key-data AAAAB3NzaC1yc2EAAAADAQABAAABgQC8iBL42yeMBioFay7lty1C4ZDTHcHyo739gc91rTTH8SKvAE4g8Rr97KOz/8PFtOObBrE9G21K7d6UBuPqmd0RUF2CkXXN/eN2PBSHJ50YprRFt/z/304bsBYkDdflKlPDjuSmZ/+OMp4pTsq0R0eNFlX9wcwxEzooIb7VPEdvWE7AYoBRUdf41u3KBHuvjGd1M6QYJtbFLQMMTiVe5IUfyVSZ1RCxEyAB9fR9CBhtVheTVsY3iG0fZc9eCEo89ErDgtGUTJK4Hxt5yCNwI88YaVmkE85cNtw8YwubWQL3/tGZHfbbQ0fynfB4kWNloyRHFr7E1kDxuX5+pbv26EqRdcOVGucNn7hnGU6C1+ejLWdBD7vgsoilFrEaBWF41elJEPKDzpszEijQ9gTrrWeYOQ+x++lvmOdssDu4KvGmj2K/MQTL2jJYrMJ7GDzsUu3XikChRL7zNfS2jYYQLzovboUCgqfPUsVba9hqeX3U67GsJo+hy5MG9RSry4+ucHs=;
-admin@example:/config/system/authentication/user/admin/authorized-key/jacky@host/> leave
-```
+admin@example:/config/system/authentication/user/admin/authorized-key/jacky@host/&gt; <b>leave</b></code></pre>
 
 > The `ssh-keygen` program used to create the public/private key-pair
 > base64 encodes the public key data, so there is no need to use the
@@ -78,11 +74,9 @@ of.
 To give another user administrator rights we add them to the `admin`
 group:
 
-```console
-admin@example:/config/> edit nacm group admin
-admin@example:/config/nacm/group/admin/> set user-name jacky
-admin@example:/config/nacm/group/admin/> leave
-```
+<pre class="cli"><code>admin@example:/config/&gt; <b>edit nacm group admin</b>
+admin@example:/config/nacm/group/admin/&gt; <b>set user-name jacky</b>
+admin@example:/config/nacm/group/admin/&gt; <b>leave</b></code></pre>
 
 Read more about [user management][1] in the official documentation.
 
