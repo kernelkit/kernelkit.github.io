@@ -93,21 +93,25 @@ admin@gw1:/config/keystore/.../wifi-secret/&gt; <b>leave</b></code></pre>
 
 ### 2. The radios
 
-radio0 carries the mesh, so it needs a band, a channel, and a real country
-code.  The mesh refuses to start without them.  radio1 carries the AP on
-2.4 GHz.
+The mesh refuses to start without a band, a channel, and a real country
+code.  The country code is one setting for all radios, while radio0,
+which carries the mesh, gets its own band and channel.  radio1 carries
+the AP on 2.4 GHz.
 
 <pre class="cli"><code>admin@gw1:/&gt; <b>configure</b>
+admin@gw1:/config/&gt; <b>set hardware wifi country-code SE</b>
 admin@gw1:/config/&gt; <b>edit hardware component radio0 wifi-radio</b>
-admin@gw1:/config/hardware/component/radio0/wifi-radio/&gt; <b>set country-code SE</b>
 admin@gw1:/config/hardware/component/radio0/wifi-radio/&gt; <b>set band 5GHz</b>
 admin@gw1:/config/hardware/component/radio0/wifi-radio/&gt; <b>set channel 36</b>
 admin@gw1:/config/hardware/component/radio0/wifi-radio/&gt; <b>end</b>
 admin@gw1:/config/&gt; <b>edit hardware component radio1 wifi-radio</b>
-admin@gw1:/config/hardware/component/radio1/wifi-radio/&gt; <b>set country-code SE</b>
 admin@gw1:/config/hardware/component/radio1/wifi-radio/&gt; <b>set band 2.4GHz</b>
 admin@gw1:/config/hardware/component/radio1/wifi-radio/&gt; <b>set channel 1</b>
 admin@gw1:/config/hardware/component/radio1/wifi-radio/&gt; <b>leave</b></code></pre>
+
+> Before Infix v26.10, the country code was set per radio, with `set
+> country-code SE` in each `wifi-radio` context.
+{: .prompt-info }
 
 All three nodes use the same mesh channel (36), since mesh peers must meet
 on one channel, and the same AP channel (1), so a roaming client does not
