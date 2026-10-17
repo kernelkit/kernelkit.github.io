@@ -37,3 +37,24 @@ div[class^='language-'] > pre.highlight {
   padding-left: 1rem;
   padding-right: 1.5rem;
 }
+
+/* CLI examples in the user guide's markup, matches doc/extra.css in Infix */
+pre.cli {
+  background-color: var(--highlight-bg-color);
+  color: var(--highlighter-rouge-color);
+  font-size: 0.85rem;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem 0.75rem 1rem;
+  overflow: auto;
+  line-height: 1.2em;
+}
+
+pre.cli .title {
+  font-weight: bold;
+}
+
+pre.cli .header {
+  background-color: #e0e0e0;
+  color: #1a1a1a;
+  font-weight: bold;
+}
