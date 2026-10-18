@@ -15,7 +15,8 @@ is included, exposing the most relevant functionality for network security.
 Rather than managing rules on a per-interface basis, zones group interfaces
 by trust level and policies control traffic flow between zones.
 
-![](/assets/img/fw-concept.svg){: #fig1 width="600" }
+![](/assets/img/fw-concept-light.svg){: .light #fig1 width="600" }
+![](/assets/img/fw-concept-dark.svg){: .dark width="600" }
 _**Figure 1**: Zone-based firewall concept._
 
 ### The Zone Concept
@@ -85,7 +86,8 @@ requires a policy where both ingress and egress are set to the same zone.
 **Inter-zone traffic**: Traffic between different zones, like LAN to WAN.
 This requires an explicit policy and is blocked by default.
 
-![](/assets/img/fw-zones.svg){: #fig2 width="600" }
+![](/assets/img/fw-zones-light.svg){: .light #fig2 width="600" }
+![](/assets/img/fw-zones-dark.svg){: .dark width="600" }
 _**Figure 2**: Traffic flow between zones._
 
 ### The Default Zone
