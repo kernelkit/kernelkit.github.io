@@ -20,10 +20,23 @@ want to create a pull request.  Do that and follow the instructions.
 
 This blog use [Jekyll][0] with the [Chirpy theme][1].  Jekyll is written
 in Ruby, so you need a fairly modern system to write and preview posts.
-Verified to work on Linux Mint 21.3, based on Ubuntu 22.04 LTS:
+Verified to work on Linux Mint 21.3 (Ubuntu 22.04 LTS) and Linux Mint
+22.3 (Ubuntu 24.04 LTS).
 
- - [Install Jekyll](https://jekyllrb.com/docs/installation/)
- - Run `bundle` from the blog directory to install all deps
+On Mint 22.3 the distro Ruby (3.2) is enough, no rbenv or system-wide
+gems needed.  Install Ruby with headers and Bundler, then install the
+gems into the blog directory:
+
+```bash
+sudo apt install build-essential ruby-dev ruby-bundler
+cd path/to/blog
+bundle config set --local path vendor/bundle
+bundle install
+```
+
+The `vendor/` directory is in `.gitignore`.  On other systems, see
+[Installing Jekyll](https://jekyllrb.com/docs/installation/), then run
+`bundle` from the blog directory to install all deps.
 
 
 ## Running
