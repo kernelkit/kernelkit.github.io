@@ -2,7 +2,7 @@
 title:  Infix Compatible Boards
 author: troglobit
 date:   2024-08-13 10:06:42 +0100
-last_modified_at: 2026-10-02 10:00:00 +0200
+last_modified_at: 2026-10-24 21:00:00 +0200
 categories: [showcase]
 tags: [boards]
 pin: true
@@ -22,6 +22,7 @@ been known to work, but have not been updated or tested continuously.
 
 | **Board**                                           | **Arch** | **Since** | **Notes**                  |
 |-----------------------------------------------------|----------|-----------|----------------------------|
+| [Banana Pi BPi-R2 Pro](#banana-pi-bpi-r2-pro)       | Aarch64  | v26.10    |                            |
 | [Banana Pi BPi-R3](#banana-pi-bpi-r3)               | Aarch64  | v25.09    |                            |
 | [Banana Pi BPi-R3 Mini](#banana-pi-bpi-r3-mini)     | Aarch64  | v26.02    |                            |
 | [Banana Pi BPi-R4](#banana-pi-bpi-r4)               | Aarch64  | v26.04    |                            |
@@ -37,6 +38,34 @@ been known to work, but have not been updated or tested continuously.
 | [StarFive VisionFive2](#starfive-visionfive2)       | RISC-V   | v24.08    |                            |
 | [Qemu](#qemu)                                       | x86_64   | v23.06    |                            |
 {: style="margin: 0 auto; width: auto" }
+
+### Banana Pi BPi-R2 Pro
+
+The [BPi-R2 Pro][36] is a router board built around the Rockchip RK3568, a
+quad-core Cortex-A55, with 2 GB LPDDR4 RAM and 16 GB eMMC.  It has a
+MediaTek MT7531 switch for its four LAN ports, a separate Gigabit WAN
+port, and two USB 3.0 ports.
+
+![](/assets/img/bpi-r2-pro-overview.jpg){: #fig-r2pro}
+_**Figure**: Banana Pi BPi-R2 Pro with interfaces and chipsets.  Image: Banana Pi._
+
+There is no on-board WiFi, instead it has two slots: an M.2 Key-E slot,
+which fits an Intel AX210 WiFi 6E card, and a Mini PCIe slot for an LTE
+modem.
+
+Infix supports:
+
+ - routing between interfaces
+ - built-in 4-port switch with switchdev offload
+ - 2× USB 3.0 ports, microSD, and eMMC storage
+ - WiFi 6E with an Intel AX210 card in the M.2 slot, as client or
+   access point on 2.4, 5, or 6 GHz
+ - LTE with a modem in the Mini PCIe slot, e.g. a Quectel EP06-E
+
+For setup, eMMC installation, and how to get a USB 3.0 modem working in
+the Mini PCIe slot, see the [BPi-R2 Pro announcement][37].
+
+ - <https://www.aliexpress.com/w/wholesale-banana-pi-bpi-r2-pro.html>
 
 ### Banana Pi BPi-R3
 
@@ -380,3 +409,5 @@ run on any Linux PC with Qemu installed ([instructions][10]).
 [33]: /posts/microchip-laguna/
 [34]: https://novarq.com/pages/tactical-1000
 [35]: /posts/novarq-tactical-1000/
+[36]: https://docs.banana-pi.org/en/BPI-R2_Pro/BananaPi_BPI-R2_Pro
+[37]: /posts/banana-pi-r2-pro/
