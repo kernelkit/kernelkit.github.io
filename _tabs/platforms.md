@@ -26,6 +26,10 @@ Possibly Separate `defconfig` and may even use custom kernel.  Candidate
 for graduating to *Tier 1* support when HW is included in a regression
 test system and being part of default builds.
 
+- [Acer Connect Vero W6m][24] (ARM64)
+- [Banana Pi BPi-F3][25] (RISC-V)
+- [Banana Pi BPi-M1][26] (ARM)
+- [Banana Pi BPi-R2 Pro][27] (ARM64)
 - [Banana Pi BPi-R3][12] (ARM64)
 - [Banana Pi BPi-R3 Mini][13] (ARM64)
 - [Banana Pi BPi-R4][20] (ARM64)
@@ -78,3 +82,7 @@ boot sequence and testing:
 [21]: https://wiki.friendlyelec.com/wiki/index.php/NanoPi_R2S_Plus
 [22]: https://novarq.com/pages/tactical-1000
 [23]: https://www.microchip.com/en-us/development-tool/ev23x71a
+[24]: https://github.com/kernelkit/infix/tree/main/board/aarch64/acer-connect-vero-w6m
+[25]: https://docs.banana-pi.org/en/BPI-F3/BananaPi_BPI-F3
+[26]: https://docs.banana-pi.org/en/BPI-M1/BananaPi_BPI-M1
+[27]: https://docs.banana-pi.org/en/BPI-R2_Pro/BananaPi_BPI-R2_Pro
