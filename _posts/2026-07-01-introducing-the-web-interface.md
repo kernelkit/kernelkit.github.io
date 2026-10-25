@@ -44,6 +44,9 @@ The sidebar splits into three groups: **Status** for read-only
 operational data, **Configure** for changing settings, and
 **Maintenance** for the lifecycle tasks.
 
+Shortcuts to a web console and the network neighbour browser sit in the
+top bar, next to a light/dark theme toggle and the bundled User's Guide.
+
 #### Status at a glance
 
 If there is one screen to show a newcomer, it is **Interfaces**.  It
@@ -108,11 +111,17 @@ automatically), and produces a support bundle.  Rounding it out are a
 **Logs** viewer, **Diagnostics**, and a guarded **System Control** for
 reboot, shutdown, and factory reset.
 
-Shortcuts to a web console and the network neighbour browser sit in the
-top bar, next to a light/dark theme toggle and the bundled User's Guide.
-
 ![](/assets/img/webui-maintenance.png){: #fig6 width="800" }
 _**Figure 6**: Firmware slots and boot order in the Maintenance section._
+
+> **Why do I have to log in again after an upgrade?**  The web
+> interface keeps sessions in memory only, never on disk, so a reboot
+> ends them all.  A device that has been switched off for a while asks
+> for your password against its current user accounts, and there is no
+> stored key that could be used to forge or decrypt a session.  From
+> v26.10 a login also ends after 24 hours at the latest, even with
+> Auto-logout turned off.
+{: .prompt-info }
 
 ### Built to fit
 
