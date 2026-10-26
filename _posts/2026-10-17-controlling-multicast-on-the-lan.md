@@ -9,7 +9,6 @@ tags: [multicast, igmp, mld, bridge, mcd]
 image:
   path: /assets/img/mcd-social.png
   alt: mcd, IGMP and MLD querier for the Linux bridge
-  show_in_post: false
 ---
 
 Multicast lets one sender reach many receivers with a single stream: a
