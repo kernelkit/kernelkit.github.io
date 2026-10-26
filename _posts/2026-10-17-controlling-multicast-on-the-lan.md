@@ -3,6 +3,7 @@ title: Controlling Multicast on the LAN
 description: How to manage IPv4 and IPv6 multicast on your LAN with Infix OS
 author: troglobit
 date: 2026-10-17 09:00:00 +0200
+last_modified_at: 2026-10-26 12:00:00 +0100
 categories: [howto]
 tags: [multicast, igmp, mld, bridge, mcd]
 image:
@@ -19,7 +20,8 @@ receiver that has joined it.
 
 This post covers how a switch decides where that copy goes, what IGMP
 and MLD have to do with it, and how to set it up in Infix OS.  It ends
-with what is new in Infix OS v26.10: a querier for IPv6, from mcd 3.0.
+with what is new in Infix OS v26.10: a querier for IPv6, from [mcd][]
+3.1.
 
 ### Multicast on a Switch
 
@@ -88,9 +90,9 @@ Fast Leave Ports        :
 Router Ports            :
 Flood Ports             : e0, e1, e2, e3, e4, e5, e6, e7
 
-<span class="header">Interface       VID  Proto  Querier                      State  Interval  Timeout  Ver</span>
-br0                  IGMP   192.168.2.1                     Up       125     None    3
-br0                  MLD    fe80::ff:fe00:1                 Up       125     None    2
+<span class="header">Interface       VID  Proto  Querier                      State  Interval  Timeout  MRD  Ver</span>
+br0                  IGMP   192.168.2.1                     Up       125     None  off    3
+br0                  MLD    fe80::ff:fe00:1                 Up       125     None  off    2
 
 <span class="header">Bridge          VID  Multicast Group       Ports                                      </span>
 br0                  224.1.1.1             e3, e2
@@ -134,7 +136,7 @@ itself.
 ### New in Infix OS v26.10: An MLD Querier
 
 Up to now, the querier in Infix OS has been IGMP only.  Infix OS v26.10
-comes with [mcd][] 3.0, which runs an MLD querier next to the IGMP one,
+comes with [mcd][] 3.1, which runs an MLD querier next to the IGMP one,
 each with its own election.  IGMP queries are sent from the interface
 address, and MLD queries from its link-local address, as
 [RFC 2710][rfc2710] and [RFC 3810][rfc3810] require.  Both start at the
@@ -150,11 +152,25 @@ $ tshark -n -i eth0 -Y 'igmp.type == 0x11 || icmpv6.type == 130'
   2 0.014043869 0.014043869 fe80::ff:fe00:1 → ff02::1   ICMPv6 90 Multicast Listener Query
 ```
 
+mcd 3.1 came out a few days after this post was first published, and
+Infix OS v26.10 ships it instead of 3.0.  It sends a general query as
+soon as a bridge port starts forwarding, after link up, STP settling,
+or a port being added, so hosts behind it are back in the MDB within
+seconds instead of at the next periodic query.  Its timers now follow
+the `query-interval` of each bridge, so a shorter interval also means
+a faster takeover from a querier that has gone silent.  mcd can also
+announce itself to other snooping switches with Multicast Router
+Discovery, [RFC 4286][rfc4286].  Infix OS does not use that yet, so the
+new MRD column in `show ip multicast` reads `off`.  The release also
+has many robustness fixes, found by fuzzing and static analysis in a
+Nix flake contributed by Dave Seddon.
+
 mcd began in 2021 as [querierd][], written at [Westermo][] for WeOS 5.
 Westermo's last release of querierd was v0.10, in May 2023.  In 2024
 its original author adopted it as mcd, and today it is the multicast
 querier in [Infix OS][infix].  mcd runs on any Linux system with a
-bridge, and its [release notes][release] list everything new in 3.0.
+bridge, and its [ChangeLog][changelog] lists everything new in 3.0 and
+3.1.
 
 [igmp]: https://www.rfc-editor.org/rfc/rfc3376.html
 [mld]: https://www.rfc-editor.org/rfc/rfc3810.html
@@ -162,10 +178,11 @@ bridge, and its [release notes][release] list everything new in 3.0.
 [rfc2710]: https://www.rfc-editor.org/rfc/rfc2710.html
 [rfc3810]: https://www.rfc-editor.org/rfc/rfc3810.html
 [rfc3376]: https://www.rfc-editor.org/rfc/rfc3376.html
+[rfc4286]: https://www.rfc-editor.org/rfc/rfc4286.html
 [mcd]: https://github.com/kernelkit/mcd
 [querierd]: https://github.com/westermo/querierd
 [Westermo]: https://www.westermo.com/
 [infix]: https://github.com/kernelkit/infix
-[release]: https://github.com/kernelkit/mcd/releases/tag/v3.0
+[changelog]: https://github.com/kernelkit/mcd/blob/main/ChangeLog.md
 [bridging]: https://kernelkit.org/infix/latest/bridging/#multicast-filtering-and-snooping
 [basic]: /posts/bridge-networking/
