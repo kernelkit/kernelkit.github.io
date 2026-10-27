@@ -15,47 +15,45 @@ Covering a building or a yard with Wi-Fi usually means several access
 points sharing one network name, so a laptop or a phone keeps working as
 it moves between them.  Two problems show up quickly:
 
-1. **Getting the network to every AP.**  Pulling Ethernet to each AP is the
+1. Getting the network to every AP.  Pulling Ethernet to each AP is the
    reliable way, but it is not always possible.  Where you cannot run a
    cable, a wireless backhaul has to carry the traffic instead.
-2. **Moving clients between APs without dropping them.**  A client that has
+2. Moving clients between APs without dropping them.  A client that has
    to fully re-authenticate every time it changes AP will stutter on voice
-   calls and long downloads.  Fast roaming closes that gap.
+   calls and long downloads.  Fast roaming fixes that.
 
-Infix [**v26.06**][release] adds both pieces: 802.11s mesh for the
-wireless backhaul, and 802.11r/k/v for fast roaming.  Basic access point
-support arrived in v26.01; this release is what ties several APs into
-one network.  The rest of this post builds a three-node network with
-them and explains why each part is configured the way it is.  At the
-end we look at the automated test that verifies the setup.
+Infix [v26.06][release] adds both: 802.11s mesh for the wireless
+backhaul, and 802.11r/k/v for fast roaming.  Basic access point support
+arrived in v26.01, and with this release several APs can work as one
+network.  Below we build a three-node network with them, and at the end
+look at the test that keeps it working.
 
 The [Wi-Fi documentation][docs] has the reference material behind each
 setting: bands, channels, security modes, and the full list of roaming
-knobs.  This post is the worked example.  For a gentler start, [WiFi
+knobs.  This post shows how they fit together.  For a gentler start, [WiFi
 Made Easy with Infix OS][easy] sets up a single access point, and then
 one per band, step by step.
 
 ## The design
 
-Three nodes cover the area.  Each node does two jobs at once, and that is
-why each one needs two radios:
+Three nodes cover the area.  Each node does two jobs, so each needs two
+radios:
 
-- **radio0 (mesh backhaul).**  All three nodes join one 802.11s mesh on
+- `radio0` is the mesh backhaul.  All three nodes join one 802.11s mesh on
   5 GHz.  The mesh carries traffic between the nodes, so only one node needs
   a wire back to the rest of the LAN.  The others reach it over the air.
-- **radio1 (client access).**  Each node runs an access point on 2.4 GHz
-  with the same SSID and the same passphrase.  This is the network clients
-  actually see and roam across.
+- `radio1` is for clients.  Each node runs an access point on 2.4 GHz with
+  the same SSID and the same passphrase.  This is the network clients see
+  and roam across.
 
 ![Network topology](/assets/img/wifi-mesh-roaming-topology.svg){: width="800" }
 _Three nodes bridge a 5 GHz mesh backhaul and a 2.4 GHz roaming AP; only gw1 has a wire._
 
-Keeping backhaul and access on different bands matters.  If the mesh and
-the AP shared one radio they would also share one channel and take turns on
-the air, and every client frame would compete with backhaul traffic.
-Splitting them, 5 GHz for the mesh and 2.4 GHz for clients, lets both run
-at full tilt, and the wider 5 GHz channels suit the backhaul where the
-throughput adds up.
+The backhaul and the clients use different bands.  If the mesh and the AP
+shared one radio they would also share one channel and take turns on the
+air, and every client frame would compete with backhaul traffic.  With
+5 GHz for the mesh and 2.4 GHz for clients, both run at full speed, and the
+backhaul, which carries everyone's traffic, gets the wider channels.
 
 A bridge (`br0`) on each node ties the mesh interface, the AP interface,
 and (on the wired node) the uplink into one layer-2 segment.  With mesh
@@ -69,8 +67,8 @@ frames cross the mesh without anyone configuring a route.
 
 ## Building it
 
-The three nodes are configured almost identically.  Only gw1 carries the
-wired uplink; gw2 and gw3 are reachable purely over the mesh.  The examples
+The three nodes are configured almost identically.  Only gw1 has the
+wired uplink; gw2 and gw3 are reachable only over the mesh.  The examples
 below show gw1 in full, then the one difference for the others.
 
 ### 1. The shared secrets
@@ -96,8 +94,8 @@ admin@gw1:/config/keystore/.../wifi-secret/&gt; <b>leave</b></code></pre>
 ### 2. The radios
 
 The mesh refuses to start without a band, a channel, and a real country
-code.  The country code is one setting for all radios, while radio0,
-which carries the mesh, gets its own band and channel.  radio1 carries
+code.  The country code is one setting for all radios, while `radio0`,
+which carries the mesh, gets its own band and channel.  `radio1` carries
 the AP on 2.4 GHz.
 
 <pre class="cli"><code>admin@gw1:/&gt; <b>configure</b>
@@ -121,10 +119,9 @@ have to change channel as it moves.
 
 ### 3. The mesh interface
 
-`wifi0` rides on radio0 as the 802.11s mesh point.  The `mesh-id` is the
-mesh equivalent of an SSID: every node that should join uses the same one.
-Leaving `forwarding` at its default (`true`) is what lets the mesh be
-bridged.
+`wifi0` is the 802.11s mesh point on `radio0`.  The `mesh-id` is the mesh
+equivalent of an SSID: every node that should join uses the same one.
+Leave `forwarding` at its default, `true`, so the mesh can be bridged.
 
 <pre class="cli"><code>admin@gw1:/config/&gt; <b>edit interface wifi0</b>
 admin@gw1:/config/interface/wifi0/&gt; <b>set wifi radio radio0</b>
@@ -134,12 +131,12 @@ admin@gw1:/config/interface/wifi0/&gt; <b>leave</b></code></pre>
 
 ### 4. The access point, with roaming
 
-`wifi1` rides on radio1 as the client-facing AP.  The roaming settings are
-the point of this step.  All three APs must agree on the SSID, the
-passphrase, and the mobility domain.  That trio is what tells a client the
-three APs are one roaming network rather than three unrelated ones.
+`wifi1` is the AP on `radio1`, and this step is mostly about its roaming
+settings.  All three APs must agree on the SSID, the passphrase, and the
+mobility domain.  Together they tell a client that the three APs are one
+roaming network.
 
-Using `mobility-domain hash` derives the domain from the SSID, so the three
+`mobility-domain hash` derives the domain from the SSID, so the three
 APs land on the same domain without anyone copying a hex value around.
 
 <pre class="cli"><code>admin@gw1:/config/&gt; <b>edit interface wifi1</b>
@@ -155,19 +152,18 @@ admin@gw1:/config/interface/wifi1/&gt; <b>leave</b></code></pre>
 
 The three roaming features do different jobs:
 
-- **dot11r** (Fast BSS Transition) is the one that makes the handoff quick.
-  It pre-shares the keys so a roaming client skips the full WPA handshake,
-  cutting the gap from roughly a second to under 50 ms.
-- **dot11k** (Radio Resource Management) hands the client a neighbour list,
+- `dot11r` (Fast BSS Transition) makes the handoff quick.  It pre-shares
+  the keys so a roaming client skips the full WPA handshake, cutting the
+  gap from roughly a second to under 50 ms.
+- `dot11k` (Radio Resource Management) hands the client a neighbour list,
   so it already knows which APs to look at instead of scanning blindly.
-- **dot11v** (BSS Transition Management) lets an AP nudge a client toward a
+- `dot11v` (BSS Transition Management) lets an AP nudge a client toward a
   better one.
 
 ### 5. The bridge
 
 `br0` joins the mesh and the AP into one segment.  On gw1 the wired uplink
-joins too, which is what gives the other nodes a path to the rest of the
-LAN.
+joins too, which gives the other nodes their path to the rest of the LAN.
 
 <pre class="cli"><code>admin@gw1:/config/&gt; <b>set interface br0</b>
 admin@gw1:/config/&gt; <b>set interface wifi0 bridge-port bridge br0</b>
@@ -176,7 +172,7 @@ admin@gw1:/config/&gt; <b>set interface eth0 bridge-port bridge br0</b>
 admin@gw1:/config/&gt; <b>leave</b></code></pre>
 
 gw2 and gw3 are identical except they have no wired uplink, so drop the
-`eth0` line.  Their br0 carries only `wifi0` (mesh) and `wifi1` (AP), and
+`eth0` line.  Their `br0` carries only `wifi0` (mesh) and `wifi1` (AP), and
 they reach the LAN over the mesh.
 
 ## Checking it works
@@ -186,8 +182,8 @@ they reach the LAN over the mesh.
 <pre class="cli"><code>admin@gw1:/&gt; <b>show interface wifi0</b>
 ...
 mode               : mesh-point
-mesh id            : backhaul
-peers              : 2</code></pre>
+mesh-id            : backhaul
+connected peers    : 2</code></pre>
 
 **Is a client associated, and where?**  The AP lists the clients on it.  As
 a client roams, it disappears from one node's list and shows up on another:
@@ -196,22 +192,18 @@ a client roams, it disappears from one node's list and shows up on another:
 ...
 mode               : access-point
 ssid               : campus
-stations           : 1</code></pre>
+connected stations : 1</code></pre>
 
-**Does traffic actually cross the mesh?**  Attach a client to gw3's AP (the
+**Does traffic cross the mesh?**  Attach a client to gw3's AP (the
 node with no wire) and reach something on the wired LAN behind gw1.  If
 that works, the mesh is carrying the traffic.
 
 ## How we keep it working
 
-A worked example that only ever ran by hand tends to rot.  This one has an
-automated counterpart in the Infix regression test suite:
-
-    test/case/interfaces/wifi_mesh_roaming/
-
-It brings up three nodes exactly as above (mesh backhaul on radio0, a
-roaming AP on radio1, all bridged) plus a fourth node as the client.  It
-then checks the claims this post makes:
+To make sure this setup keeps working, the Infix regression test suite
+has a test for it, [wifi_mesh_roaming][test].  It sets up three nodes as
+above, mesh backhaul on `radio0` and a roaming AP on `radio1`, all bridged,
+plus a fourth node as the client.  It then checks that:
 
 - the three nodes form a mesh (each sees its peers);
 - a client associates to the `campus` SSID;
@@ -219,19 +211,19 @@ then checks the claims this post makes:
 - when the AP the client is on goes away, the client roams to another node
   carrying the same SSID and mobility domain, and traffic recovers.
 
+The test runs on virtual radios, `mac80211_hwsim`, and a small relay,
+`wifimedium`, carries frames between the separate guests so they can hear
+each other.  On real hardware the radios use the air instead, and the
+configuration is the same.
+
 In simulation every radio hears every other at the same strength, so there
 is no signal gradient to drift a client from one AP to the next.  The test
 forces the move instead.  It takes down the AP the client is on and
 confirms the client lands on another one and keeps talking.  That is a
-harsher check than a gentle signal-based drift: it proves the second AP
-accepts the client and the backhaul re-converges, with no human in the
-loop.
-
-The virtual radios are `mac80211_hwsim`, and a small relay, `wifimedium`,
-carries frames between the separate guests so they can hear each other.
-On real hardware none of that exists.  The radios use the air, and the
-same configuration applies unchanged.
+harder test than a slow drift between APs, since the second AP has to
+accept the client and the backhaul has to re-converge on its own.
 
 [docs]:    https://kernelkit.org/infix/latest/wifi/
 [easy]:    /posts/mt7615-on-the-bpi-r4/
 [release]: https://github.com/kernelkit/infix/releases/tag/v26.06.0
+[test]:    https://github.com/kernelkit/infix/tree/main/test/case/interfaces/wifi_mesh_roaming
