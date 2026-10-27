@@ -55,7 +55,7 @@ The Tactical-1000 is part of the default `aarch64` build since v26.09,
 and it is currently being added to our regression test system.
 
 ![](/assets/img/tactical-1000-unpacked.png){: #fig2}
-_**Figure 2**: Just unpacked, next to a couple of tiny BPi-R3 routers.  Photo: J. Wiberg._
+_**Figure 2**: Just unpacked, next to a couple of tiny BPi-R3 routers._
 
 [lan969x]: https://www.microchip.com/en-us/product/lan9694
 [laguna]: /posts/microchip-laguna/
