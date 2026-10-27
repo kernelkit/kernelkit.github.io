@@ -129,7 +129,7 @@ admin@gw1:/config/interface/wifi0/&gt; <b>set wifi mesh-point mesh-id backhaul</
 admin@gw1:/config/interface/wifi0/&gt; <b>set wifi mesh-point security secret mesh-secret</b>
 admin@gw1:/config/interface/wifi0/&gt; <b>leave</b></code></pre>
 
-### 4. The access point, with roaming
+### 4. The roaming access point
 
 `wifi1` is the AP on `radio1`, and this step is mostly about its roaming
 settings.  All three APs must agree on the SSID, the passphrase, and the
@@ -198,7 +198,7 @@ connected stations : 1</code></pre>
 node with no wire) and reach something on the wired LAN behind gw1.  If
 that works, the mesh is carrying the traffic.
 
-## How we keep it working
+## The regression test
 
 To make sure this setup keeps working, the Infix regression test suite
 has a test for it, [wifi_mesh_roaming][test].  It sets up three nodes as
@@ -210,6 +210,9 @@ plus a fourth node as the client.  It then checks that:
 - traffic reaches the client across the mesh backhaul;
 - when the AP the client is on goes away, the client roams to another node
   carrying the same SSID and mobility domain, and traffic recovers.
+
+![Test topology](/assets/img/wifi-mesh-roaming-test.svg){: width="800" }
+_The test topology.  Blue is the mesh backhaul, orange the access points the client roams between._
 
 The test runs on virtual radios, `mac80211_hwsim`, and a small relay,
 `wifimedium`, carries frames between the separate guests so they can hear
