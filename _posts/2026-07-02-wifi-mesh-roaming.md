@@ -2,7 +2,7 @@
 title: Seamless Wi-Fi with Mesh Backhaul and Roaming
 author: mattiaswal
 date: 2026-07-02 08:00:00 +0200
-last_modified_at: 2026-09-14 12:00:00 +0100
+last_modified_at: 2026-10-27 12:00:00 +0100
 categories: [howto]
 tags: [wifi, mesh, roaming, networking]
 image:
@@ -31,7 +31,9 @@ end we look at the automated test that verifies the setup.
 
 The [Wi-Fi documentation][docs] has the reference material behind each
 setting: bands, channels, security modes, and the full list of roaming
-knobs.  This post is the worked example.
+knobs.  This post is the worked example.  For a gentler start, [WiFi
+Made Easy with Infix OS][easy] sets up a single access point, and then
+one per band, step by step.
 
 ## The design
 
@@ -231,4 +233,5 @@ On real hardware none of that exists.  The radios use the air, and the
 same configuration applies unchanged.
 
 [docs]:    https://kernelkit.org/infix/latest/wifi/
+[easy]:    /posts/mt7615-on-the-bpi-r4/
 [release]: https://github.com/kernelkit/infix/releases/tag/v26.06.0
