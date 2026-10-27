@@ -49,8 +49,8 @@ port, and two USB 3.0 ports.
 ![](/assets/img/bpi-r2-pro-overview.jpg){: #fig-r2pro}
 _**Figure**: Banana Pi BPi-R2 Pro with interfaces and chipsets.  Image: Banana Pi._
 
-There is no on-board WiFi, instead it has two slots: an M.2 Key-E slot,
-which fits an Intel AX210 WiFi 6E card, and a Mini PCIe slot for an LTE
+There is no on-board Wi-Fi, instead it has two slots: an M.2 Key-E slot,
+which fits an Intel AX210 Wi-Fi 6E card, and a Mini PCIe slot for an LTE
 modem.
 
 Infix supports:
@@ -58,7 +58,7 @@ Infix supports:
  - routing between interfaces
  - built-in 4-port switch with switchdev offload
  - 2× USB 3.0 ports, microSD, and eMMC storage
- - WiFi 6E with an Intel AX210 card in the M.2 slot, as client or
+ - Wi-Fi 6E with an Intel AX210 card in the M.2 slot, as client or
    access point on 2.4, 5, or 6 GHz
  - LTE with a modem in the Mini PCIe slot, e.g. a Quectel EP06-E
 
@@ -69,7 +69,7 @@ the Mini PCIe slot, see the [BPi-R2 Pro announcement][37].
 
 ### Banana Pi BPi-R3
 
-The [BPi-R3][14] is an affordable (€130-€150) WiFi-capable router board
+The [BPi-R3][14] is an affordable (€130-€150) Wi-Fi-capable router board
 built around the MediaTek MT7986A (Filogic 830), a quad-core Cortex-A53
 at 2.0 GHz with 2 GB DDR4 RAM.
 
@@ -87,7 +87,7 @@ Infix supports all hardware features:
  - 2.5 Gbps Ethernet and SFP connectivity
  - USB 3.0 port, microSD, eMMC, and M.2 NVMe storage
  - system LEDs and reset button
- - dual-band 802.11ax WiFi (access point and station modes)
+ - dual-band 802.11ax Wi-Fi (access point and station modes)
 
 For detailed setup instructions, see the [BPi-R3 announcement][15].
 
@@ -106,9 +106,9 @@ RJ45 ports and 8 GB onboard eMMC.
 ![](/assets/img/bpi-r3-mini-board.jpeg){: #fig2}
 _**Figure 2**: Banana Pi BPi-R3 Mini._
 
-With 2 GB DDR4 RAM, dual-band WiFi 6 (802.11ax) across two radios, and
+With 2 GB DDR4 RAM, dual-band Wi-Fi 6 (802.11ax) across two radios, and
 support for up to 16 virtual APs per radio, it is a natural fit as a
-managed WiFi AP router or wireless repeater.
+managed Wi-Fi AP router or wireless repeater.
 
 ![Banana Pi BPi-R3 Mini](/assets/img/bpi-r3-mini.jpg){: width="250" .right}
 
@@ -119,7 +119,7 @@ Infix supports all hardware features:
  - 8 GB onboard eMMC storage
  - USB 2.0 port
  - system LEDs and reset button
- - dual-band 802.11ax WiFi (access point and station modes)
+ - dual-band 802.11ax Wi-Fi (access point and station modes)
 
 Support for the BPi-R3 Mini was added in Infix v26.02.
 
@@ -131,8 +131,8 @@ The [BPi-R4][31] is the successor to the BPi-R3, built around the MediaTek
 MT7988A (Filogic 880) — a significant step up from its predecessor.  The CPU
 moves from in-order Cortex-A53 cores to out-of-order Cortex-A73 cores at 1.8
 GHz, with 4 GB DDR4 RAM.  The two SFP+ uplinks run USXGMII natively at up to
-10 Gbps, and unlike the BPi-R3 there is no on-board WiFi — that is provided
-by an optional MediaTek MT7996E PCIe module with tri-band WiFi 7 (802.11be,
+10 Gbps, and unlike the BPi-R3 there is no on-board Wi-Fi — that is provided
+by an optional MediaTek MT7996E PCIe module with tri-band Wi-Fi 7 (802.11be,
 2.4/5/6 GHz).
 
 ![](/assets/img/bpi-r4-poe.jpg){: #fig-bpi-r4}
@@ -150,7 +150,7 @@ Infix supports all hardware features:
  - built-in 4-port 1 GbE switch with switchdev offload
  - 2× 10 Gbps SFP+ uplinks (standard R4), or 1× SFP+ + 1× 2.5 GbE RJ45 (R4-2g5/R4P)
  - optional PoE input on 2.5 GbE port (R4P)
- - optional tri-band WiFi 7 (802.11be) via MT7996E PCIe module
+ - optional tri-band Wi-Fi 7 (802.11be) via MT7996E PCIe module
  - USB 3.0 port, 8 GB eMMC, microSD, and M.2 Key-M (NVMe) storage
  - PWM-controlled fan and system LEDs
  - factory reset button
@@ -169,7 +169,7 @@ full switchdev offload, 8 GB eMMC, microSD, and a USB 3.0 port.
 ![](/assets/img/bpi-r64-overview.jpg){: #fig-r64}
 _**Figure**: Banana Pi BPi-R64 with interfaces and chipsets._
 
-Built-in WiFi is 2.4 GHz 802.11n (MT7603E), but one of the two Mini PCIe
+Built-in Wi-Fi is 2.4 GHz 802.11n (MT7603E), but one of the two Mini PCIe
 slots accepts a MediaTek MT7615 card for dual-band 802.11ac — Infix
 automatically prefers it when fitted.
 
@@ -203,7 +203,7 @@ Infix supports *all* features of this device:
  - system LEDs to indicate bootup, factory-reset, and operating mode
 
 The board has become so popular that they've now made an R2S *Plus* with
-onboard eMMC, and WiFi over SDIO.  Support for the Plus is coming very
+onboard eMMC, and Wi-Fi over SDIO.  Support for the Plus is coming very
 soon to Infix.
 
 ![](/assets/img/nanopi-r2s-overview.jpg){: #fig4}
@@ -323,11 +323,11 @@ several models across both 32-bit and 64-bit ARM architectures:
 _**Figure 6**: Raspberry Pi 4 Model B._
 
 
-All models include WiFi (dual-band on Pi 3B/4B) and Bluetooth.  The Pi 4B
+All models include Wi-Fi (dual-band on Pi 3B/4B) and Bluetooth.  The Pi 4B
 and CM4 also support various carrier boards, including the [CM4 IoT Router
 Board Mini][17] and [CM4 NVMe NAS][18] enclosures.
 
-Infix provides DHCP-enabled Ethernet out of the box, with WiFi available
+Infix provides DHCP-enabled Ethernet out of the box, with Wi-Fi available
 for client or access point modes.  However, these boards have limitations
 for routing use cases: a single Ethernet port and CPU-based packet
 processing (no hardware switching offload).

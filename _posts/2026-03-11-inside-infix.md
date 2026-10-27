@@ -218,7 +218,7 @@ execution is driven by [9pm][19], Richard Alpe's TAP runner that runs any
 executable producing [Test Anything Protocol][22] output and organises them into
 hierarchical suites with clean result reporting.  Virtual topologies make it
 cheap to catch regressions early in development; physical runs ensure that
-hardware-specific paths — DSA offloads, WiFi, switch silicon — are exercised
+hardware-specific paths — DSA offloads, Wi-Fi, switch silicon — are exercised
 regularly.
 
 This level of automation means Infix is not constrained to a fixed

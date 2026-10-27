@@ -1,5 +1,5 @@
 ---
-title: Banana Pi BPI-R2 Pro, with LTE and WiFi 6E
+title: Banana Pi BPI-R2 Pro, with LTE and Wi-Fi 6E
 author: troglobit
 date: 2026-10-24 21:00:00 +0200
 categories: [howto]
@@ -9,17 +9,17 @@ image:
   alt: The BPI-R2 Pro with an Intel AX210 and a Quectel EP06-E LTE modem, cables everywhere.
 ---
 
-My mom has poor mobile coverage in her apartment.  Her phone can do WiFi
+My mom has poor mobile coverage in her apartment.  Her phone can do Wi-Fi
 calling though, so what she really needs is not a better phone, but a good
-WiFi.  This little board is going to be her signal amplifier, and as a
+Wi-Fi.  This little board is going to be her signal amplifier, and as a
 bonus, the Internet gets a whole lot better when us kids come to visit ;-)
 
 The [Banana Pi BPI-R2 Pro][0] is a small router built around the Rockchip
 RK3568, four Cortex-A55 cores, with 2 GB RAM, 16 GB eMMC, four switched LAN
-ports, one WAN port, and two USB 3.0 ports.  It has no WiFi of its own,
+ports, one WAN port, and two USB 3.0 ports.  It has no Wi-Fi of its own,
 instead it has a Mini PCIe slot and an M.2 Key-E slot.  We put a [Quectel
-EP06-E][1] LTE modem in the Mini PCIe slot and an [Intel AX210][2] WiFi 6E
-card in the M.2 slot, which makes it a router with both WiFi and LTE.
+EP06-E][1] LTE modem in the Mini PCIe slot and an [Intel AX210][2] Wi-Fi 6E
+card in the M.2 slot, which makes it a router with both Wi-Fi and LTE.
 
 ![](/assets/img/bpi-r2-pro-board.jpeg){: #fig1}
 _**Figure 1**: The BPI-R2 Pro v1.1 still has a lot to offer at a competitive price._
@@ -64,9 +64,9 @@ Bus 002 Device 002: ID 2c7c:0306 Quectel EP06-E
 Sierra Wireless modems, e.g. the MC7455, need the same treatment with their
 own commands, both are in the [modem documentation][4].
 
-### WiFi, after a look around
+### Wi-Fi, after a look around
 
-The AX210 is a good little card.  It works well as a WiFi client, and as a
+The AX210 is a good little card.  It works well as a Wi-Fi client, and as a
 single access point on 2.4, 5, or 6 GHz.  It has one quirk though, called
 LAR, Location Aware Regulatory.
 
@@ -85,12 +85,12 @@ that transmits first, and the 5 and 6 GHz channels are simply not on offer.
 Infix knows about this and lets the card have a quick look around before
 starting the access point.  One scan is enough for the firmware to hear the
 neighbours and open up the channels, so there is nothing extra to
-configure, see the [WiFi documentation][5].
+configure, see the [Wi-Fi documentation][5].
 
 ### Does it work?
 
 It does.  On my desk, behind two layers of NAT, my phone switched over to
-WiFi calling like it had never done anything else.  Next stop, mom's place.
+Wi-Fi calling like it had never done anything else.  Next stop, mom's place.
 
 ### Availability
 

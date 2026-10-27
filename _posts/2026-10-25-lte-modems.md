@@ -210,7 +210,7 @@ seconds of the system starting its modem services.
 ### Backup or main line
 
 The default route via `wwan0` has a route preference of 200, higher than
-both wired Ethernet and WiFi.  So with a cable in the WAN port, LTE
+both wired Ethernet and Wi-Fi.  So with a cable in the WAN port, LTE
 stays in the background and takes over only when the wired link goes
 away.  To make LTE the main line instead, lower the preference:
 
@@ -225,7 +225,7 @@ away.  To make LTE the main line instead, lower the preference:
  - `set hardware component modem0 state admin-state locked` takes the
    modem offline without losing its configuration
  - Several `wwanN` interfaces can share one modem, each with its own
-   APN, much like several WiFi networks on one radio
+   APN, much like several Wi-Fi networks on one radio
 
 The [modem documentation][4] has the rest: authentication, GPS on modems
 that have it, and troubleshooting.  It also covers the USB 3.0 modems

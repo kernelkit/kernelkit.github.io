@@ -30,9 +30,9 @@ look at the test that keeps it working.
 
 The [Wi-Fi documentation][docs] has the reference material behind each
 setting: bands, channels, security modes, and the full list of roaming
-knobs.  This post shows how they fit together.  For a gentler start, [WiFi
-Made Easy with Infix OS][easy] sets up a single access point, and then
-one per band, step by step.
+knobs.  This post shows how they fit together.  For a gentler start,
+[Wi-Fi Made Easy with Infix OS][easy] sets up a single access point, and
+then one per band, step by step.
 
 ## The design
 

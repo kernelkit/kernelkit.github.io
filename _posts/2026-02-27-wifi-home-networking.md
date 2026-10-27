@@ -1,5 +1,5 @@
 ---
-title: "Field Report: WiFi AP on BPi-R3"
+title: "Field Report: Wi-Fi AP on BPi-R3"
 author: troglobit
 date: 2026-02-27 10:00:00 +0100
 categories: [showcase]
@@ -12,7 +12,7 @@ image:
 
 ![Banana Pi BPi-R3](/assets/img/spider-on-wall.jpeg){: width="400" .right}
 
-WiFi access point support landed in Infix v26.01, and the engineer who
+Wi-Fi access point support landed in Infix v26.01, and the engineer who
 spent six months making it happen — Mattias Walström — wasted no time
 putting it to the test.  He wrote up [his experience][ml] of replacing
 his home network with a full Infix deployment on a [BPi-R3][bpi].
@@ -28,7 +28,7 @@ All of it running on a €150 router board, managed through the same
 NETCONF/RESTCONF interfaces you'd use on data center gear.
 
 Read [Mattias' article][ml] for the full story, then grab a [BPi-R3][ali],
-[flash an image][flash], and have a look at the [WiFi documentation][docs].
+[flash an image][flash], and have a look at the [Wi-Fi documentation][docs].
 
 ---
 
